@@ -78,20 +78,20 @@
     display: none;
 }
 
-.theme-dark .theme-icon-system,
-.theme-dark .theme-icon-light {
+.dark .theme-icon-system,
+.dark .theme-icon-light {
     display: none;
 }
 
-.theme-dark .theme-icon-dark {
+.dark .theme-icon-dark {
     display: block;
 }
 
-.theme-light .theme-icon-system,
-.theme-light .theme-icon-dark {
+.light .theme-icon-system,
+.light .theme-icon-dark {
     display: none;
 }
 
-.theme-light .theme-icon-light {
+.light .theme-icon-light {
     display: block;
 }
