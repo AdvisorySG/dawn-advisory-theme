@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 @import "general/normalize.css";
 @import "general/basics.css";
 @import "general/grid.css";
