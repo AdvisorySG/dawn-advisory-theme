@@ -13,6 +13,7 @@ const zip = require("gulp-zip");
 const easyimport = require("postcss-easy-import");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
+const tailwindcss = require("tailwindcss");
 
 function serve(done) {
     livereload.listen();
@@ -27,7 +28,15 @@ function handleError(done) {
 
 function hbs(done) {
     pump(
-        [src(["*.hbs", "partials/**/*.hbs", "members/**/*.hbs"]), livereload()],
+        [
+            src([
+                "*.hbs",
+                "partials/**/*.hbs",
+                "members/**/*.hbs",
+                "!node_modules/**/*.hbs",
+            ]),
+            livereload(),
+        ],
         handleError(done)
     );
 }
@@ -36,7 +45,7 @@ function css(done) {
     pump(
         [
             src("assets/css/screen.css", { sourcemaps: true }),
-            postcss([easyimport, autoprefixer(), cssnano()]),
+            postcss([easyimport, tailwindcss, autoprefixer(), cssnano()]),
             dest("assets/built/", { sourcemaps: "." }),
             livereload(),
         ],
@@ -84,7 +93,6 @@ function zipper(done) {
                 "!node_modules/**",
                 "!dist",
                 "!dist/**",
-                "!yarn-error.log",
             ]),
             zip(filename),
             dest("dist/"),

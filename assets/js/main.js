@@ -439,19 +439,19 @@ function theme() {
     var toggleText = toggle.find('.theme-text');
 
     function system() {
-        html.removeClass(['theme-dark', 'theme-light']);
+        html.removeClass(['dark', 'light']);
         localStorage.removeItem('dawn_theme');
         toggleText.text(toggle.attr('data-system'));
     }
 
     function dark() {
-        html.removeClass('theme-light').addClass('theme-dark');
+        html.removeClass('light').addClass('dark');
         localStorage.setItem('dawn_theme', 'dark');
         toggleText.text(toggle.attr('data-dark'));
     }
 
     function light() {
-        html.removeClass('theme-dark').addClass('theme-light');
+        html.removeClass('dark').addClass('light');
         localStorage.setItem('dawn_theme', 'light');
         toggleText.text(toggle.attr('data-light'));
     }
@@ -471,9 +471,9 @@ function theme() {
     toggle.on('click', function (e) {
         e.preventDefault();
 
-        if (!html.hasClass('theme-dark') && !html.hasClass('theme-light')) {
+        if (!html.hasClass('dark') && !html.hasClass('light')) {
             dark();
-        } else if (html.hasClass('theme-dark')) {
+        } else if (html.hasClass('dark')) {
             light();
         } else {
             system();
