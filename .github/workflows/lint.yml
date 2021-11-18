@@ -1,9 +1,9 @@
-name: Prettier
+name: Lint Theme
 on:
   pull_request:
   push:
 jobs:
-  prettier:
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,4 +24,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm install
+      - run: npx eslint .
       - run: npx prettier -c .

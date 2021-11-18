@@ -299,7 +299,7 @@ function modal() {
         }
     });
 
-    modalOverlay.on('transitionend', function (e) {
+    modalOverlay.on('transitionend', function () {
         if (!body.hasClass('modal-opened')) {
             modalOverlay.hide();
         }
@@ -312,7 +312,6 @@ function modal() {
 
 function search() {
     'use strict';
-    if (typeof gh_search_key == 'undefined' || gh_search_key == '') return;
 
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -323,6 +322,7 @@ function search() {
             ? true
             : false;
 
+    if (typeof gh_search_key == 'undefined' || gh_search_key == '') return;
     var url =
         siteUrl +
         '/ghost/api/v3/content/posts/?key=' +
