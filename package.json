@@ -1,6 +1,6 @@
 {
-    "name": "dawn",
-    "description": "A Ghost theme",
+    "name": "dawn-advisory-theme",
+    "description": "Dawn theme for Ghost, adapted for Advisory SG.",
     "version": "1.0.0",
     "engines": {
         "ghost": ">=4.0.0",
