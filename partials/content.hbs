@@ -17,6 +17,17 @@
                         </a>
                     </span>
                 {{/primary_tag}}
+                <div>
+                
+                    {{#foreach tags}}
+                        {{#if @first}}
+                        {{else}}
+                            <span class="single-meta-item">
+                                <a href="{{url}}">{{name}}</a>
+                            </span>
+                        {{/if}}
+                    {{/foreach}}
+                </div>
             </div>
         {{/is}}
         <h1 class="single-title">{{title}}</h1>
