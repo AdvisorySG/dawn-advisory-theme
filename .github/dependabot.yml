@@ -4,4 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    reviewers:
+      - "AdvisorySG/ghost-reviewers"
     open-pull-requests-limit: 4
