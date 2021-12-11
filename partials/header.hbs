@@ -9,16 +9,6 @@
         </a>
     </div>
     {{#if @site.navigation}}
-        <nav class="main-nav hidden-xs hidden-sm hidden-md">
-            {{#if @custom.content_api_key_for_search}}
-                <button class="button-icon menu-item-button js-modal" data-modal="search" aria-label="Search">
-                    <svg class="icon">
-                        <use xlink:href="#magnify"></use>
-                    </svg>
-                </button>
-            {{/if}}
-        </nav>
-
         <button class="button-icon hidden-lg hidden-xl js-modal" data-modal="search" aria-label="Search">
             <svg class="icon">
                 <use xlink:href="#magnify"></use>
@@ -38,6 +28,13 @@
         </div>
     {{/if}}
     <div class="header-right hidden-xs hidden-sm hidden-md">
+        {{#if @custom.content_api_key_for_search}}
+            <button class="button-icon menu-item menu-item-button js-modal" data-modal="search" aria-label="Search">
+                <svg class="icon">
+                    <use xlink:href="#magnify"></use>
+                </svg>
+            </button>
+        {{/if}}
         {{navigation}}
     </div>
 </header>

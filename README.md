@@ -28,14 +28,7 @@ Optionally, if you have access to the [Admin panel of Advisory](https://beta.adv
 
 1. Navigate to the `Integrations` and click on `Add custom integration`.
 2. Copy the content API key; this will be used to fetch posts from your site.
-3. Insert the generated key in `Code injection > Site Header` field.
-
-```html
-<script>
-    var gh_search_key = "API_KEY";
-    var gh_search_migration = "v1";
-</script>
-```
+3. Insert the generated key in `Settings > Design > Site-wide > Content API key for search".
 
 The theme generates an index of posts for highly performant search. The index is updated automatically when posts are added or updated. However, it isn't updated when posts are unpublished or deleted.
 
