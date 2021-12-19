@@ -18,12 +18,11 @@
                     </span>
                 {{/primary_tag}}
                 <div>
+                    <span class="tag-list-label">More:</span>
                     {{#foreach tags}}
                         {{#if @first}}
                         {{else}}
-                            <span class="single-meta-item">
-                                <a href="{{url}}">{{name}}</a>
-                            </span>
+                            <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
                         {{/if}}
                     {{/foreach}}
                 </div>
