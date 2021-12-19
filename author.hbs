@@ -39,9 +39,9 @@
                 </div>
             </section>
         {{/author}}
-        <div class="post-feed container medium">
+        <<div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
-                {{> "loop"}}
+                {{> "post-card"}}
             {{/foreach}}
         </div>
         {{pagination}}

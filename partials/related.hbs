@@ -1,11 +1,11 @@
-{{#get "posts" limit="5" filter="tags:[{{post.tags}}]+id:-{{post.id}}" as |related|}}
+{{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" as |related|}}
     {{#if related}}
         <section class="related-wrapper">
-            <div class="container medium">
+            <div class="container large">
                 <h3 class="related-title">You might also like...</h3>
-                <div class="related-feed">
+                <div class="related-feed grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
                     {{#foreach posts}}
-                        {{> "loop"}}
+                        {{> "post-card"}}
                     {{/foreach}}
                 </div>
             </div>

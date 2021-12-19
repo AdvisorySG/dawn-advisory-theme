@@ -154,7 +154,7 @@ function pagination() {
 
     if (body.hasClass('paged-next')) {
         wrapper.infiniteScroll({
-            append: '.feed',
+            append: '.feed-card',
             button: '.infinite-scroll-button',
             debug: false,
             hideNav: '.pagination',
@@ -164,13 +164,6 @@ function pagination() {
             status: '.infinite-scroll-status',
         });
     }
-
-    wrapper.on(
-        'append.infiniteScroll',
-        function (event, response, path, items) {
-            $(items[0]).addClass('feed-paged');
-        }
-    );
 }
 
 function video() {
