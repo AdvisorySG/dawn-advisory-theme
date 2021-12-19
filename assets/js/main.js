@@ -231,10 +231,10 @@ function toc() {
         var toggle = $('.sticky-toc-button');
 
         $('.single-content')
-            .find('> h2, > h3')
+            .find('> h1, > h2')
             .each(function (index, value) {
                 var linkClass =
-                    $(this).prop('tagName') == 'H3'
+                    $(this).prop('tagName') == 'H2'
                         ? 'sticky-toc-link sticky-toc-link-indented'
                         : 'sticky-toc-link';
                 output +=
