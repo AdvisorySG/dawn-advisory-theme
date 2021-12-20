@@ -94,7 +94,7 @@
     },
     "devDependencies": {
         "autoprefixer": "10.4.0",
-        "cssnano": "5.0.12",
+        "cssnano": "5.0.14",
         "eslint": "^8.2.0",
         "gscan": "4.17.0",
         "gulp": "4.0.2",
