@@ -2,29 +2,28 @@
     <div class="social">
         {{#if @site.facebook}}
             <a class="social-item social-item-facebook"
-                href="{{facebook_url @site.facebook}}" target="_blank"
-                rel="noopener noreferrer" aria-label="Facebook">
+                href="https://www.facebook.com/advisorysg/" target="_blank"
+                rel="noopener noreferrer" aria-label="Facebook" style="margin-bottom:2px">
                 <svg class="icon">
                     <use xlink:href="#facebook-box"></use>
                 </svg>
             </a>
         {{/if}}
-        {{#if @site.twitter}}
-            <a class="social-item social-item-twitter"
-                href="{{twitter_url @site.twitter}}" target="_blank"
-                rel="noopener noreferrer" aria-label="Twitter">
-                <svg class="icon">
-                    <use xlink:href="#twitter-box"></use>
-                </svg>
-            </a>
-        {{/if}}
-        <a class="social-item social-item-rss"
-            href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/"
-            target="_blank" rel="noopener noreferrer" aria-label="RSS">
-            <svg class="icon">
-                <use xlink:href="#rss-box"></use>
+        <a class="social-item social-item-instagram" 
+            href="https://www.instagram.com/advisory.sg/"
+            target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg class="icon" style="margin-left:3px ;margin-top:3px">
+                <use xlink:href="#instagram" ></use>
             </svg>
-        </a>
+        </a>        
+        <a class="social-item social-item-linkedin"
+            href='https://www.linkedin.com/company/advisorysg/' target="_blank" 
+            rel="noopener noreferrer" aria-label="Linkedin" style="margin-bottom:2px">
+            <svg class="icon">
+                <use xlink:href="#linkedin"></use>
+            </svg>
+        </a> 
+
     </div>
 
     <div class="copyright">
