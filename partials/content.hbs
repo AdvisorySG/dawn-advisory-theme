@@ -30,15 +30,9 @@
                 <h3 class="single-footer-title">Published by:</h3>
                 <div class="author-list">
                     {{#foreach authors}}
-                        <div class="author-image-placeholder u-placeholder square">
                             <a href="{{url}}" title="{{name}}">
-                                <img class="author-image lazyload u-object-fit"
-                                    data-srcset="{{img_url profile_image size="xs"}}"
-                                    src="{{img_url profile_image size="xs"}}"
-                                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    alt="{{name}}">
+                                <p>{{name}}</p>
                             </a>
-                        </div>
                     {{/foreach}}
                 </div>
             </div>
