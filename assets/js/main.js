@@ -438,12 +438,6 @@ function theme() {
     var toggle = $('.js-theme');
     var toggleText = toggle.find('.theme-text');
 
-    function system() {
-        html.removeClass(['dark', 'light']);
-        localStorage.removeItem('dawn_theme');
-        toggleText.text(toggle.attr('data-system'));
-    }
-
     function dark() {
         html.removeClass('light').addClass('dark');
         localStorage.setItem('dawn_theme', 'dark');
@@ -454,6 +448,18 @@ function theme() {
         html.removeClass('dark').addClass('light');
         localStorage.setItem('dawn_theme', 'light');
         toggleText.text(toggle.attr('data-light'));
+    }
+
+    function system() {
+        html.removeClass(['dark', 'light']);
+        html.addClass(
+            window.matchMedia &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+        );
+        localStorage.removeItem('dawn_theme');
+        toggleText.text(toggle.attr('data-system'));
     }
 
     switch (localStorage.getItem('dawn_theme')) {
@@ -471,12 +477,16 @@ function theme() {
     toggle.on('click', function (e) {
         e.preventDefault();
 
-        if (!html.hasClass('dark') && !html.hasClass('light')) {
-            dark();
-        } else if (html.hasClass('dark')) {
-            light();
-        } else {
-            system();
+        switch (localStorage.getItem('dawn_theme')) {
+            case 'dark':
+                light();
+                break;
+            case 'light':
+                system();
+                break;
+            default:
+                dark();
+                break;
         }
     });
 }
