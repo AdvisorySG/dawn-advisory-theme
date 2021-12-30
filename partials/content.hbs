@@ -17,15 +17,24 @@
                         </a>
                     </span>
                 {{/primary_tag}}
-                <div>
-                    <span class="tag-list-label">More:</span>
-                    {{#foreach tags}}
-                        {{#if @first}}
+                {{#has tag="count:>1"}}
+                    <div>
+                        <span class="tag-list-label">More:</span>
+                        {{#if primary_tag}}
+                            {{#foreach tags}}
+                                {{#if @first}}
+                                {{else}}
+                                    <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                                {{/if}}
+                            {{/foreach}}
                         {{else}}
-                            <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                            {{#foreach tags}}
+                                <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                            {{/foreach}}
                         {{/if}}
-                    {{/foreach}}
-                </div>
+                        
+                    </div>
+                {{/has}}
             </div>
         {{/is}}
         <h1 class="single-title">{{title}}</h1>
