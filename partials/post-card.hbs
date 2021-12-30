@@ -6,13 +6,17 @@
         <img class="object-cover m-0 hidden md:block md:min-w-[40%] md:max-w-[40%] md:h-full lg:w-full lg:max-w-full lg:h-60" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
         {{/if}}
         <div class="flex-grow bg-white dark:bg-gray-100 px-3 pt-3 pb-5 relative">
-            <p class="text-xl my-1 dark:text-gray-900">
-                {{#if primary_tag}}
-                {{primary_tag.name}}
-                {{else}}
-                No tag
-                {{/if}}
-            </p>
+            {{#if primary_tag}}
+                {{#primary_tag}}
+                    <span class="single-meta-item single-meta-tag">
+                        <a class="post-tag post-tag-{{slug}} text-lg uppercase font-extrabold" href="{{url}}">
+                            {{name}}
+                        </a>
+                    </span>
+                {{/primary_tag}}
+            {{else}}
+                <p class="text-xl my-1 dark:text-gray-900">[No tag]</p>
+            {{/if}}
             <p class="text-2xl font-bold my-2 dark:text-black">{{title}}</p>
             <p class="text-xl my-1 max-h-20 line-clamp-4 dark:text-gray-900">{{excerpt}}</p>
             <div class="h-8"></div>
