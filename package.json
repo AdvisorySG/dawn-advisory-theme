@@ -61,7 +61,7 @@
             },
             "show_featured_posts": {
                 "type": "boolean",
-                "default": true,
+                "default": false,
                 "group": "homepage"
             },
             "featured_title": {
