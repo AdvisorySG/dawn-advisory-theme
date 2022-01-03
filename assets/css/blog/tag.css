@@ -20,7 +20,6 @@
 }
 
 .tag-list-label {
-    margin-right: 0.5rem;
     color: var(--secondary-text-color);
 }
 
@@ -29,7 +28,6 @@
 }
 
 .tag-list-item {
-    margin-left: 0.3rem;
     color: var(--brand-color);
 }
 

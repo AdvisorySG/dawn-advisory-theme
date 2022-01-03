@@ -36,32 +36,14 @@
     margin-top: 2rem;
 }
 
-.author-list {
-    display: flex;
+.author-list-label {
+    color: var(--secondary-text-color);
 }
 
-.author-list .author-image-placeholder {
-    margin: 0 -4px;
-    width: 54px;
-    border: 2px solid var(--white-color);
+.author-list-item {
+    color: var(--brand-color);
 }
 
-.author-list .author-image-placeholder:first-child {
-    z-index: 10;
-}
-
-.author-list .author-image-placeholder:nth-child(2) {
-    z-index: 9;
-}
-
-.author-list .author-image-placeholder:nth-child(3) {
-    z-index: 8;
-}
-
-.author-list .author-image-placeholder:nth-child(4) {
-    z-index: 7;
-}
-
-.author-list .author-image-placeholder:nth-child(5) {
-    z-index: 6;
+.author-list-item:not(:last-child):after {
+    content: ", ";
 }
