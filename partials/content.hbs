@@ -42,6 +42,18 @@
                 {{custom_excerpt}}
             </div>
         {{/if}}
+        {{#if @custom.show_author}}
+            <div class="single-footer-top">
+                <h3 class="single-footer-title">Published by:</h3>
+                <div class="author-list">
+                    {{#foreach authors}}
+                            <a href="{{url}}" title="{{name}}">
+                                <p>{{name}}</p>
+                            </a>
+                    {{/foreach}}
+                </div>
+            </div>
+        {{/if}}
         {{#if feature_image}}
             {{#unless no_image}}
                 <figure class="single-media kg-width-{{width}}">
@@ -77,24 +89,6 @@
                 {{/prev_post}}
             </div>
             <div class="single-footer-middle">
-                {{#if @custom.show_author}}
-                    <div class="single-footer-top">
-                        <h3 class="single-footer-title">Published by:</h3>
-                        <div class="author-list">
-                            {{#foreach authors}}
-                                <div class="author-image-placeholder u-placeholder square">
-                                    <a href="{{url}}" title="{{name}}">
-                                        <img class="author-image lazyload u-object-fit"
-                                            data-srcset="{{img_url profile_image size="xs"}}"
-                                            src="{{img_url profile_image size="xs"}}"
-                                            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                            alt="{{name}}">
-                                    </a>
-                                </div>
-                            {{/foreach}}
-                        </div>
-                    </div>
-                {{/if}}
                 {{#if @custom.show_share_links}}
                     <div class="single-footer-bottom">
                         <div class="share">
