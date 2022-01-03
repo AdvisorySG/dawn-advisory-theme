@@ -57,7 +57,6 @@
                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
                     </div>
-
                     {{#if feature_image_caption}}
                         <figcaption>{{feature_image_caption}}</figcaption>
                     {{/if}}
@@ -97,6 +96,12 @@
                                     <use xlink:href="#twitter"></use>
                                 </svg>
                                 Tweet
+                            </a>
+                            <a class="share-link share-link-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{url absolute="true"}}" target="_blank" rel="noopener noreferrer">
+                                <svg class="icon icon-linkedin">
+                                    <use xlink:href="#linkedin"></use>
+                                </svg>
+                                Share
                             </a>
                         </div>
                     </div>

@@ -40,6 +40,10 @@
     color: var(--twitter-color);
 }
 
+.dark .share-link-linkedin {
+    color: var(--linkedin-color);
+}
+
 @media (prefers-color-scheme: dark) {
     html:not(.light):root {
         --primary-text-color: #e2e2e2;
@@ -81,5 +85,9 @@
 
     html:not(.light) .share-link-twitter {
         color: var(--twitter-color);
+    }
+
+    html:not(.light) .share-link-linkedin {
+        color: var(--linkedin-color);
     }
 }
