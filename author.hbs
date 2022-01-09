@@ -5,7 +5,15 @@
         {{#author}}
             <section class="author container small">
                 <div class="author-image-placeholder u-placeholder square">
-                    <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" alt="{{name}}">
+                    {{#if profile_image}}
+                        <img class="author-image lazyload u-object-fit"
+                            data-srcset="{{img_url profile_image size="xs"}}"
+                            src="{{img_url profile_image size="xs"}}"
+                            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            alt="{{name}}">
+                    {{else}}
+                        <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="{{asset 'images/profile_placeholder.png'}}">
+                    {{/if}}
                 </div>
                 {{#if website}}
                     <h1 class="author-name"><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{name}}</a>
