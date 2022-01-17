@@ -43,13 +43,13 @@
             </div>
         {{/if}}
         {{#if @custom.show_author}}
-            <div class="single-footer-top">
+            <div class="single-footer-top" style="margin-top: 20px;">
                 <h3 class="single-footer-title">Published by:</h3>
                 <div class="author-list">
                     {{#foreach authors}}
-                            <a href="{{url}}" title="{{name}}">
-                                <p>{{name}}</p>
-                            </a>
+                        <a href="{{url}}" title="{{name}}">
+                            <span>{{name}}</span>
+                        </a>
                     {{/foreach}}
                 </div>
             </div>
