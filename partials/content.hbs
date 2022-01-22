@@ -17,9 +17,26 @@
                         </a>
                     </span>
                 {{/primary_tag}}
+                {{#has tag="count:>1"}}
+                    <div>
+                        <span class="tag-list-label">More:</span>
+                        {{#if primary_tag}}
+                            {{#foreach tags}}
+                                {{#if @first}}
+                                {{else}}
+                                    <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                                {{/if}}
+                            {{/foreach}}
+                        {{else}}
+                            {{#foreach tags}}
+                                <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                            {{/foreach}}
+                        {{/if}}
+                    </div>
+                {{/has}}
             </div>
         {{/is}}
-        <h1 class="single-title" id="title">{{title}}</h1>
+        <h1 class="single-title">{{title}}</h1>
         {{#if custom_excerpt}}
             <div class="single-excerpt">
                 {{custom_excerpt}}
@@ -34,7 +51,6 @@
                             srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                             alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
                     </div>
-
                     {{#if feature_image_caption}}
                         <figcaption>{{feature_image_caption}}</figcaption>
                     {{/if}}
@@ -81,7 +97,7 @@
                 {{#if @custom.show_share_links}}
                     <div class="single-footer-bottom">
                         <div class="share">
-                            <a class="share-link share-link-facebook" id="facebookShareButton" href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}" target="_blank" rel="noopener noreferrer">
+                            <a class="share-link share-link-facebook" id="facebookShareButton" href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}" target="_blank" rel="noopener noreferrer" style="color: #3b5998;">
                                 <svg class="icon icon-facebook">
                                     <use xlink:href="#facebook"></use>
                                 </svg>
@@ -89,8 +105,8 @@
                             </a>
                             <a class="share-link share-link-twitter" id="twitterShareButton" href="https://twitter.com/intent/tweet?url={{url absolute="true"}}&text={{encode title}}" target="_blank" rel="noopener noreferrer">
                                 <svg class="icon icon-twitter">
-                                        <use xlink:href="#twitter"></use>
-                                    </svg>
+                                    <use xlink:href="#twitter"></use>
+                                </svg>
                                 Tweet
                             </a>
                             <a class="share-link share-link-linkedin" id="linkedinShareButton" href="https://www.linkedin.com/shareArticle?mini=true&url={{url absolute="true"}}" target="_blank" rel="noopener noreferrer" style="color:rgb(10,102,194)">
@@ -98,8 +114,7 @@
                                     <use xlink:href="#linkedin"></use>
                                 </svg>
                                 Share
-                            </a>
-                                                        
+                            </a>                                                    
                         </div>
                     </div>
                 {{/if}}
