@@ -4,9 +4,21 @@
     <main class="site-main">
         {{#author}}
             <section class="author container small">
-                <div class="author-image-placeholder u-placeholder square">
-                    <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png">
-                </div>
+                {{#if profile_image}}
+                    <div class="author-image-placeholder u-placeholder square">
+                        <a href="{{url}}" title="{{name}}">
+                            <img class="author-image lazyload u-object-fit"
+                                data-srcset="{{img_url profile_image size="xs"}}"
+                                src="{{img_url profile_image size="xs"}}"
+                                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                alt="{{name}}">
+                        </a>
+                    </div>
+                {{else}}
+                    <div class="author-image-placeholder u-placeholder square">
+                        <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="../assets/images/profile_placeholder.png">
+                    </div>
+                {{/if}}
                 {{#if website}}
                     <h1 class="author-name"><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{name}}</a>
                     </h1>
