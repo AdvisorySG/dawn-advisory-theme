@@ -7,6 +7,20 @@
                 {{> "post-card"}}
             {{/foreach}}
         </div>
+        <section class="tag">
+            <div class="container medium">
+                {{#get "tags"}}
+                    {{#if tags}}
+                        <div class="tag-list">
+                            <span class="tag-list-label">More:</span>
+                            {{#foreach tags}}
+                                <a class="tag-list-item" href="{{url}}">{{name}}</a>
+                            {{/foreach}}
+                        </div>
+                    {{/if}}
+                {{/get}}
+            </div>
+        </section>
         {{pagination}}
     </main>
 </div>
