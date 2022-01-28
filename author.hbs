@@ -16,7 +16,9 @@
                     </div>
                 {{else}}
                     <div class="author-image-placeholder u-placeholder square">
-                        <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="../assets/images/profile_placeholder.png">
+                        <a href="{{url}}" title="{{name}}">
+                            <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="/assets/images/profile_placeholder.png">
+                        </a>
                     </div>
                 {{/if}}
                 {{#if website}}
