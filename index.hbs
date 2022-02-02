@@ -2,6 +2,20 @@
 
 <div class="content-area">
     <main class="site-main">
+        <section class="tag">
+            <div class="container medium">
+                {{#get "tags"}}
+                    {{#if tags}}
+                        <div class="tag-list">
+                            <span class="tag-list-label">Industries:</span>
+                            {{#foreach tags}}
+                                <a class="tag-list-item" href="{{url}}">{{name}}</a>
+                            {{/foreach}}
+                        </div>
+                    {{/if}}
+                {{/get}}
+            </div>
+        </section>
         <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
                 {{> "post-card"}}
