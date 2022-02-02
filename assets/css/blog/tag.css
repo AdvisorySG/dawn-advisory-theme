@@ -32,8 +32,9 @@
     content: "#";
 }
 
-.tag-list-item + .tag-list-item {
+.tag-list-item {
     margin-left: 0.3rem;
+    color: var(--brand-color);
 }
 
 .tag-media {
