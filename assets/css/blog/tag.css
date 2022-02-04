@@ -9,10 +9,6 @@
     font-size: 2.4rem;
 }
 
-.tag-name::before {
-    content: "#";
-}
-
 .tag-description {
     margin: 1rem auto 0;
     max-width: 500px;
