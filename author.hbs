@@ -4,9 +4,23 @@
     <main class="site-main">
         {{#author}}
             <section class="author container small">
-                <div class="author-image-placeholder u-placeholder square">
-                    <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" alt="{{name}}">
-                </div>
+                {{#if profile_image}}
+                    <div class="author-image-placeholder u-placeholder square">
+                        <a href="{{url}}" title="{{name}}">
+                            <img class="author-image lazyload u-object-fit"
+                                data-srcset="{{img_url profile_image size="xs"}}"
+                                src="{{img_url profile_image size="xs"}}"
+                                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                alt="{{name}}">
+                        </a>
+                    </div>
+                {{else}}
+                    <div class="author-image-placeholder u-placeholder square">
+                        <a href="{{url}}" title="{{name}}">
+                            <img class="author-image u-object-fit" src="{{img_url profile_image size="xs"}}" srcset="{{asset 'images/profile_placeholder.png'}}">
+                        </a>
+                    </div>
+                {{/if}}
                 {{#if website}}
                     <h1 class="author-name"><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{name}}</a>
                     </h1>
