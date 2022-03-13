@@ -79,6 +79,11 @@
                 "default": true,
                 "group": "post"
             },
+            "show_excerpt": {
+                "type": "boolean",
+                "default": false,
+                "group": "post"
+            },
             "show_related_posts": {
                 "type": "boolean",
                 "default": true,
