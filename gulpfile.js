@@ -1,11 +1,11 @@
 const { series, parallel, watch, src, dest } = require("gulp");
 const pump = require("pump");
+const compiler = require("webpack");
+const webpack = require("webpack-stream");
 
 // gulp plugins and utils
 const livereload = require("gulp-livereload");
 const postcss = require("gulp-postcss");
-const concat = require("gulp-concat");
-const uglify = require("gulp-uglify");
 const zip = require("gulp-zip");
 
 // postcss plugins
@@ -55,11 +55,8 @@ function css(done) {
 function js(done) {
     pump(
         [
-            src(["assets/js/lib/*.js", "assets/js/main.js"], {
-                sourcemaps: true,
-            }),
-            concat("main.min.js"),
-            uglify(),
+            src("assets/js/main.js"),
+            webpack(require("./webpack.config.js"), compiler),
             dest("assets/built/", { sourcemaps: "." }),
             livereload(),
         ],
