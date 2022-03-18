@@ -72,26 +72,3 @@
 .theme-text {
     margin-left: 0.3rem;
 }
-
-.theme-icon-dark,
-.theme-icon-light {
-    display: none;
-}
-
-.dark .theme-icon-system,
-.dark .theme-icon-light {
-    display: none;
-}
-
-.dark .theme-icon-dark {
-    display: block;
-}
-
-.light .theme-icon-system,
-.light .theme-icon-dark {
-    display: none;
-}
-
-.light .theme-icon-light {
-    display: block;
-}
