@@ -5,7 +5,7 @@
         {{else}} {{!-- Placeholder --}}
         <img class="object-cover m-0 hidden md:block md:min-w-[40%] md:max-w-[40%] md:h-full lg:w-full lg:max-w-full lg:h-60" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
         {{/if}}
-        <div class="flex-grow bg-white dark:bg-gray-700 px-3 pt-3 pb-5 relative">
+        <div class="flex-grow bg-white px-3 pt-3 pb-5 relative">
             {{#if primary_tag}}
                 {{#primary_tag}}
                     <span class="single-meta-item single-meta-tag">
@@ -15,12 +15,12 @@
                     </span>
                 {{/primary_tag}}
             {{else}}
-                <p class="text-xl my-1 dark:text-gray-300">[No tag]</p>
+                <p class="text-xl my-1">[No tag]</p>
             {{/if}}
-            <p class="text-2xl font-bold my-2 dark:text-white">{{title}}</p>
-            <p class="text-xl my-1 max-h-20 dark:text-gray-300 line-clamp-3">{{excerpt}}</p>
+            <p class="text-2xl font-bold my-2">{{title}}</p>
+            <p class="text-xl my-1 max-h-20 line-clamp-3">{{excerpt}}</p>
             <div class="h-8"></div>
-            <div class="text-xl absolute right-4 bottom-4 dark:text-gray-300">
+            <div class="text-xl absolute right-4 bottom-4">
                 <i class="far fa-clock"></i>
                 <time datetime="{{date format="YYYY-MM-DD"}}">{{date published_at format="D MMM YYYY"}}</time>
             </div>
