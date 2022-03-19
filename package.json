@@ -93,6 +93,7 @@
     },
     "scripts": {
         "dev": "gulp",
+        "prepare": "husky install",
         "test": "gscan .",
         "test:ci": "gscan --fatal --verbose .",
         "zip": "gulp zip"
