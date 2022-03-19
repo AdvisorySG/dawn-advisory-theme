@@ -21,14 +21,9 @@
     --font-serif: Lora, Times, serif; /* stylelint-disable-line value-keyword-case */
     --font-mono: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console,
         monospace; /* stylelint-disable-line value-keyword-case */
-    --navbar-height: 80px;
+    --navbar-height: 95px;
 }
 
-@media (max-width: 767px) {
-    :root {
-        --navbar-height: 70px;
-    }
-}
 
 html {
     box-sizing: border-box;
