@@ -25,29 +25,9 @@
                     <span class="author-meta">{{location}}</span>
                 {{/if}}
                 <div class="author-bio">{{bio}}</div>
-                <div class="share author-social">
-                    {{#if facebook}}
-                        <a class="share-link share-link-facebook author-social-item"
-                            href="https://www.facebook.com/{{facebook}}" target="_blank" rel="noopener noreferrer">
-                            <svg class="icon icon-facebook">
-                                <use xlink:href="#facebook"></use>
-                            </svg>
-                            Facebook
-                        </a>
-                    {{/if}}
-                    {{#if twitter}}
-                        <a class="share-link share-link-twitter author-social-item"
-                            href="https://twitter.com/{{twitter}}" target="_blank" rel="noopener noreferrer">
-                            <svg class="icon icon-twitter">
-                                <use xlink:href="#twitter"></use>
-                            </svg>
-                            Twitter
-                        </a>
-                    {{/if}}
-                </div>
             </section>
         {{/author}}
-        <<div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
+        <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
                 {{> "post-card"}}
             {{/foreach}}
