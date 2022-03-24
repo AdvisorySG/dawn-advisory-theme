@@ -46,16 +46,6 @@ When your site has lots of posts, including the post content in the index cache 
 </script>
 ```
 
-# White Logo
-
-If your logo image isn't recognizable in dark mode, you can set a white version of the logo in `Code injection > Site Header` field.
-
-```html
-<script>
-    var gh_white_logo = "https://example.com/content/images/white-logo.png";
-</script>
-```
-
 # Dropdown Menu
 
 The theme looks for a menu item with three dots (`...`) in its URL, and uses that as a dropdown menu toggle. All menu items after the toggle will be added to the dropdown list automatically.
@@ -98,4 +88,4 @@ This method is not officially supported by Ghost and might break any time (thoug
 
 # Copyright & License
 
-Copyright (c) 2013-2021 Ghost Foundation, 2021 Advisory Singapore - Released under the [MIT license](LICENSE).
+Copyright (c) 2013-2021 Ghost Foundation, 2021-2022 Advisory Singapore - Released under the [MIT license](LICENSE).
