@@ -1,4 +1,3 @@
-var html = $('html');
 var body = $('body');
 var timeout;
 var st = 0;
@@ -10,8 +9,6 @@ var progress = $('.sticky-progress');
 $(function () {
     'use strict';
     subMenu();
-    whiteLogo();
-    whiteIcon();
     featured();
     pagination();
     video();
@@ -21,7 +18,6 @@ $(function () {
     modal();
     search();
     burger();
-    theme();
 });
 
 $(window).on('scroll', function () {
@@ -103,24 +99,6 @@ function subMenu() {
                 subMenu.hide();
             }
         });
-    }
-}
-
-function whiteLogo() {
-    'use strict';
-    if (typeof gh_white_logo != 'undefined') {
-        var whiteImage =
-            '<img class="logo-image white" src="' + gh_white_logo + '">';
-        $('.logo').prepend(whiteImage);
-    }
-}
-
-function whiteIcon() {
-    'use strict';
-    if (typeof gh_white_icon != 'undefined') {
-        var whiteImage =
-            '<img class="cover-icon-image white" src="' + gh_white_icon + '">';
-        $('.cover-icon').prepend(whiteImage);
     }
 }
 
@@ -423,64 +401,6 @@ function burger() {
     'use strict';
     $('.burger').on('click', function () {
         body.toggleClass('menu-opened');
-    });
-}
-
-function theme() {
-    'use strict';
-    var toggle = $('.js-theme');
-    var toggleText = toggle.find('.theme-text');
-
-    function dark() {
-        html.removeClass('light').addClass('dark');
-        localStorage.setItem('dawn_theme', 'dark');
-        toggleText.text(toggle.attr('data-dark'));
-    }
-
-    function light() {
-        html.removeClass('dark').addClass('light');
-        localStorage.setItem('dawn_theme', 'light');
-        toggleText.text(toggle.attr('data-light'));
-    }
-
-    function system() {
-        html.removeClass(['dark', 'light']);
-        html.addClass(
-            window.matchMedia &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light'
-        );
-        localStorage.removeItem('dawn_theme');
-        toggleText.text(toggle.attr('data-system'));
-    }
-
-    switch (localStorage.getItem('dawn_theme')) {
-        case 'dark':
-            dark();
-            break;
-        case 'light':
-            light();
-            break;
-        default:
-            system();
-            break;
-    }
-
-    toggle.on('click', function (e) {
-        e.preventDefault();
-
-        switch (localStorage.getItem('dawn_theme')) {
-            case 'dark':
-                light();
-                break;
-            case 'light':
-                system();
-                break;
-            default:
-                dark();
-                break;
-        }
     });
 }
 
