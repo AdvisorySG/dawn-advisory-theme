@@ -23,8 +23,8 @@
     color: var(--secondary-text-color);
 }
 
-.tag-list-item::before {
-    content: "#";
+.tag-list-item:not(:last-child):after {
+    content: ", ";
 }
 
 .tag-list-item {
