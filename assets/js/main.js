@@ -14,7 +14,6 @@ $(function () {
     video();
     gallery();
     table();
-    toc();
     modal();
     search();
     burger();
@@ -191,54 +190,6 @@ function table() {
                             $(column).attr('data-label', labels[index]);
                         });
                 });
-        });
-    }
-}
-
-function toc() {
-    'use strict';
-    if (body.hasClass('post-template')) {
-        var output = '';
-        var toggle = $('.sticky-toc-button');
-
-        $('.single-content')
-            .find('> h1, > h2')
-            .each(function (index, value) {
-                var linkClass =
-                    $(this).prop('tagName') == 'H2'
-                        ? 'sticky-toc-link sticky-toc-link-indented'
-                        : 'sticky-toc-link';
-                output +=
-                    '<a class="' +
-                    linkClass +
-                    '" href="#' +
-                    $(value).attr('id') +
-                    '">' +
-                    $(value).text() +
-                    '</a>';
-            });
-
-        if (output == '') {
-            toggle.remove();
-        }
-
-        $('.sticky-toc').html(output);
-
-        toggle.on('click', function () {
-            body.toggleClass('toc-opened');
-        });
-
-        $('.sticky-toc-link').on('click', function (e) {
-            e.preventDefault();
-            var link = $(this).attr('href');
-
-            $('html, body').animate(
-                {
-                    scrollTop:
-                        $('[id="' + link.substring(1) + '"]').offset().top - 82,
-                },
-                500
-            );
         });
     }
 }
