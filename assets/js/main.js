@@ -238,7 +238,6 @@ function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
     var searchResult = $('.search-result');
-    var popular = $('.popular-wrapper');
     var includeContent =
         typeof gh_search_content == 'undefined' || gh_search_content == true
             ? true
@@ -328,12 +327,6 @@ function search() {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
-        }
-
-        if (result.length > 0) {
-            popular.hide();
-        } else {
-            popular.show();
         }
     });
 
