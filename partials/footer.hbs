@@ -1,32 +1,47 @@
-<footer class="site-footer container">
-    <div class="social">
-        <a class="social-item social-item-facebook"
-            href="https://www.facebook.com/advisorysg/" target="_blank"
-            rel="noopener noreferrer" aria-label="Facebook" >
-            <svg class="icon">
-                <use xlink:href="#facebook-box"></use>
-            </svg>
-        </a>
-        <a class="social-item social-item-instagram"
-            href="https://www.instagram.com/advisory.sg/" target="_blank"
-            rel="noopener noreferrer" aria-label="Instagram">
-            <svg class="icon">
-                <use xlink:href="#instagram-box"></use>
-            </svg>
-        </a>
-        <a class="social-item social-item-linkedin"
-            href="https://www.linkedin.com/company/advisorysg/" target="_blank"
-            rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg class="icon">
-                <use xlink:href="#linkedin-box"></use>
-            </svg>
-        </a>
+<footer class="flex flex-col align-center">
+    <div class="w-screen bg-neutral-900 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 justify-items-center gap-16 p-16">
+        <div class="col-auto sm:col-span-3 lg:col-auto">
+            <img class="h-60 m-auto" src="{{asset 'images/footer-logo.png'}}" />
+        </div>
+        <div>
+            <h2 class="text-white">WHO WE ARE</h2>
+            <p><a class="text-neutral-400">Our Team</a></p>
+            <p><a class="text-neutral-400">Our Partners</a></p>
+            <p><a class="text-neutral-400">About Us</a></p>
+        </div>
+        <div>
+            <h2 class="text-white">WHAT WE DO</h2>
+            <p><a class="text-neutral-400">Our Events</a></p>
+            <p><a class="text-neutral-400" href="/stories/">Our Stories</a></p>
+            <p><a class="text-neutral-400">Our Impact</a></p>
+        </div>
+        <div>
+            <h2 class="text-white">GET INVOLVED</h2>
+            <p><a class="text-neutral-400" href="/contact-us/">Contact Us</a></p>
+            <p><a class="text-neutral-400" href="/join-us/">Join Us</a></p>
+        </div>
     </div>
-    <div class="copyright">
-        Powered by <a href="https://ghost.org/" target="_blank"
-            rel="noopener noreferrer">Ghost</a>
-    </div>
-    <nav class="footer-nav">
-        {{navigation type="secondary"}}
-    </nav>
+    <div class="w-screen bg-neutral-900 grid grid-cols-1 sm:grid-cols-2 px-16 pt-4">
+        <div class="justify-self-center sm:justify-self-start">
+            <p class="text-neutral-400">
+                &copy; 2020 Advisory SG | Powered by <a class="text-neutral-400" href="https://ghost.org/" target="_blank" rel="noopener noreferrer">Ghost</a>
+            </p>
+        </div>
+        <div class="justify-self-center sm:justify-self-end flex flex-row gap-4">
+            <a class="social-item social-item-facebook" href="https://www.facebook.com/advisorysg/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg class="icon">
+                    <use xlink:href="#facebook-box"></use>
+                </svg>
+            </a>
+            <a class="social-item social-item-instagram" href="https://www.instagram.com/advisory.sg/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg class="icon">
+                    <use xlink:href="#instagram-box"></use>
+                </svg>
+            </a>
+            <a class="social-item social-item-linkedin" href="https://www.linkedin.com/company/advisorysg/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg class="icon">
+                    <use xlink:href="#linkedin-box"></use>
+                </svg>
+            </a>
+        </div>
 </footer>
