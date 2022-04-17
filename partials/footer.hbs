@@ -1,32 +1,48 @@
-<footer class="site-footer container">
-    <div class="social">
-        <a class="social-item social-item-facebook"
-            href="https://www.facebook.com/advisorysg/" target="_blank"
-            rel="noopener noreferrer" aria-label="Facebook" >
-            <svg class="icon">
-                <use xlink:href="#facebook-box"></use>
-            </svg>
-        </a>
-        <a class="social-item social-item-instagram"
-            href="https://www.instagram.com/advisory.sg/" target="_blank"
-            rel="noopener noreferrer" aria-label="Instagram">
-            <svg class="icon">
-                <use xlink:href="#instagram-box"></use>
-            </svg>
-        </a>
-        <a class="social-item social-item-linkedin"
-            href="https://www.linkedin.com/company/advisorysg/" target="_blank"
-            rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg class="icon">
-                <use xlink:href="#linkedin-box"></use>
-            </svg>
-        </a>
+<footer class="flex flex-col align-center bg-neutral-900 w-screen">
+    <div class="w-screen max-w-screen-lg mx-auto grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 justify-items-center gap-8 pt-16 px-16">
+        <div class="col-auto max-w-2xl flex flex-col sm:flex-row sm:col-span-3 md:col-span-2 md:flex-col lg:flex-row">
+            <img class="h-60 m-auto" src="{{asset 'images/footer-logo.png'}}" />
+            <p class="text-neutral-300 text-center sm:text-left md:text-center lg:text-left">Advisory is a fully youth-led non-profit dedicated to empowering young Singaporeans to make informed decisions about their futures.</p>
+        </div>
+        <div>
+            <h2 class="text-white">WHO WE ARE</h2>
+            <p><a class="text-neutral-300">Our Team</a></p>
+            <p><a class="text-neutral-300">Our Partners</a></p>
+            <p><a class="text-neutral-300">About Us</a></p>
+        </div>
+        <div>
+            <h2 class="text-white">WHAT WE DO</h2>
+            <p><a class="text-neutral-300">Our Events</a></p>
+            <p><a class="text-neutral-300" href="/stories/">Our Stories</a></p>
+            <p><a class="text-neutral-300">Our Impact</a></p>
+        </div>
+        <div>
+            <h2 class="text-white">GET INVOLVED</h2>
+            <p><a class="text-neutral-300" href="/contact-us/">Contact Us</a></p>
+            <p><a class="text-neutral-300" href="/join-us/">Join Us</a></p>
+        </div>
     </div>
-    <div class="copyright">
-        Powered by <a href="https://ghost.org/" target="_blank"
-            rel="noopener noreferrer">Ghost</a>
-    </div>
-    <nav class="footer-nav">
-        {{navigation type="secondary"}}
-    </nav>
+    <div class="w-screen max-w-screen-lg mx-auto grid grid-cols-1 sm:grid-cols-2 px-16 py-8">
+        <div class="justify-self-center sm:justify-self-start">
+            <p class="text-neutral-300">
+                &copy; 2022 Advisory SG | Powered by <a class="text-neutral-300" href="https://ghost.org/" target="_blank" rel="noopener noreferrer">Ghost</a>
+            </p>
+        </div>
+        <div class="justify-self-center sm:justify-self-end flex flex-row gap-4">
+            <a class="social-item social-item-facebook" href="https://www.facebook.com/advisorysg/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg class="icon">
+                    <use xlink:href="#facebook-box"></use>
+                </svg>
+            </a>
+            <a class="social-item social-item-instagram" href="https://www.instagram.com/advisory.sg/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg class="icon">
+                    <use xlink:href="#instagram-box"></use>
+                </svg>
+            </a>
+            <a class="social-item social-item-linkedin" href="https://www.linkedin.com/company/advisorysg/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg class="icon">
+                    <use xlink:href="#linkedin-box"></use>
+                </svg>
+            </a>
+        </div>
 </footer>
