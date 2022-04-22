@@ -1,9 +1,9 @@
 <article class="feed-card {{post_class}} rounded-lg ring-1 ring-gray-900/5 shadow-xl">
     <div onclick="location.href='{{url}}'" class="flex flex-col cursor-pointer h-full rounded-xl overflow-hidden sm:flex-row sm:h-60 lg:flex-col lg:h-full ">
         {{#if feature_image}}
-        <img class="object-cover m-0 w-full h-60 sm:min-w-[30%] sm:max-w-[30%] sm:h-full lg:w-full lg:max-w-full lg:h-60" src="{{img_url feature_image}}" alt="{{title}}" />
+        <img class="object-cover m-0 w-full h-72 sm:min-w-[50%] sm:max-w-[50%] sm:h-full md:min-w-[40%] md:max-w-[40%] lg:w-full lg:max-w-full lg:h-60" src="{{img_url feature_image}}" alt="{{title}}" />
         {{else}} {{!-- Placeholder --}}
-        <img class="object-cover m-0 hidden sm:block sm:min-w-[30%] sm:max-w-[30%] sm:h-full lg:w-full lg:max-w-full lg:h-60" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
+        <img class="object-cover m-0 hidden sm:block sm:min-w-[50%] sm:max-w-[50%] sm:h-full md:min-w-[40%] md:max-w-[40%] lg:w-full lg:max-w-full lg:h-60" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
         {{/if}}
         <div class="flex-grow bg-white px-3 pt-3 pb-5 relative">
             {{#if primary_tag}}
