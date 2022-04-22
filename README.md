@@ -46,16 +46,6 @@ When your site has lots of posts, including the post content in the index cache 
 </script>
 ```
 
-# White Logo
-
-If your logo image isn't recognizable in dark mode, you can set a white version of the logo in `Code injection > Site Header` field.
-
-```html
-<script>
-    var gh_white_logo = "https://example.com/content/images/white-logo.png";
-</script>
-```
-
 # Dropdown Menu
 
 The theme looks for a menu item with three dots (`...`) in its URL, and uses that as a dropdown menu toggle. All menu items after the toggle will be added to the dropdown list automatically.
@@ -92,10 +82,16 @@ Finally, run `npm run dev` in the `content/themes/dawn-advisory-theme/` director
 
 This method is not officially supported by Ghost and might break any time (though the theme handling logic is unlikely to be modified in the foreseeable future). Take note that if you add new post templates, you may need to restart Ghost manually for the changes to take place in the Admin panel.
 
+## `routes.yaml` Setup
+
+For the homepage and separate [Stories](https://beta.advisory.sg/stories) page to be rendered correctly, it is necessary to upload a custom `routes.yaml` file onto Ghost. Please refer to [the instructions here](https://ghost.org/docs/themes/routing/) for more details.
+
+**Note**: The `routes.yaml` file supplied in the repository is not automatically deployed onto the main website.
+
 # PostCSS Features Used
 
 -   Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
 
 # Copyright & License
 
-Copyright (c) 2013-2021 Ghost Foundation, 2021 Advisory Singapore - Released under the [MIT license](LICENSE).
+Copyright (c) 2013-2021 Ghost Foundation, 2021-2022 Advisory Singapore - Released under the [MIT license](LICENSE).

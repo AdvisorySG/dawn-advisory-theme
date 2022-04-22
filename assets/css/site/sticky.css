@@ -26,52 +26,6 @@
     white-space: nowrap;
 }
 
-.sticky-toc-button {
-    flex-shrink: 0;
-    margin-right: -6px;
-}
-
-.sticky-toc-button .icon {
-    width: 24px;
-    height: 24px;
-}
-
-.sticky-toc {
-    visibility: hidden;
-    position: absolute;
-    top: 72px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0;
-    width: 250px;
-    text-align: left;
-    background-color: var(--lighter-gray-color);
-    opacity: 0;
-    transition-timing-function: var(--animation-base);
-    transition-duration: 0.2s;
-    transition-property: opacity transform;
-    transform: translateY(-10px);
-}
-
-.sticky-toc-link {
-    padding: 0.6rem 1.7rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.sticky-toc-link-indented::before {
-    content: "-";
-    margin-right: 0.5rem;
-}
-
-.toc-opened .sticky-toc {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .sticky-track {
     position: absolute;
     bottom: -2px;

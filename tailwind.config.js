@@ -6,7 +6,6 @@ module.exports = {
         "assets/built/**/*.js",
         "!node_modules/**/*.hbs",
     ],
-    darkMode: "class",
     theme: {
         extend: {},
     },

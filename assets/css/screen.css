@@ -15,7 +15,6 @@
 @import "site/footer.css";
 @import "site/modal.css";
 @import "site/search.css";
-@import "site/popular.css";
 @import "site/burger.css";
 @import "blog/feed.css";
 @import "blog/featured.css";
@@ -37,4 +36,3 @@
 @import "misc/kg.css";
 @import "misc/utils.css";
 @import "misc/animations.css";
-@import "misc/dark.css";

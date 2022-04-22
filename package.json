@@ -79,6 +79,11 @@
                 "default": true,
                 "group": "post"
             },
+            "show_excerpt": {
+                "type": "boolean",
+                "default": false,
+                "group": "post"
+            },
             "show_related_posts": {
                 "type": "boolean",
                 "default": true,
@@ -88,33 +93,40 @@
     },
     "scripts": {
         "dev": "gulp",
+        "prepare": "husky install",
         "test": "gscan .",
         "test:ci": "gscan --fatal --verbose .",
         "zip": "gulp zip"
     },
     "devDependencies": {
-        "autoprefixer": "10.4.2",
-        "cssnano": "5.0.16",
+        "autoprefixer": "10.4.4",
+        "cssnano": "5.1.7",
         "eslint": "^8.2.0",
-        "gscan": "4.22.0",
+        "gscan": "4.26.1",
         "gulp": "4.0.2",
-        "gulp-concat": "2.6.1",
         "gulp-livereload": "4.0.2",
         "gulp-postcss": "9.0.1",
-        "gulp-uglify": "3.0.2",
         "gulp-zip": "5.1.0",
         "husky": "^7.0.4",
-        "postcss": "8.4.5",
-        "postcss-easy-import": "3.0.0",
+        "postcss": "8.4.12",
+        "postcss-easy-import": "4.0.0",
         "prettier": "^2.4.1",
         "pretty-quick": "^3.1.2",
         "pump": "3.0.0",
-        "tailwindcss": "^3.0.7"
+        "webpack-stream": "^7.0.0"
     },
     "browserslist": [
         "defaults"
     ],
     "dependencies": {
-        "@tailwindcss/line-clamp": "^0.3.0"
+        "@tailwindcss/line-clamp": "^0.3.0",
+        "elasticlunr": "^0.9.5",
+        "fitvids": "^2.1.1",
+        "infinite-scroll": "^4.0.1",
+        "jquery": "^3.6.0",
+        "lazysizes": "^5.3.2",
+        "photoswipe": "^4.1.3",
+        "tailwindcss": "^3.0.7",
+        "webpack": "^5.70.0"
     }
 }

@@ -9,10 +9,6 @@
     font-size: 2.4rem;
 }
 
-.tag-name::before {
-    content: "#";
-}
-
 .tag-description {
     margin: 1rem auto 0;
     max-width: 500px;
@@ -24,16 +20,14 @@
 }
 
 .tag-list-label {
-    margin-right: 0.5rem;
     color: var(--secondary-text-color);
 }
 
-.tag-list-item::before {
-    content: "#";
+.tag-list-item:not(:last-child):after {
+    content: ", ";
 }
 
 .tag-list-item {
-    margin-left: 0.3rem;
     color: var(--brand-color);
 }
 
