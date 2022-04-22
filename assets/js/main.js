@@ -108,7 +108,7 @@ function subMenu() {
 }
 
 function featured() {
-    var glideFeed = new Glide('.featured-feed1', {
+    var glideFeed = new Glide('.featured-feed', {
         type: 'carousel',
         autoplay: 3500,
         perView: 3,
