@@ -7,7 +7,7 @@ import elasticlunr from 'elasticlunr';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
-import './lib/owl.carousel.js';
+import Glide from '@glidejs/glide';
 
 var body = $('body');
 var timeout;
@@ -108,26 +108,20 @@ function subMenu() {
 }
 
 function featured() {
-    $('.featured-feed').owlCarousel({
-        dots: false,
-        margin: 30,
-        nav: true,
-        navText: [
-            '<svg class="icon"><use xlink:href="#chevron-left"></use></svg>',
-            '<svg class="icon"><use xlink:href="#chevron-right"></use></svg>',
-        ],
-        responsive: {
-            0: {
-                items: 1,
-            },
+    var glideFeed = new Glide('.featured-feed1', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 3,
+        breakpoints: {
             768: {
-                items: 2,
+                perView: 1,
             },
             992: {
-                items: 3,
+                perView: 2,
             },
         },
     });
+    glideFeed.mount();
 }
 
 function pagination() {

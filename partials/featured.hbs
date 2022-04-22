@@ -1,26 +1,43 @@
 {{#get "posts" filter="featured:true" limit="all" as |featured|}}
     {{#if featured}}
         <section class="featured-wrapper container">
-            {{#if @custom.featured_title}}
-                <h2 class="featured-title">{{@custom.featured_title}}</h2>
-            {{/if}}
-            <div class="featured-feed owl">
-                {{#foreach featured}}
-                    <article class="{{post_class}}">
-                        {{#if feature_image}}
-                            <div class="u-placeholder horizontal">
-                                <img class="lazyload u-object-fit"
-                                    data-srcset="{{> srcset}}" data-sizes="auto"
-                                    src="{{img_url feature_image size="m"}}"
-                                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                    alt="{{title}}">
-                            </div>
-                        {{/if}}
-                        <h3 class="post-title">{{title}}</h3>
-                        <a class="u-permalink" href={{url}} aria-label="{{title}}"></a>
-                    </article>
-                {{/foreach}}
+            <div class="featured-feed1 glide">
+                {{#if @custom.featured_title}}
+                    <h2 class="featured-title">{{@custom.featured_title}}</h2>
+                {{/if}}
+                <div data-glide-el="controls" style="position: absolute; top: -10px; right: 0px">
+                    <button data-glide-dir="<" type="button" role="presentation" class="border border-gray-300 py-2 px-2 rounded" >
+                        <svg class="icon">
+                            <use xlink:href="#chevron-left"></use>
+                        </svg>
+                    </button>
+                    <button data-glide-dir=">" type="button" role="presentation" class="border border-gray-300 py-2 px-2 rounded">
+                        <svg class="icon">
+                            <use xlink:href="#chevron-right"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                        {{#foreach featured}}
+                            <article class="{{post_class}} glide__slide">
+                                {{#if feature_image}}
+                                    <div class="u-placeholder horizontal">
+                                        <img class="lazyload u-object-fit"
+                                            data-srcset="{{> srcset}}" data-sizes="auto"
+                                            src="{{img_url feature_image size="m"}}"
+                                            srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                            alt="{{title}}">
+                                    </div>
+                                {{/if}}
+                                <h3 class="post-title">{{title}}</h3>
+                                <a class="u-permalink" href={{url}} aria-label="{{title}}"></a>
+                            </article>
+                        {{/foreach}}
+                    </div>
+                </div>
             </div>
+            
         </section>
     {{/if}}
 {{/get}}
