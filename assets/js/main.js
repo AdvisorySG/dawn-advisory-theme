@@ -20,6 +20,8 @@ var progress = $('.sticky-progress');
 $(function () {
     subMenu();
     featured();
+    partners();
+    featuredBy();
     pagination();
     video();
     gallery();
@@ -117,6 +119,34 @@ function featured() {
                 perView: 1,
             },
             992: {
+                perView: 2,
+            },
+        },
+    });
+    glideFeed.mount();
+}
+
+function partners() {
+    var glideFeed = new Glide('.partners-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 4,
+        breakpoints: {
+            768: {
+                perView: 2,
+            },
+        },
+    });
+    glideFeed.mount();
+}
+
+function featuredBy() {
+    var glideFeed = new Glide('.featuredby-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 4,
+        breakpoints: {
+            768: {
                 perView: 2,
             },
         },
