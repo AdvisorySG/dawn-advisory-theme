@@ -36,3 +36,12 @@
 @import "misc/kg.css";
 @import "misc/utils.css";
 @import "misc/animations.css";
+
+@layer base {
+    ul {
+        list-style: disc;
+    }
+    ol {
+        list-style: decimal;
+    }
+}
