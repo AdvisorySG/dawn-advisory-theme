@@ -14,7 +14,7 @@ This theme was originally based off [TryGhost/Dawn](https://github.com/TryGhost/
 
 ```bash
 # Install dependencies
-npm
+npm install
 
 # Package the theme into a zip archive
 npm run zip
