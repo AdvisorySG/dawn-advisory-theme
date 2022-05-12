@@ -36,3 +36,12 @@
 @import "misc/utils.css";
 @import "misc/animations.css";
 @import "../../node_modules/@glidejs/glide/dist/css/glide.core.min.css";
+
+@layer base {
+    ul {
+        list-style: disc;
+    }
+    ol {
+        list-style: decimal;
+    }
+}
