@@ -9,12 +9,12 @@ This theme was originally based off [TryGhost/Dawn](https://github.com/TryGhost/
 # Instructions
 
 1. [Setup a local Ghost instance](https://ghost.org/docs/install/local/).
-2. Ensure you have [Node v14](https://nodejs.org/) installed.
+2. Ensure you have [Node v16](https://nodejs.org/) installed.
 3. From the root directory, execute the `zip` Gulp task:
 
 ```bash
 # Install dependencies
-npm
+npm install
 
 # Package the theme into a zip archive
 npm run zip

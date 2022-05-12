@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "engines": {
         "ghost": ">=4.0.0",
-        "ghost-api": "v4"
+        "ghost-api": "v4",
+        "node": "16.x"
     },
     "license": "MIT",
     "author": {
