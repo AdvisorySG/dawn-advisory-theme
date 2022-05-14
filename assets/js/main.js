@@ -110,6 +110,10 @@ function subMenu() {
 }
 
 function featured() {
+    if (body.find('.featured-feed').length === 0) {
+        return;
+    }
+
     var glideFeed = new Glide('.featured-feed', {
         type: 'carousel',
         autoplay: 3500,
@@ -127,6 +131,10 @@ function featured() {
 }
 
 function partners() {
+    if (body.find('.partners-feed').length === 0) {
+        return;
+    }
+
     var glideFeed = new Glide('.partners-feed', {
         type: 'carousel',
         autoplay: 3500,
@@ -141,6 +149,10 @@ function partners() {
 }
 
 function featuredBy() {
+    if (body.find('.featuredby-feed').length === 0) {
+        return;
+    }
+
     var glideFeed = new Glide('.featuredby-feed', {
         type: 'carousel',
         autoplay: 3500,
