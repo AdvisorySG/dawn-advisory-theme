@@ -266,6 +266,22 @@ function modal() {
     });
 }
 
+function elasticSearch(query, callback) {
+    var base_url = 'https://advisorysg.ent.ap-southeast-1.aws.found.io';
+    var engine = 'ghost';
+    var search_only_key = 'search-brya3eig6n5g9ybimkw3o9u3';
+
+    var oReq = new XMLHttpRequest();
+    var payload = { query: query }; //, 'page':{'size':5, 'current':1}};
+    oReq.open(
+        'POST',
+        base_url + '/api/as/v1/engines/' + engine + '/search.json'
+    ); //?'+encodeURI(JSON.stringify(payload)));
+    oReq.addEventListener('load', callback);
+    oReq.setRequestHeader('Content-Type', 'application/json');
+    oReq.setRequestHeader('Authorization', 'Bearer ' + search_only_key);
+    oReq.send(JSON.stringify(payload));
+}
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -339,6 +355,24 @@ function search() {
     }
 
     searchInput.on('keyup', function (e) {
+        elasticSearch(e.target.value, function () {
+            var data = JSON.parse(this.responseText);
+            var output = '';
+            data.results.forEach(function (post) {
+                output +=
+                    '<div class="search-result-row">' +
+                    '<a class="search-result-row-link" href="' +
+                    post['url_path'].raw +
+                    '">' +
+                    post.title.raw +
+                    '</a>' +
+                    '</div>';
+            });
+            searchResult.html(output);
+        });
+    });
+    /*
+    searchInput.on('keyup', function (e) {
         var result = index.search(e.target.value, { expand: true });
         var output = '';
 
@@ -354,13 +388,15 @@ function search() {
         });
 
         searchResult.html(output);
+        
+        
 
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
         }
-    });
+    });*/
 
     $('.search-form').on('submit', function (e) {
         e.preventDefault();
