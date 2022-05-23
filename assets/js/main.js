@@ -3,7 +3,6 @@ import './jquery-global.js';
 import InfiniteScroll from 'infinite-scroll';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
-import elasticlunr from 'elasticlunr';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
@@ -272,11 +271,11 @@ function elasticSearch(query, callback) {
     var search_only_key = 'search-brya3eig6n5g9ybimkw3o9u3';
 
     var oReq = new XMLHttpRequest();
-    var payload = { query: query }; //, 'page':{'size':5, 'current':1}};
+    var payload = { query: query };
     oReq.open(
         'POST',
         base_url + '/api/as/v1/engines/' + engine + '/search.json'
-    ); //?'+encodeURI(JSON.stringify(payload)));
+    );
     oReq.addEventListener('load', callback);
     oReq.setRequestHeader('Content-Type', 'application/json');
     oReq.setRequestHeader('Authorization', 'Bearer ' + search_only_key);
@@ -286,73 +285,6 @@ function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
     var searchResult = $('.search-result');
-    var includeContent =
-        typeof gh_search_content == 'undefined' || gh_search_content == true
-            ? true
-            : false;
-
-    if (typeof gh_search_key == 'undefined' || gh_search_key == '') return;
-    var url =
-        siteUrl +
-        '/ghost/api/v3/content/posts/?key=' +
-        gh_search_key +
-        '&limit=all&fields=id,title,url,updated_at,visibility&order=updated_at%20desc';
-    url += includeContent ? '&formats=plaintext' : '';
-    var indexDump = JSON.parse(localStorage.getItem('dawn_search_index'));
-    var index;
-
-    elasticlunr.clearStopWords();
-
-    localStorage.removeItem('dawn_index');
-    localStorage.removeItem('dawn_last');
-
-    function update(data) {
-        data.posts.forEach(function (post) {
-            index.addDoc(post);
-        });
-
-        try {
-            localStorage.setItem('dawn_search_index', JSON.stringify(index));
-            localStorage.setItem('dawn_search_last', data.posts[0].updated_at);
-        } catch (e) {
-            console.error(
-                'Your browser local storage is full. Update your search settings following the instruction at https://github.com/TryGhost/Dawn#disable-content-search'
-            );
-        }
-    }
-
-    if (!indexDump) {
-        $.get(url, function (data) {
-            if (data.posts.length > 0) {
-                index = elasticlunr(function () {
-                    this.addField('title');
-                    if (includeContent) {
-                        this.addField('plaintext');
-                    }
-                    this.setRef('id');
-                });
-
-                update(data);
-            }
-        });
-    } else {
-        index = elasticlunr.Index.load(indexDump);
-
-        $.get(
-            url +
-                "&filter=updated_at:>'" +
-                localStorage
-                    .getItem('dawn_search_last')
-                    .replace(/\..*/, '')
-                    .replace(/T/, ' ') +
-                "'",
-            function (data) {
-                if (data.posts.length > 0) {
-                    update(data);
-                }
-            }
-        );
-    }
 
     searchInput.on('keyup', function (e) {
         elasticSearch(e.target.value, function () {
@@ -370,33 +302,12 @@ function search() {
             });
             searchResult.html(output);
         });
-    });
-    /*
-    searchInput.on('keyup', function (e) {
-        var result = index.search(e.target.value, { expand: true });
-        var output = '';
-
-        result.forEach(function (post) {
-            output +=
-                '<div class="search-result-row">' +
-                '<a class="search-result-row-link" href="' +
-                post.doc.url +
-                '">' +
-                post.doc.title +
-                '</a>' +
-                '</div>';
-        });
-
-        searchResult.html(output);
-        
-        
-
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
         }
-    });*/
+    });
 
     $('.search-form').on('submit', function (e) {
         e.preventDefault();
