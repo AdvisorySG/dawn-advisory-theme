@@ -1,14 +1,12 @@
 function Header () {
     return (
-        <nav>
-            <ul className="nav-bar">
-                <li>Home</li>
-                <li>Daily Tracker</li>
-                <li>Weekly Tracker</li>
-                <li>Calender</li>
-                <li>Analytics</li>
-                <li>About</li>
-            </ul>
+        <nav className="nav-bar">
+            <p>Home</p>
+            <p>Daily Tracker</p>
+            <p>Weekly Tracker</p>
+            <p>Calender</p>
+            <p>Analytics</p>
+            <p>About</p>
         </nav>
     )
 }
