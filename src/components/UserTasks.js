@@ -20,9 +20,24 @@ const UserTasks = [
         urgency : "Low"
     },
     {
-        task: "Study for internship interview",
+        task: "Group project meeting preparation",
         day : "Sunday",
         urgency : "Low"
+    },
+    {
+        task: "Attend CCA outing",
+        day : "Sunday",
+        urgency : "Low"
+    },
+    {
+        task: "Complete Orbital Part 1",
+        day : "Sunday",
+        urgency : "High"
+    },
+    {
+        task: "Complete research project",
+        day : "Saturday",
+        urgency : "Medium"
     }
 ]
 
