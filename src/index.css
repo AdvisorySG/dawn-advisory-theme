@@ -28,6 +28,7 @@ code {
 }
 
 .home-page-container {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -36,22 +37,19 @@ code {
 }
 
 .home-page-container h1 {
-  display:flex;
   font-size: 100px;
   position: absolute;
-  bottom: 4rem;
-  margin: 40rem 30rem;
+  bottom: 60%;
+  left: 25%;
   color:black;
 
 }
 
 .home-page-container p {
-  display:flex;
   font-size: 25px;
   position: absolute;
-  margin-left: 25rem;
-  margin-top: 30rem;
-  bottom: 35rem;
+  bottom: 60%;
+  left: 25%;
   color:black;
   font-weight: bold;  
 }
