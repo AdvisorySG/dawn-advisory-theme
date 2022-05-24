@@ -110,3 +110,31 @@ body {
   margin-left: 1.5%;
   margin-top: 1.5%;
 }
+
+#important {
+  background-color: red;
+  border: 5px solid red;
+  width: 98.5%;
+  max-height: 30%;
+  font-weight: bold;
+  color:white;
+}
+
+#need-attention {
+  background-color: orange;
+  border: 5px solid orange;
+  width: 98.5%;
+  max-height: 30%;
+  font-weight: bold;
+  color:white;
+}
+
+#on-track {
+  background-color: green;
+  border: 5px solid green;
+  width: 98.5%;
+  max-height: 30%;
+  font-weight: bold;
+  color:white;
+}
+

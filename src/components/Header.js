@@ -2,10 +2,10 @@ function Header () {
     return (
         <nav className="nav-bar">
             <p>Home</p>
-            <p>Daily Tracker</p>
-            <p>Weekly Tracker</p>
+            <p>Todo List</p>
             <p>Calender</p>
             <p>Analytics</p>
+            <p>Achievements</p>
             <p>About</p>
         </nav>
     )
