@@ -101,3 +101,12 @@ body {
 .title {
   margin-left: 5%;
 }
+
+.card > img {
+  display: flex;
+  flex-direction: row;
+  max-width: 5%;
+  max-height: 5%;
+  margin-left: 1.5%;
+  margin-top: 1.5%;
+}

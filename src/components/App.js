@@ -18,26 +18,7 @@ function Page () {
             <Header />
             <h1 class="title">Todo List</h1>
             {/* <Home /> */}
-            <Card 
-                task="Study math"
-                day="Monday"
-                urgency="High"
-            />
-            <Card 
-                task="Study Chemistry"
-                day="Tuesday"
-                urgency="High"
-            />
-            <Card 
-                task="Study History"
-                day="Friday"
-                urgency="Medium"
-            />
-            <Card 
-                task="Study Biology"
-                day="Sunday"
-                urgency="Low"
-            />
+            {userTasks}
             <Footer />
         </div>
     );
