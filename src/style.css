@@ -94,6 +94,10 @@ body {
   margin-left: 1.5%;
 }
 
+.card > p.urgency {
+  margin-left: 1.5%;
+}
+
 .title {
   margin-left: 5%;
 }
