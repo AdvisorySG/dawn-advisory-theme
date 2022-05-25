@@ -1,3 +1,4 @@
+/* DEFAULT STYLING */
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,208 +6,207 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+}
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
   
-  .container{
-    width:auto;
-    height:auto;
-  }
+.container {
+  width:auto;
+  height:auto;
+}
 
-  .nav-bar {
-    list-style-type: none;
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    width:100%;
-    height: 10%;
-    background-color: salmon;
-    color:white;
-    font-weight: bold;
-  }
+.nav-bar {
+  list-style-type: none;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  width:100%;
+  height: 10%;
+  background-color: salmon;
+  color:white;
+  font-weight: bold;
+}
   
-  .home-page-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width:100%;
-    background-color: rgb(255, 239, 222);
-  }
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:100%;
+  background-color: rgb(255, 239, 222);
+}
 
-  .home-page-background {
-    width: 100%;
-    height:100%;
-  }
-  
-  .home-page-container > h1 {
-    padding-left:5%;
-    margin-bottom:0%;
-    font-size: 60px;
-    font-weight: bold;  
-  }
-  
-  .home-page-container > p {
-    padding-left:5%;
-    font-size: 20px;
-    font-weight: bold;  
-  }
-  
-  .footer > p {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width:100%;
-    height:20%;
-    margin:0px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: salmon;
-    font-weight: bold;
-    color: white;
+.home-page-background {
+  width: 100%;
+  height:100%;
+}
+
+.home-page-container > h1 {
+  padding-left:5%;
+  margin-bottom:0%;
+  font-size: 60px;
+  font-weight: bold;  
+}
+
+.home-page-container > p {
+  padding-left:5%;
+  font-size: 20px;
+  font-weight: bold;  
+}
+
+.footer > p {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height:20%;
+  margin:0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: salmon;
+  font-weight: bold;
+  color: white;
 }
 
 .card {
-  display:flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border:2px solid black;
-  background-color:white;
-  max-width: 75%;
-  margin-bottom: 2%;
-  margin-left:5%;
+display:flex;
+flex-direction: column;
+flex-wrap: wrap;
+border:2px solid black;
+background-color:white;
+max-width: 75%;
+margin-bottom: 2%;
+margin-left:5%;
 }
 
 .card > p.task {
-  margin-left: 1.5%;
+margin-left: 1.5%;
 }
 
 .card > p.day {
-  margin-left: 1.5%;
+margin-left: 1.5%;
 }
 
 .card > p.urgency {
-  margin-left: 1.5%;
+margin-left: 1.5%;
 }
 
 .title {
-  margin-left: 5%;
+margin-left: 5%;
 }
 
 /*
 .card > img {
-  display: flex;
-  flex-direction: row;
-  max-width: 5%;
-  max-height: 5%;
-  margin-left: 1.5%;
-  margin-top: 1.5%;
+display: flex;
+flex-direction: row;
+max-width: 5%;
+max-height: 5%;
+margin-left: 1.5%;
+margin-top: 1.5%;
 }*/
 
 
 #important {
-  background-color: red;
-  border: 5px solid red;
-  width: 98.5%;
-  max-height: 30%;
-  font-weight: bold;
-  color:white;
+background-color: red;
+border: 5px solid red;
+width: 98.5%;
+max-height: 30%;
+font-weight: bold;
+color:white;
 }
 
 #need-attention {
-  background-color: orange;
-  border: 5px solid orange;
-  width: 98.5%;
-  max-height: 30%;
-  font-weight: bold;
-  color:white;
+background-color: orange;
+border: 5px solid orange;
+width: 98.5%;
+max-height: 30%;
+font-weight: bold;
+color:white;
 }
 
 #on-track {
-  background-color: green;
-  border: 5px solid green;
-  width: 98.5%;
-  max-height: 30%;
-  font-weight: bold;
-  color:white;
+background-color: green;
+border: 5px solid green;
+width: 98.5%;
+max-height: 30%;
+font-weight: bold;
+color:white;
 }
 
 form {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 2fr;
+display: grid;
+grid-template-rows: 1fr 1fr;
+grid-template-columns: 1fr 2fr;
 }
 
 .todoinput {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1%;
-  width: 70%;
-  margin-left: 15%;
+display: flex;
+flex-wrap: wrap;
+padding: 1%;
+width: 70%;
+margin-left: 15%;
 }
 
 .todobutton {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 20%;
-  background-color:cornsilk;
-  border-color: black;
-  border-radius: 4px;
-  padding: 1%;
-  font-weight: bold;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+width: 20%;
+background-color:cornsilk;
+border-color: black;
+border-radius: 4px;
+padding: 1%;
+font-weight: bold;
 }
 
 .card-topbar {
-  display: flex;
-  flex-wrap: wrap; 
-  align-items: center;
+display: flex;
+flex-wrap: wrap; 
+align-items: center;
 }
 
 
 .edit-todo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin-left: 1%;
-  width:12%;
-  background-color: skyblue;
-  border-color: black;
-  border-radius: 2px;
-  padding: 1%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+height: 100%;
+margin-left: 1%;
+width:12%;
+background-color: skyblue;
+border-color: black;
+border-radius: 2px;
+padding: 1%;
 }
 
 .delete-todo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin-left: 1%;
-  width:12%;
-  background-color: pink;
-  border-color: black;
-  border-radius: 2px;
-  padding: 1%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+height: 100%;
+margin-left: 1%;
+width:12%;
+background-color: pink;
+border-color: black;
+border-radius: 2px;
+padding: 1%;
 }
 
 .img-todo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  margin-left: 6px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+height: 50px;
+margin-left: 6px;
 }
-
