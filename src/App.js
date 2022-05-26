@@ -6,7 +6,7 @@ import UserTasks from './components/UserTasks.js';
 import Todolist from './components/Todolist.js';
 import './App.css';
 
-function Page () {
+function App() {
     const userTasks = UserTasks.map(item => {
         return <Card
                     task = {item.task}
@@ -25,4 +25,4 @@ function Page () {
     );
 };
 
-export default Page;
+export default App;
