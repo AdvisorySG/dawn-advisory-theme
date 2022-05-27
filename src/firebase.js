@@ -1,4 +1,5 @@
-import firebaseConfig from './firebaseConfig.js'
+import firebaseConfig from './firebaseConfig.js' // hidden firebase authentication credentials 
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
