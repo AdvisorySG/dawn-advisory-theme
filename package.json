@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "engines": {
         "ghost": ">=4.0.0",
-        "ghost-api": "v4"
+        "ghost-api": "v4",
+        "node": "16.x"
     },
     "license": "MIT",
     "author": {
@@ -119,6 +120,7 @@
         "defaults"
     ],
     "dependencies": {
+        "@glidejs/glide": "^3.5.2",
         "@tailwindcss/line-clamp": "^0.3.0",
         "elasticlunr": "^0.9.5",
         "fitvids": "^2.1.1",

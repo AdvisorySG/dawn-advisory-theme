@@ -83,12 +83,15 @@ function zipper(done) {
     );
 }
 
-const hbsWatcher = () =>
-    watch(["*.hbs", "partials/**/*.hbs", "members/**/*.hbs"], hbs);
-const cssWatcher = () => watch("assets/css/**/*.css", css);
-const jsWatcher = () => watch("assets/js/**/*.js", js);
+const HBS_PATHS = ["*.hbs", "partials/**/*.hbs", "members/**/*.hbs"];
+const CSS_PATHS = ["assets/css/**/*.css"];
+const JS_PATHS = ["assets/js/**/*.js"];
+
+const hbsWatcher = () => watch(HBS_PATHS, hbs);
+const cssWatcher = () => watch(CSS_PATHS.concat(HBS_PATHS), css);
+const jsWatcher = () => watch(JS_PATHS, js);
 const watcher = parallel(hbsWatcher, cssWatcher, jsWatcher);
-const build = series(css, js);
+const build = series(hbs, css, js);
 
 exports.build = build;
 exports.zip = series(build, zipper);

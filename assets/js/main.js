@@ -7,7 +7,7 @@ import elasticlunr from 'elasticlunr';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
-import './lib/owl.carousel.js';
+import Glide from '@glidejs/glide';
 
 var body = $('body');
 var timeout;
@@ -20,6 +20,8 @@ var progress = $('.sticky-progress');
 $(function () {
     subMenu();
     featured();
+    partners();
+    featuredBy();
     pagination();
     video();
     gallery();
@@ -108,26 +110,60 @@ function subMenu() {
 }
 
 function featured() {
-    $('.featured-feed').owlCarousel({
-        dots: false,
-        margin: 30,
-        nav: true,
-        navText: [
-            '<svg class="icon"><use xlink:href="#chevron-left"></use></svg>',
-            '<svg class="icon"><use xlink:href="#chevron-right"></use></svg>',
-        ],
-        responsive: {
-            0: {
-                items: 1,
-            },
+    if (body.find('.featured-feed').length === 0) {
+        return;
+    }
+
+    var glideFeed = new Glide('.featured-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 3,
+        breakpoints: {
             768: {
-                items: 2,
+                perView: 1,
             },
             992: {
-                items: 3,
+                perView: 2,
             },
         },
     });
+    glideFeed.mount();
+}
+
+function partners() {
+    if (body.find('.partners-feed').length === 0) {
+        return;
+    }
+
+    var glideFeed = new Glide('.partners-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 4,
+        breakpoints: {
+            768: {
+                perView: 2,
+            },
+        },
+    });
+    glideFeed.mount();
+}
+
+function featuredBy() {
+    if (body.find('.featuredby-feed').length === 0) {
+        return;
+    }
+
+    var glideFeed = new Glide('.featuredby-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 4,
+        breakpoints: {
+            768: {
+                perView: 2,
+            },
+        },
+    });
+    glideFeed.mount();
 }
 
 function pagination() {

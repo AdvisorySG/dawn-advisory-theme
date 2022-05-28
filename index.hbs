@@ -1,5 +1,7 @@
 {{!< default}}
 
+{{#contentFor "title"}}Stories{{/contentFor}}
+
 <div class="content-area">
     <main class="site-main">
         <header class="single-header kg-canvas">
@@ -7,7 +9,7 @@
         </header>
         <section class="tag">
             <div class="container medium">
-                {{#get "tags"}}
+                {{#get "tags" limit="all" as |tags|}}
                     {{#if tags}}
                         <div class="tag-list">
                             <span class="tag-list-label">Industries:</span>
