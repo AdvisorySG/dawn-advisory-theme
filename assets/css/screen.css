@@ -26,6 +26,7 @@
 @import "blog/related.css";
 @import "blog/comment.css";
 @import "blog/tag.css";
+@import "blog/quotes.css";
 @import "members/plan.css";
 @import "members/auth.css";
 @import "members/account.css";
