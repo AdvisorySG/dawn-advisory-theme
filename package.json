@@ -3,8 +3,7 @@
     "description": "Dawn theme for Ghost, adapted for Advisory SG.",
     "version": "1.0.0",
     "engines": {
-        "ghost": ">=4.0.0",
-        "ghost-api": "v4",
+        "ghost": ">=5.0.0",
         "node": "16.x"
     },
     "license": "MIT",
