@@ -102,7 +102,7 @@
         "autoprefixer": "10.4.7",
         "cssnano": "5.1.7",
         "eslint": "^8.2.0",
-        "gscan": "4.31.0",
+        "gscan": "4.31.2",
         "gulp": "4.0.2",
         "gulp-livereload": "4.0.2",
         "gulp-postcss": "9.0.1",
