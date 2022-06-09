@@ -1,11 +1,11 @@
-<article class="feed-card {{post_class}} rounded-lg ring-1 ring-gray-900/5 shadow-xl m-auto max-w-2xl sm:max-w-none hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
-    <div onclick="location.href='{{url}}'" class="flex flex-col cursor-pointer h-full rounded-xl overflow-hidden sm:flex-row sm:h-60 lg:flex-col lg:h-full ">
+<article class="feed-card {{post_class}} rounded-lg ring-1 ring-gray-900/5 shadow-xl m-auto w-full max-w-2xl md:max-w-full lg:h-full hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
+    <div onclick="location.href='{{url}}'" class="flex flex-col cursor-pointer h-full rounded-xl overflow-hidden md:flex-row md:h-80 lg:flex-col lg:h-full">
         {{#if feature_image}}
-        <img class="object-cover m-0 w-full h-72 sm:min-w-[40%] sm:max-w-[40%] sm:h-full lg:w-full lg:max-w-full lg:h-60" src="{{img_url feature_image}}" alt="{{title}}" />
+        <img class="object-cover m-0 h-full md:aspect-[9/5] lg:h-auto lg:aspect-[15/8]" src="{{img_url feature_image}}" alt="{{title}}" />
         {{else}} {{!-- Placeholder --}}
-        <img class="object-cover m-0 hidden sm:block sm:min-w-[40%] sm:max-w-[40%] sm:h-full lg:w-full lg:max-w-full lg:h-60" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
+        <img class="object-cover m-0 hidden h-48 md:aspect-[9/5] lg:aspect-[15/8]" src="https://via.placeholder.com/100/FFFFFF/FFFFFF" alt="{{title}}" />
         {{/if}}
-        <div class="flex-grow bg-white px-3 pt-3 pb-5 relative">
+        <div class="grow bg-white px-3 pt-3 pb-5 relative">
             {{#if primary_tag}}
                 {{#primary_tag}}
                     <span class="single-meta-item single-meta-tag">
