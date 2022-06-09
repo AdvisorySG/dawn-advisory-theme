@@ -266,20 +266,20 @@ function modal() {
 }
 
 function elasticSearch(query, callback) {
-    var base_url = 'https://advisorysg.ent.ap-southeast-1.aws.found.io';
+    var baseUrl = 'https://advisorysg.ent.ap-southeast-1.aws.found.io';
     var engine = 'ghost';
-    var search_only_key = 'search-brya3eig6n5g9ybimkw3o9u3';
+    var searchOnlyKey = 'search-brya3eig6n5g9ybimkw3o9u3';
 
-    var oReq = new XMLHttpRequest();
+    var searchReq = new XMLHttpRequest();
     var payload = { query: query };
-    oReq.open(
+    searchReq.open(
         'POST',
-        base_url + '/api/as/v1/engines/' + engine + '/search.json'
+        `${baseUrl}/api/as/v1/engines/${engine}/search.json`
     );
-    oReq.addEventListener('load', callback);
-    oReq.setRequestHeader('Content-Type', 'application/json');
-    oReq.setRequestHeader('Authorization', 'Bearer ' + search_only_key);
-    oReq.send(JSON.stringify(payload));
+    searchReq.addEventListener('load', callback);
+    searchReq.setRequestHeader('Content-Type', 'application/json');
+    searchReq.setRequestHeader('Authorization', `Bearer ${searchOnlyKey}`);
+    searchReq.send(JSON.stringify(payload));
 }
 function search() {
     var searchInput = $('.search-input');
@@ -291,14 +291,11 @@ function search() {
             var data = JSON.parse(this.responseText);
             var output = '';
             data.results.forEach(function (post) {
-                output +=
-                    '<div class="search-result-row">' +
-                    '<a class="search-result-row-link" href="' +
-                    post['url_path'].raw +
-                    '">' +
-                    post.title.raw +
-                    '</a>' +
-                    '</div>';
+                output += `<div class="search-result-row">
+                        <a class="search-result-row-link" href="${post['url_path'].raw}">
+                            ${post.title.raw}
+                        </a>
+                    </div>`;
             });
             searchResult.html(output);
         });
