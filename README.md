@@ -24,28 +24,6 @@ npm run zip
 
 Optionally, if you have access to the [Admin panel of Advisory](https://beta.advisory.sg/ghost/), you can go to `Settings > Labs > Migration Options > Export your content` in order to export the posts and settings used for the actual website as a JSON file. This file can be imported into your local instance of Ghost, at `Settings > Labs > Migration Options > Import content`. Take note that this will not remove existing posts/pages.
 
-# Search
-
-1. Navigate to the `Integrations` and click on `Add custom integration`.
-2. Copy the content API key; this will be used to fetch posts from your site.
-3. Insert the generated key in `Settings > Design > Site-wide > Content API key for search".
-
-The theme generates an index of posts for highly performant search. The index is updated automatically when posts are added or updated. However, it isn't updated when posts are unpublished or deleted.
-
-To force update the index, increment the search index migration version like `'v2'`.
-
-## Disable Content Search
-
-When your site has lots of posts, including the post content in the index cache ends up with exceeding the browser local storage quota. In that case, disabling content search is recommended. Also make sure increase the migration version to force update the old index.
-
-```html
-<script>
-    var gh_search_key = "API_KEY";
-    var gh_search_migration = "v2"; // Increased from v1
-    var gh_search_content = false; // Disables content search
-</script>
-```
-
 # Dropdown Menu
 
 The theme looks for a menu item with three dots (`...`) in its URL, and uses that as a dropdown menu toggle. All menu items after the toggle will be added to the dropdown list automatically.
