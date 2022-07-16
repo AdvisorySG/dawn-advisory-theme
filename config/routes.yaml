@@ -3,7 +3,7 @@ routes:
 
 collections:
   /stories/:
-    permalink: /{slug}/
+    permalink: /{year}/{month}/{day}/{slug}/
     template: index
 
 taxonomies:
