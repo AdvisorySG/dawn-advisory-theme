@@ -3,7 +3,20 @@ on:
   pull_request:
   push:
 jobs:
+  pre_build:
+    # continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          concurrent_skipping: "same_content_newer"
+          paths_ignore: '["CONTRIBUTING.md", "LICENSE", "**/README.md"]'
   build:
+    needs: pre_build
+    if: ${{ needs.pre_build.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
