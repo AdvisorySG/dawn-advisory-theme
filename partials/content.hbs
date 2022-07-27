@@ -10,28 +10,30 @@
                 <span class="single-meta-item single-meta-length">
                     {{reading_time}}
                 </span>
-                {{#primary_tag}}
-                    <span class="single-meta-item single-meta-tag">
-                        <a class="post-tag post-tag-{{slug}}" href="{{url}}">{{name}}</a>
-                    </span>
-                {{/primary_tag}}
-                {{#has tag="count:>1"}}
+                {{#if primary_tag}}
+                    {{#primary_tag}}
+                        <span class="single-meta-item single-meta-tag">
+                            <a class="post-tag post-tag-{{slug}}" href="{{url}}">{{name}}</a>
+                        </span>
+                    {{/primary_tag}}
                     <div>
-                        <span class="tag-list-label">More Tags:</span>
-                        {{#if primary_tag}}
-                            {{#foreach tags}}
-                                {{#if @first}}
-                                {{else}}
-                                    <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
-                                {{/if}}
-                            {{/foreach}}
-                        {{else}}
-                            {{#foreach tags}}
-                                <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
-                            {{/foreach}}
-                        {{/if}}
+                        {{#foreach tags from="2"}}
+                            {{#if @first}}
+                                <span class="tag-list-label">More Tags:</span>
+                            {{/if}}
+                            <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                        {{/foreach}}
                     </div>
-                {{/has}}
+                {{else}}
+                    <div>
+                        {{#foreach tags from="1"}}
+                            {{#if @first}}
+                                <span class="tag-list-label">More Tags:</span>
+                            {{/if}}
+                            <a class="tag-list-item font-semibold" href="{{url}}">{{name}}</a>
+                        {{/foreach}}
+                    </div>
+                {{/if}}
                 {{#if @custom.show_author}}
                     <div>
                         <span class="author-list-label">Authors:</h3>
