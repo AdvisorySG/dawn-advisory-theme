@@ -3,7 +3,21 @@ on:
   pull_request:
   push:
 jobs:
+  pre_lint:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          concurrent_skipping: "same_content_newer"
+          paths_ignore: '["CONTRIBUTING.md", "LICENSE", "**/README.md"]'
+
   lint:
+    needs: pre_lint
+    if: ${{ needs.pre_lint.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
