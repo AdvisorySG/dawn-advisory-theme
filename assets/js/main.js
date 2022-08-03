@@ -303,6 +303,7 @@ function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
     var searchResult = $('.search-result');
+    var modalOverlay = $('.modal-overlay');
 
     searchInput.on('keyup', function (e) {
         elasticSearch(e.target.value, function () {
@@ -317,7 +318,7 @@ function search() {
             });
             searchResult.html(output);
             searchListingLength = data.results.length;
-            searchSelectionId = 0;
+            searchSelectionId = -1;
         });
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
@@ -326,7 +327,11 @@ function search() {
         }
     });
 
-    document.onkeydown = function (e) {
+    modalOverlay.on('keydown', function (e) {
+        if (searchListingLength == 0) {
+            searchInput.focus();
+            return;
+        }
         switch (e.key) {
             case 'ArrowUp':
                 searchSelectionId =
@@ -342,8 +347,8 @@ function search() {
                 return;
         }
         e.preventDefault();
-        document.getElementById(`search-element-${searchSelectionId}`).focus();
-    };
+        $(`#search-element-${searchSelectionId}`).focus();
+    });
 
     $('.search-form').on('submit', function (e) {
         e.preventDefault();
