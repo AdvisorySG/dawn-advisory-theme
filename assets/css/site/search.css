@@ -32,7 +32,8 @@
     line-height: 1.4;
 }
 
-.search-result-row-link:hover {
+.search-result-row-link:hover,
+.search-result-row-link:focus {
     background-color: var(--lighter-gray-color);
     opacity: 1;
 }

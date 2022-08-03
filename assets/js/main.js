@@ -296,6 +296,9 @@ function elasticSearch(query, callback) {
     searchReq.setRequestHeader('Authorization', `Bearer ${searchOnlyKey}`);
     searchReq.send(JSON.stringify(payload));
 }
+
+var searchSelectionId = 0;
+var searchListingLength = 0;
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -305,14 +308,16 @@ function search() {
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
             var output = '';
-            data.results.forEach(function (post) {
+            data.results.forEach(function (post, index) {
                 output += `<div class="search-result-row">
-                        <a class="search-result-row-link" href="${post['url_path'].raw}">
+                        <a id="search-element-${index}" class="search-result-row-link" href="${post['url_path'].raw}">
                             ${post.title.raw}
                         </a>
                     </div>`;
             });
             searchResult.html(output);
+            searchListingLength = data.results.length;
+            searchSelectionId = 0;
         });
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
@@ -320,6 +325,25 @@ function search() {
             searchButton.removeClass('search-button-clear');
         }
     });
+
+    document.onkeydown = function (e) {
+        switch (e.key) {
+            case 'ArrowUp':
+                searchSelectionId =
+                    searchSelectionId > 0 ? searchSelectionId - 1 : 0;
+                break;
+            case 'ArrowDown':
+                searchSelectionId =
+                    searchSelectionId < searchListingLength
+                        ? searchSelectionId + 1
+                        : searchSelectionId;
+                break;
+            default:
+                return;
+        }
+        e.preventDefault();
+        document.getElementById(`search-element-${searchSelectionId}`).focus();
+    };
 
     $('.search-form').on('submit', function (e) {
         e.preventDefault();
