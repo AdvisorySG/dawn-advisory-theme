@@ -31,11 +31,11 @@
     color: var(--brand-color);
 }
 
-.tag-media {
+.tag-feature-media {
     margin-top: 4.5rem;
 }
 
-.tag-media::before {
+.tag-feature-media::before {
     padding-bottom: 35% !important;
 }
 
@@ -44,7 +44,7 @@
         margin-bottom: 2.5rem;
     }
 
-    .tag-media {
+    .tag-feature-media {
         margin-top: 3rem;
     }
 }
