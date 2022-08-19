@@ -7,6 +7,11 @@
     width: 100%;
 }
 
+.container-impact-number {
+    display: flex;
+    justify-content: space-around;
+}
+
 .container.medium {
     max-width: calc(750px + 8vw);
 }
