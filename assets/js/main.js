@@ -304,8 +304,10 @@ function search() {
     var searchButton = $('.search-button');
     var searchResult = $('.search-result');
     var modalOverlay = $('.modal-overlay');
+    var body = $('body,html');
+    let focusOnFirst;
 
-    searchInput.on('keyup', function (e) {
+    searchInput.on('input', function (e) {
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
             var output = '';
@@ -319,6 +321,14 @@ function search() {
             searchResult.html(output);
             searchListingLength = data.results.length;
             searchSelectionId = -1;
+
+            clearTimeout(focusOnFirst);
+            focusOnFirst = setTimeout(function () {
+                if (searchListingLength == 0) return;
+                if (searchSelectionId >= 0) return;
+                searchSelectionId = 0;
+                $(`#search-element-${searchSelectionId}`).focus();
+            }, 500);
         });
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
@@ -327,27 +337,41 @@ function search() {
         }
     });
 
+    body.on('keydown', function (e) {
+        if (modalOverlay.css('display') === 'none') return;
+        modalOverlay.focus();
+    });
+
     modalOverlay.on('keydown', function (e) {
-        if (searchListingLength == 0) {
+        if (searchListingLength === 0) {
             searchInput.focus();
             return;
         }
         switch (e.key) {
             case 'ArrowUp':
                 searchSelectionId =
-                    searchSelectionId > 0 ? searchSelectionId - 1 : 0;
+                    searchSelectionId > -1 ? searchSelectionId - 1 : -1;
+                if (searchSelectionId === -1) {
+                    searchInput.focus();
+                    break;
+                }
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
                 break;
             case 'ArrowDown':
                 searchSelectionId =
                     searchSelectionId < searchListingLength
                         ? searchSelectionId + 1
                         : searchSelectionId;
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
+                break;
+            case 'Enter':
                 break;
             default:
+                searchInput.focus();
                 return;
         }
-        e.preventDefault();
-        $(`#search-element-${searchSelectionId}`).focus();
     });
 
     $('.search-form').on('submit', function (e) {
