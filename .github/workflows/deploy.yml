@@ -17,7 +17,7 @@ jobs:
 
   build:
     needs: pre_build
-    if: ${{ needs.pre_build.outputs.should_skip != 'true' }}
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || needs.pre_build.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
