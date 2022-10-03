@@ -99,7 +99,7 @@
         "zip": "gulp zip"
     },
     "devDependencies": {
-        "autoprefixer": "10.4.7",
+        "autoprefixer": "10.4.12",
         "cssnano": "5.1.12",
         "eslint": "^8.2.0",
         "gscan": "4.33.0",
