@@ -296,28 +296,81 @@ function elasticSearch(query, callback) {
     searchReq.setRequestHeader('Authorization', `Bearer ${searchOnlyKey}`);
     searchReq.send(JSON.stringify(payload));
 }
+
+var searchSelectionId = 0;
+var searchListingLength = 0;
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
     var searchResult = $('.search-result');
+    var modalOverlay = $('.modal-overlay');
+    var body = $('body,html');
+    let focusOnFirst;
 
-    searchInput.on('keyup', function (e) {
+    searchInput.on('input', function (e) {
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
             var output = '';
-            data.results.forEach(function (post) {
+            data.results.forEach(function (post, index) {
                 output += `<div class="search-result-row">
-                        <a class="search-result-row-link" href="${post['url_path'].raw}">
+                        <a id="search-element-${index}" class="search-result-row-link" href="${post['url_path'].raw}">
                             ${post.title.raw}
                         </a>
                     </div>`;
             });
             searchResult.html(output);
+            searchListingLength = data.results.length;
+            searchSelectionId = -1;
+
+            clearTimeout(focusOnFirst);
+            focusOnFirst = setTimeout(function () {
+                if (searchListingLength == 0) return;
+                if (searchSelectionId >= 0) return;
+                searchSelectionId = 0;
+                $(`#search-element-${searchSelectionId}`).focus();
+            }, 500);
         });
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
+        }
+    });
+
+    body.on('keydown', function (e) {
+        if (modalOverlay.css('display') === 'none') return;
+        modalOverlay.focus();
+    });
+
+    modalOverlay.on('keydown', function (e) {
+        if (searchListingLength === 0) {
+            searchInput.focus();
+            return;
+        }
+        switch (e.key) {
+            case 'ArrowUp':
+                searchSelectionId =
+                    searchSelectionId > -1 ? searchSelectionId - 1 : -1;
+                if (searchSelectionId === -1) {
+                    searchInput.focus();
+                    break;
+                }
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
+                break;
+            case 'ArrowDown':
+                searchSelectionId =
+                    searchSelectionId < searchListingLength
+                        ? searchSelectionId + 1
+                        : searchSelectionId;
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
+                break;
+            case 'Enter':
+                break;
+            default:
+                searchInput.focus();
+                return;
         }
     });
 
