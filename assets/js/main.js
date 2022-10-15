@@ -337,7 +337,7 @@ function search() {
         }
     });
 
-    body.on('keydown', function (e) {
+    body.on('keydown', function () {
         if (modalOverlay.css('display') === 'none') return;
         modalOverlay.focus();
     });
