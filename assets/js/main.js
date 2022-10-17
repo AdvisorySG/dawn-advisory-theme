@@ -310,11 +310,16 @@ function search() {
     searchInput.on('input', function (e) {
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
+            console.log(data);
             var output = '';
             data.results.forEach(function (post, index) {
-                output += `<div class="search-result-row">
-                        <a id="search-element-${index}" class="search-result-row-link" href="${post['url_path'].raw}">
-                            ${post.title.raw}
+                output += `<div class="search-result-row group">
+                        <a id="search-element-${index}" 
+                          class="search-result-row-link" 
+                          href="${post.url_path.raw}"
+                          title="${post.meta_description.raw}"
+                        >
+                              ${post.title.raw}
                         </a>
                     </div>`;
             });
@@ -323,11 +328,14 @@ function search() {
             searchSelectionId = -1;
 
             clearTimeout(focusOnFirst);
+
+            const searchElement = $(`#search-element-${searchSelectionId}`);
+            popupElement.display = 'none';
             focusOnFirst = setTimeout(function () {
                 if (searchListingLength == 0) return;
                 if (searchSelectionId >= 0) return;
                 searchSelectionId = 0;
-                $(`#search-element-${searchSelectionId}`).focus();
+                searchElement.focus();
             }, 500);
         });
         if (e.target.value.length > 0) {
