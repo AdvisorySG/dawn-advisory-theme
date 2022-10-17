@@ -308,18 +308,31 @@ function search() {
     let focusOnFirst;
 
     searchInput.on('input', function (e) {
+        const searchValue = e.target.value;
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
-            console.log(data);
             var output = '';
             data.results.forEach(function (post, index) {
+                var tooltipDescription = '';
+                var boldedDescription = '';
+                if (post.meta_description && post.meta_description.raw) {
+                    tooltipDescription = post.meta_description.raw;
+                    boldedDescription = post.meta_description.raw.replaceAll(
+                        searchValue,
+                        `<b>${searchValue}</b>`
+                    );
+                }
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
                           class="search-result-row-link" 
                           href="${post.url_path.raw}"
-                          title="${post.meta_description.raw}"
+                          title="${tooltipDescription}"
                         >
-                              ${post.title.raw}
+                              <b>${post.title.raw}</b>
+                              <br/>
+                              <span class="text-lg line-clamp-2">
+                                ${boldedDescription}
+                              </span>
                         </a>
                     </div>`;
             });
@@ -329,13 +342,11 @@ function search() {
 
             clearTimeout(focusOnFirst);
 
-            const searchElement = $(`#search-element-${searchSelectionId}`);
-            popupElement.display = 'none';
             focusOnFirst = setTimeout(function () {
                 if (searchListingLength == 0) return;
                 if (searchSelectionId >= 0) return;
                 searchSelectionId = 0;
-                searchElement.focus();
+                $(`#search-element-${searchSelectionId}`).focus();
             }, 500);
         });
         if (e.target.value.length > 0) {
