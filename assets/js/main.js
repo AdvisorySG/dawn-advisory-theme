@@ -308,13 +308,31 @@ function search() {
     let focusOnFirst;
 
     searchInput.on('input', function (e) {
+        const searchValue = e.target.value;
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
             var output = '';
             data.results.forEach(function (post, index) {
-                output += `<div class="search-result-row">
-                        <a id="search-element-${index}" class="search-result-row-link" href="${post['url_path'].raw}">
-                            ${post.title.raw}
+                var tooltipDescription = '';
+                var boldedDescription = '';
+                if (post.meta_description && post.meta_description.raw) {
+                    tooltipDescription = post.meta_description.raw;
+                    boldedDescription = post.meta_description.raw.replaceAll(
+                        searchValue,
+                        `<b>${searchValue}</b>`
+                    );
+                }
+                output += `<div class="search-result-row group">
+                        <a id="search-element-${index}" 
+                          class="search-result-row-link" 
+                          href="${post.url_path.raw}"
+                          title="${tooltipDescription}"
+                        >
+                              <b>${post.title.raw}</b>
+                              <br/>
+                              <span class="text-lg line-clamp-2">
+                                ${boldedDescription}
+                              </span>
                         </a>
                     </div>`;
             });
@@ -323,6 +341,7 @@ function search() {
             searchSelectionId = -1;
 
             clearTimeout(focusOnFirst);
+
             focusOnFirst = setTimeout(function () {
                 if (searchListingLength == 0) return;
                 if (searchSelectionId >= 0) return;
