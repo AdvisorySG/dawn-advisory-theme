@@ -1,0 +1,5 @@
+{
+    "profile": "handlebars",
+    "extension": "hbs",
+    "ignore": "H006,H013,H017,H021,H030,H031"
+}
