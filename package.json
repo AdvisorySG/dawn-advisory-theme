@@ -103,7 +103,7 @@
         "cssnano": "5.1.14",
         "djlint": "^1.19.7",
         "eslint": "^8.2.0",
-        "gscan": "4.34.0",
+        "gscan": "4.35.0",
         "gulp": "4.0.2",
         "gulp-livereload": "4.0.2",
         "gulp-postcss": "9.0.1",
