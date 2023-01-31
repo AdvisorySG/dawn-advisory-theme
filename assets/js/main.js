@@ -385,6 +385,26 @@ function search() {
                 e.preventDefault();
                 $(`#search-element-${searchSelectionId}`).focus();
                 break;
+            case 'ArrowLeft':
+                //go back to top
+                searchSelectionId = 0
+                if (searchSelectionId === -1) {
+                    searchInput.focus();
+                    break;
+                }
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
+                break;                
+            case 'ArrowRight':
+                //go back to top
+                searchSelectionId = 0
+                if (searchSelectionId === -1) {
+                    searchInput.focus();
+                    break;
+                }
+                e.preventDefault();
+                $(`#search-element-${searchSelectionId}`).focus();
+                break; 
             case 'Enter':
                 break;
             default:
