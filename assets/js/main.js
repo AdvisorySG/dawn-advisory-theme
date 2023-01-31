@@ -320,11 +320,18 @@ function search() {
                         searchValue,
                         `<mark>${searchValue}</mark>`
                     );
-                    highlightedDescription =
-                        post.meta_description.raw.replaceAll(
-                            searchValue,
-                            `<mark class="text-xl">${searchValue}</mark>`
-                        );
+                    if (post.meta_description.snippet) {
+                        highlightedDescription = post.meta_description.snippet
+                            .replaceAll(`<em>`, `<mark class="text-xl">`)
+                            .replaceAll(`</em>`, `</mark>`)
+                            .trim();
+                    } else {
+                        highlightedDescription =
+                            post.meta_description.raw.replaceAll(
+                                searchValue,
+                                `<mark class="text-xl">${searchValue}</mark>`
+                            );
+                    }
                 }
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
