@@ -386,8 +386,8 @@ function search() {
                 $(`#search-element-${searchSelectionId}`).focus();
                 break;
             case 'ArrowLeft':
-                //go back to top
-                searchSelectionId = 0
+                //go back to top search bar
+                searchSelectionId = -1
                 if (searchSelectionId === -1) {
                     searchInput.focus();
                     break;
@@ -396,8 +396,8 @@ function search() {
                 $(`#search-element-${searchSelectionId}`).focus();
                 break;                
             case 'ArrowRight':
-                //go back to top
-                searchSelectionId = 0
+                //go back to top search bar
+                searchSelectionId = -1
                 if (searchSelectionId === -1) {
                     searchInput.focus();
                     break;
