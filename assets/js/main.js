@@ -1,8 +1,6 @@
 import './jquery-global.js';
 
 import InfiniteScroll from 'infinite-scroll';
-import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
@@ -314,13 +312,19 @@ function search() {
             var output = '';
             data.results.forEach(function (post, index) {
                 var tooltipDescription = '';
-                var boldedDescription = '';
+                var highlightedTitle = '';
+                var highlightedDescription = '';
                 if (post.meta_description && post.meta_description.raw) {
                     tooltipDescription = post.meta_description.raw;
-                    boldedDescription = post.meta_description.raw.replaceAll(
+                    highlightedTitle = post.title.raw.replaceAll(
                         searchValue,
-                        `<b>${searchValue}</b>`
+                        `<mark>${searchValue}</mark>`
                     );
+                    highlightedDescription =
+                        post.meta_description.raw.replaceAll(
+                            searchValue,
+                            `<mark class="text-xl">${searchValue}</mark>`
+                        );
                 }
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
@@ -328,10 +332,10 @@ function search() {
                           href="${post.url_path.raw}"
                           title="${tooltipDescription}"
                         >
-                              <b>${post.title.raw}</b>
+                              <b>${highlightedTitle}</b>
                               <br/>
                               <span class="text-lg line-clamp-2">
-                                ${boldedDescription}
+                                ${highlightedDescription}
                               </span>
                         </a>
                     </div>`;
