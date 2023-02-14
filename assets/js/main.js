@@ -29,6 +29,7 @@ $(function () {
     modal();
     search();
     burger();
+    expandTags();
 });
 
 $(window).on('scroll', function () {
@@ -407,6 +408,17 @@ function search() {
 function burger() {
     $('.burger').on('click', function () {
         body.toggleClass('menu-opened');
+    });
+}
+
+function expandTags() {
+    const expandButton = $('.tag-expand-button');
+    const tags = $('.tag-list');
+    expandButton.on('click', function () {
+        tags.toggleClass('max-h-36 overflow-clip');
+        expandButton.html(
+            expandButton.html() === 'Read more' ? 'Read less' : 'Read more'
+        );
     });
 }
 
