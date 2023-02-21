@@ -388,23 +388,13 @@ function search() {
             case 'ArrowLeft':
                 //go back to top search bar
                 searchSelectionId = -1
-                if (searchSelectionId === -1) {
-                    searchInput.focus();
-                    break;
-                }
-                e.preventDefault();
-                $(`#search-element-${searchSelectionId}`).focus();
-                break;                
+                searchInput.focus();
+                break;               
             case 'ArrowRight':
                 //go back to top search bar
                 searchSelectionId = -1
-                if (searchSelectionId === -1) {
-                    searchInput.focus();
-                    break;
-                }
-                e.preventDefault();
-                $(`#search-element-${searchSelectionId}`).focus();
-                break; 
+                searchInput.focus();
+                break;
             case 'Enter':
                 break;
             default:
