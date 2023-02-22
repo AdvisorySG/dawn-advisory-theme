@@ -27,21 +27,19 @@
         </div>
     {{/if}}
     <div class="header-right hidden-xs hidden-sm hidden-md">
-        <button class="button-icon js-modal" data-modal="search" aria-label="Search">
+        <button class="button-icon menu-item menu-item-button js-modal" data-modal="search" aria-label="Search">
             <svg class="icon">
                 <use xlink:href="#magnify"></use>
             </svg>
         </button>
-        <a class="menu-item menu-item-impact">
-            {{navigation}}
-        </a>
+        {{navigation}}
     </div>
 </header>
 
 {{#is "post"}}
     {{#post}}
         <header class="sticky">
-            <div class="sticky-title">{{tite}}</div>
+            <div class="sticky-title">{{title}}</div>
             <div class="sticky-track">
                 <div class="sticky-progress"></div>
             </div>
