@@ -36,7 +36,7 @@
 }
 
 .sticky-progress {
-    height: 300%;
+    height: 100%;
     background-color: var(--brand-color);
     transition: transform 0.2s;
     transform: translate3d(-100%, 0, 0);
@@ -48,7 +48,7 @@
 
 @media (max-width: 767px) {
     .sticky-title {
-        font-size: 1.4rem;
+        font-size: 1.7rem;
         font-weight: 700;
     }
 }
