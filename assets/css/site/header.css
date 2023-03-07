@@ -52,6 +52,7 @@
 .menu-item {
     margin: 0 1.5rem;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .menu-item[href*="..."],
