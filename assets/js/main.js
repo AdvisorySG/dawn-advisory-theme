@@ -385,6 +385,16 @@ function search() {
                 e.preventDefault();
                 $(`#search-element-${searchSelectionId}`).focus();
                 break;
+            case 'ArrowLeft':
+                //go back to top search bar
+                searchSelectionId = -1;
+                searchInput.focus();
+                break;
+            case 'ArrowRight':
+                //go back to top search bar
+                searchSelectionId = -1;
+                searchInput.focus();
+                break;
             case 'Enter':
                 break;
             default:
