@@ -387,12 +387,12 @@ function search() {
                 break;
             case 'ArrowLeft':
                 //go back to top search bar
-                searchSelectionId = -1
+                searchSelectionId = -1;
                 searchInput.focus();
-                break;               
+                break;
             case 'ArrowRight':
                 //go back to top search bar
-                searchSelectionId = -1
+                searchSelectionId = -1;
                 searchInput.focus();
                 break;
             case 'Enter':
