@@ -11,12 +11,14 @@
                     {{reading_time}}
                 </span>
                 {{#if primary_tag}}
-                    {{#primary_tag}}
-                        <span class="single-meta-item single-meta-tag">
-                            <a class="post-tag post-tag-{{slug}}" href="{{url}}">{{name}}</a>
-                        </span>
-                    {{/primary_tag}}
                     <div>
+                        {{#primary_tag}}
+                            <span class="single-meta-item single-meta-tag">
+                                <a class="post-tag post-tag-{{slug}}" href="{{url}}">{{name}}</a>
+                            </span>
+                        {{/primary_tag}}
+                    </div>                       
+                    <div class="single-meta-spacing">
                         {{#foreach tags from="2"}}
                             {{#if @first}}
                                 <span class="tag-list-label">More Tags:</span>
@@ -25,7 +27,7 @@
                         {{/foreach}}
                     </div>
                 {{else}}
-                    <div>
+                    <div class="single-meta-spacing">
                         {{#foreach tags from="1"}}
                             {{#if @first}}
                                 <span class="tag-list-label">More Tags:</span>

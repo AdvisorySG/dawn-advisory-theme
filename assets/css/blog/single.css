@@ -6,9 +6,21 @@
 .single-meta {
     margin-bottom: 1rem;
     color: var(--secondary-text-color);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+.single-meta-date {
+    font-size: 1.8rem;
+}
+
+.single-meta-length {
+    font-size: 1.8rem;
+}
+
+.single-meta-spacing {
+    padding-top: 2.5rem;
 }
 
 .single-meta-item + .single-meta-item::before {
