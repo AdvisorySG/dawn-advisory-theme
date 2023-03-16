@@ -56,9 +56,6 @@
                 ],
                 "default": "Modern sans-serif"
             },
-            "content_api_key_for_search": {
-                "type": "text"
-            },
             "show_featured_posts": {
                 "type": "boolean",
                 "default": false,
@@ -100,16 +97,16 @@
     },
     "devDependencies": {
         "autoprefixer": "10.4.13",
-        "cssnano": "5.1.14",
+        "cssnano": "5.1.15",
         "djlint": "^1.19.7",
         "eslint": "^8.2.0",
-        "gscan": "4.34.0",
+        "gscan": "4.36.0",
         "gulp": "4.0.2",
         "gulp-livereload": "4.0.2",
         "gulp-postcss": "9.0.1",
         "gulp-zip": "5.1.0",
         "husky": "^8.0.1",
-        "postcss": "8.4.19",
+        "postcss": "8.4.21",
         "postcss-easy-import": "4.0.0",
         "prettier": "^2.4.1",
         "pretty-quick": "^3.1.2",
