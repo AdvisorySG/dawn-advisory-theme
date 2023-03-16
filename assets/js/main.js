@@ -312,24 +312,24 @@ function search() {
             var output = '';
             data.results.forEach(function (post, index) {
                 var tooltipDescription = '';
-                var highlightedTitle = '';
+                var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                var highlightedTitle = post.title.raw.replaceAll(
+                    searchValueRegex,
+                    `<mark>$1</mark>`
+                );
                 var highlightedDescription = '';
                 if (post.meta_description && post.meta_description.raw) {
                     tooltipDescription = post.meta_description.raw;
-                    highlightedTitle = post.title.raw.replaceAll(
-                        searchValue,
-                        `<mark>${searchValue}</mark>`
-                    );
                     if (post.meta_description.snippet) {
                         highlightedDescription = post.meta_description.snippet
-                            .replaceAll(`<em>`, `<mark class="text-xl">`)
-                            .replaceAll(`</em>`, `</mark>`)
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
                             .trim();
                     } else {
                         highlightedDescription =
                             post.meta_description.raw.replaceAll(
-                                searchValue,
-                                `<mark class="text-xl">${searchValue}</mark>`
+                                searchValueRegex,
+                                `<mark>$1</mark>`
                             );
                     }
                 }
