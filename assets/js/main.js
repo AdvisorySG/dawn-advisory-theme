@@ -1,6 +1,8 @@
 import './jquery-global.js';
 
 import InfiniteScroll from 'infinite-scroll';
+import PhotoSwipe from 'photoswipe';
+import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
@@ -313,10 +315,20 @@ function search() {
             data.results.forEach(function (post, index) {
                 var tooltipDescription = '';
                 var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
-                var highlightedTitle = post.title.raw.replaceAll(
-                    searchValueRegex,
-                    `<mark>$1</mark>`
-                );
+                var highlightedTitle = '';
+                if (post.title && post.title.raw) {
+                    if (post.title.snippet) {
+                        highlightedTitle = post.title.snippet
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
+                            .trim();
+                    } else {
+                        highlightedTitle = post.title.raw.replaceAll(
+                            searchValueRegex,
+                            `<mark>$1</mark>`
+                        );
+                    }
+                }
                 var highlightedDescription = '';
                 if (post.meta_description && post.meta_description.raw) {
                     tooltipDescription = post.meta_description.raw;
