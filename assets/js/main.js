@@ -305,12 +305,15 @@ function search() {
     var searchResult = $('.search-result');
     var modalOverlay = $('.modal-overlay');
     var body = $('body,html');
+
+    //for search pagination
     var searchNext = $('.search-next');
     var searchPrev = $('.search-prev');
     var pageResult = $('.page-result');
     let focusOnFirst;
     var currentPage = 1;
-    var maxPage = 2;
+    var postPerPage = 6;
+    var maxPages;
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
@@ -319,8 +322,11 @@ function search() {
             var output = '';
             var pagination = '';
             var counter = 0;
-            var firstPost = (currentPage - 1) * 6;
-            var lastPost = currentPage * 6 - 1;
+            var firstPost = (currentPage - 1) * postPerPage;
+            var lastPost = currentPage * postPerPage - 1;
+            var lastDisplay;
+            maxPages = Math.floor(data.results.length / postPerPage) + 1;
+
             data.results.forEach(function (post, index) {
                 if (counter >= firstPost && counter <= lastPost) {
                     var tooltipDescription = '';
@@ -385,12 +391,18 @@ function search() {
                 $(`#search-element-${searchSelectionId}`).focus();
             }, 500);
 
+            if (searchListingLength < lastPost + 1) {
+                lastDisplay = searchListingLength;
+            } else {
+                lastDisplay = lastPost + 1;
+            }
+
             pagination += `<div>
                 <p class="text-sm text-gray-700">
                     Showing
                     <span class="font-medium">${firstPost + 1}</span>
                     to
-                    <span class="font-medium">${lastPost + 1}</span>
+                    <span class="font-medium">${lastDisplay}</span>
                     of
                     <span class="font-medium">${data.results.length}</span>
                     results
@@ -472,7 +484,7 @@ function search() {
     });
 
     searchNext.on('click', function () {
-        if (currentPage < maxPage) {
+        if (currentPage < maxPages) {
             currentPage += 1;
             searchInput.trigger('input');
         }
