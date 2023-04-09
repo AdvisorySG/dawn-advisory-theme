@@ -305,59 +305,72 @@ function search() {
     var searchResult = $('.search-result');
     var modalOverlay = $('.modal-overlay');
     var body = $('body,html');
+    var searchNext = $('.search-next');
+    var searchPrev = $('.search-prev');
+    var pageResult = $('.page-result');
     let focusOnFirst;
+    var currentPage = 1;
+    var maxPage = 2;
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
         elasticSearch(e.target.value, function () {
             var data = JSON.parse(this.responseText);
             var output = '';
+            var pagination = '';
+            var counter = 0;
+            var firstPost = (currentPage - 1) * 6;
+            var lastPost = currentPage * 6 - 1;
             data.results.forEach(function (post, index) {
-                var tooltipDescription = '';
-                var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
-                var highlightedTitle = '';
-                if (post.title && post.title.raw) {
-                    if (post.title.snippet) {
-                        highlightedTitle = post.title.snippet
-                            .replaceAll(`<em>`, `<em><mark>`)
-                            .replaceAll(`</em>`, `</mark></em>`)
-                            .trim();
-                    } else {
-                        highlightedTitle = post.title.raw.replaceAll(
-                            searchValueRegex,
-                            `<mark>$1</mark>`
-                        );
-                    }
-                }
-                var highlightedDescription = '';
-                if (post.meta_description && post.meta_description.raw) {
-                    tooltipDescription = post.meta_description.raw;
-                    if (post.meta_description.snippet) {
-                        highlightedDescription = post.meta_description.snippet
-                            .replaceAll(`<em>`, `<em><mark>`)
-                            .replaceAll(`</em>`, `</mark></em>`)
-                            .trim();
-                    } else {
-                        highlightedDescription =
-                            post.meta_description.raw.replaceAll(
+                if (counter >= firstPost && counter <= lastPost) {
+                    var tooltipDescription = '';
+                    var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                    var highlightedTitle = '';
+                    if (post.title && post.title.raw) {
+                        if (post.title.snippet) {
+                            highlightedTitle = post.title.snippet
+                                .replaceAll(`<em>`, `<em><mark>`)
+                                .replaceAll(`</em>`, `</mark></em>`)
+                                .trim();
+                        } else {
+                            highlightedTitle = post.title.raw.replaceAll(
                                 searchValueRegex,
                                 `<mark>$1</mark>`
                             );
+                        }
                     }
+                    var highlightedDescription = '';
+                    if (post.meta_description && post.meta_description.raw) {
+                        tooltipDescription = post.meta_description.raw;
+                        if (post.meta_description.snippet) {
+                            highlightedDescription =
+                                post.meta_description.snippet
+                                    .replaceAll(`<em>`, `<em><mark>`)
+                                    .replaceAll(`</em>`, `</mark></em>`)
+                                    .trim();
+                        } else {
+                            highlightedDescription =
+                                post.meta_description.raw.replaceAll(
+                                    searchValueRegex,
+                                    `<mark>$1</mark>`
+                                );
+                        }
+                    }
+                    output += `<div class="search-result-row group">
+                            <a id="search-element-${index}" 
+                            class="search-result-row-link" 
+                            href="${post.url_path.raw}"
+                            title="${tooltipDescription}"
+                            >
+                                <b>${highlightedTitle}</b>
+                                <br/>
+                                <span class="text-lg line-clamp-2">
+                                    ${highlightedDescription}
+                                </span>
+                            </a>
+                        </div>`;
                 }
-                output += `<div class="search-result-row group">
-                        <a id="search-element-${index}" 
-                          class="search-result-row-link" 
-                          href="${post.url_path.raw}"
-                          title="${tooltipDescription}"
-                        >
-                              <b>${highlightedTitle}</b>
-                              <br/>
-                              <span class="text-lg line-clamp-2">
-                                ${highlightedDescription}
-                              </span>
-                        </a>
-                    </div>`;
+                counter += 1;
             });
             searchResult.html(output);
             searchListingLength = data.results.length;
@@ -371,6 +384,19 @@ function search() {
                 searchSelectionId = 0;
                 $(`#search-element-${searchSelectionId}`).focus();
             }, 500);
+
+            pagination += `<div>
+                <p class="text-sm text-gray-700">
+                    Showing
+                    <span class="font-medium">${firstPost + 1}</span>
+                    to
+                    <span class="font-medium">${lastPost + 1}</span>
+                    of
+                    <span class="font-medium">${data.results.length}</span>
+                    results
+                </p>
+            </div>`;
+            pageResult.html(pagination);
         });
         if (e.target.value.length > 0) {
             searchButton.addClass('search-button-clear');
@@ -433,6 +459,22 @@ function search() {
     searchButton.on('click', function () {
         if ($(this).hasClass('search-button-clear')) {
             searchInput.val('').focus().keyup();
+            currentPage = 1;
+            searchInput.trigger('input');
+        }
+    });
+
+    searchPrev.on('click', function () {
+        if (currentPage > 1) {
+            currentPage -= 1;
+            searchInput.trigger('input');
+        }
+    });
+
+    searchNext.on('click', function () {
+        if (currentPage < maxPage) {
+            currentPage += 1;
+            searchInput.trigger('input');
         }
     });
 }

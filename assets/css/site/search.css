@@ -16,7 +16,6 @@
 }
 
 .search-result {
-    overflow-y: scroll;
     max-height: 50vh;
     -webkit-overflow-scrolling: touch;
 }
