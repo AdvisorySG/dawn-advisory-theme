@@ -18,7 +18,7 @@
                             </span>
                         {{/primary_tag}}
                     </div>                       
-                    <div class="single-meta-spacing">
+                    <div>
                         {{#foreach tags from="2"}}
                             {{#if @first}}
                                 <span class="tag-list-label">More Tags:</span>
@@ -27,7 +27,7 @@
                         {{/foreach}}
                     </div>
                 {{else}}
-                    <div class="single-meta-spacing">
+                    <div>
                         {{#foreach tags from="1"}}
                             {{#if @first}}
                                 <span class="tag-list-label">More Tags:</span>

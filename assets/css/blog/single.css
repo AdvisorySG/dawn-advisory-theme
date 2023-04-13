@@ -4,23 +4,18 @@
 }
 
 .single-meta {
-    margin-bottom: 1rem;
     color: var(--secondary-text-color);
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 800;
     text-transform: uppercase;
 }
 
 .single-meta-date {
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .single-meta-length {
-    font-size: 1.8rem;
-}
-
-.single-meta-spacing {
-    padding-top: 2.5rem;
+    font-size: 2rem;
 }
 
 .single-meta-item + .single-meta-item::before {
@@ -56,7 +51,6 @@
 }
 
 .single-media {
-    margin-top: 3rem;
     margin-bottom: 3rem;
 }
 
