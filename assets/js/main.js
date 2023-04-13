@@ -310,107 +310,121 @@ function search() {
     var searchNext = $('.search-next');
     var searchPrev = $('.search-prev');
     var pageResult = $('.page-result');
+    var pageButtons = $('.buttons-hide');
     let focusOnFirst;
     var currentPage = 1;
-    var postPerPage = 6;
+    var postPerPage = 5;
     var maxPages;
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
-        elasticSearch(e.target.value, function () {
-            var data = JSON.parse(this.responseText);
-            var output = '';
-            var pagination = '';
-            var counter = 0;
-            var firstPost = (currentPage - 1) * postPerPage;
-            var lastPost = currentPage * postPerPage - 1;
-            var lastDisplay;
-            maxPages = Math.floor(data.results.length / postPerPage) + 1;
+        if (searchValue != ""){
+            elasticSearch(searchValue, function () {
+                var data = JSON.parse(this.responseText);
+                var output = '';
+                var pagination = '';
+                var counter = 0;
+                var firstPost = (currentPage - 1) * postPerPage;
+                var lastPost = currentPage * postPerPage - 1;
+                var lastDisplay;
+                maxPages = Math.floor(data.results.length / postPerPage);
+                if (data.results.length % postPerPage > 0){
+                    maxPages +=1
+                }
 
-            data.results.forEach(function (post, index) {
-                if (counter >= firstPost && counter <= lastPost) {
-                    var tooltipDescription = '';
-                    var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
-                    var highlightedTitle = '';
-                    if (post.title && post.title.raw) {
-                        if (post.title.snippet) {
-                            highlightedTitle = post.title.snippet
-                                .replaceAll(`<em>`, `<em><mark>`)
-                                .replaceAll(`</em>`, `</mark></em>`)
-                                .trim();
-                        } else {
-                            highlightedTitle = post.title.raw.replaceAll(
-                                searchValueRegex,
-                                `<mark>$1</mark>`
-                            );
-                        }
-                    }
-                    var highlightedDescription = '';
-                    if (post.meta_description && post.meta_description.raw) {
-                        tooltipDescription = post.meta_description.raw;
-                        if (post.meta_description.snippet) {
-                            highlightedDescription =
-                                post.meta_description.snippet
+                data.results.forEach(function (post, index) {
+                    if (counter >= firstPost && counter <= lastPost) {
+                        var tooltipDescription = '';
+                        var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                        var highlightedTitle = '';
+                        if (post.title && post.title.raw) {
+                            if (post.title.snippet) {
+                                highlightedTitle = post.title.snippet
                                     .replaceAll(`<em>`, `<em><mark>`)
                                     .replaceAll(`</em>`, `</mark></em>`)
                                     .trim();
-                        } else {
-                            highlightedDescription =
-                                post.meta_description.raw.replaceAll(
+                            } else {
+                                highlightedTitle = post.title.raw.replaceAll(
                                     searchValueRegex,
                                     `<mark>$1</mark>`
                                 );
+                            }
                         }
+                        var highlightedDescription = '';
+                        if (post.meta_description && post.meta_description.raw) {
+                            tooltipDescription = post.meta_description.raw;
+                            if (post.meta_description.snippet) {
+                                highlightedDescription =
+                                    post.meta_description.snippet
+                                        .replaceAll(`<em>`, `<em><mark>`)
+                                        .replaceAll(`</em>`, `</mark></em>`)
+                                        .trim();
+                            } else {
+                                highlightedDescription =
+                                    post.meta_description.raw.replaceAll(
+                                        searchValueRegex,
+                                        `<mark>$1</mark>`
+                                    );
+                            }
+                        }
+                        output += `<div class="search-result-row group">
+                                <a id="search-element-${index}" 
+                                class="search-result-row-link" 
+                                href="${post.url_path.raw}"
+                                title="${tooltipDescription}"
+                                >
+                                    <b>${highlightedTitle}</b>
+                                    <br/>
+                                    <span class="text-lg line-clamp-2 search-result-text">
+                                        ${highlightedDescription}
+                                    </span>
+                                </a>
+                            </div>`;
                     }
-                    output += `<div class="search-result-row group">
-                            <a id="search-element-${index}" 
-                            class="search-result-row-link" 
-                            href="${post.url_path.raw}"
-                            title="${tooltipDescription}"
-                            >
-                                <b>${highlightedTitle}</b>
-                                <br/>
-                                <span class="text-lg line-clamp-2">
-                                    ${highlightedDescription}
-                                </span>
-                            </a>
-                        </div>`;
+                    counter += 1;
+                });
+                searchResult.html(output);
+                searchResult.show();
+                searchListingLength = data.results.length;
+                searchSelectionId = -1;
+
+                clearTimeout(focusOnFirst);
+
+                focusOnFirst = setTimeout(function () {
+                    if (searchListingLength == 0) return;
+                    if (searchSelectionId >= 0) return;
+                    searchSelectionId = 0;
+                    $(`#search-element-${searchSelectionId}`).focus();
+                }, 500);
+
+                if (searchListingLength < lastPost + 1) {
+                    lastDisplay = searchListingLength;
+                } else {
+                    lastDisplay = lastPost + 1;
                 }
-                counter += 1;
+
+                pagination +=`<div>
+                                <span class="text-lg text-gray-700">
+                                Showing
+                                <span class="font-medium">${firstPost + 1}</span>
+                                to
+                                <span class="font-medium">${lastDisplay}</span>
+                                of
+                                <span class="font-medium">${data.results.length}</span>
+                                results
+                                </span>
+                            </div>`;
+                pageResult.html(pagination);
+                pageResult.show()
+                pageButtons.show()
             });
-            searchResult.html(output);
-            searchListingLength = data.results.length;
-            searchSelectionId = -1;
-
-            clearTimeout(focusOnFirst);
-
-            focusOnFirst = setTimeout(function () {
-                if (searchListingLength == 0) return;
-                if (searchSelectionId >= 0) return;
-                searchSelectionId = 0;
-                $(`#search-element-${searchSelectionId}`).focus();
-            }, 500);
-
-            if (searchListingLength < lastPost + 1) {
-                lastDisplay = searchListingLength;
-            } else {
-                lastDisplay = lastPost + 1;
-            }
-
-            pagination += `<div>
-                <p class="text-sm text-gray-700">
-                    Showing
-                    <span class="font-medium">${firstPost + 1}</span>
-                    to
-                    <span class="font-medium">${lastDisplay}</span>
-                    of
-                    <span class="font-medium">${data.results.length}</span>
-                    results
-                </p>
-            </div>`;
-            pageResult.html(pagination);
-        });
-        if (e.target.value.length > 0) {
+        } else {
+            searchResult.hide()
+            pageResult.hide()
+            pageButtons.hide()
+        }    
+        
+        if (searchValue.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
