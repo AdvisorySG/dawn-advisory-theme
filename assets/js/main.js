@@ -314,13 +314,36 @@ function search() {
             var output = '';
             data.results.forEach(function (post, index) {
                 var tooltipDescription = '';
-                var boldedDescription = '';
+                var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                var highlightedTitle = '';
+                if (post.title && post.title.raw) {
+                    if (post.title.snippet) {
+                        highlightedTitle = post.title.snippet
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
+                            .trim();
+                    } else {
+                        highlightedTitle = post.title.raw.replaceAll(
+                            searchValueRegex,
+                            `<mark>$1</mark>`
+                        );
+                    }
+                }
+                var highlightedDescription = '';
                 if (post.meta_description && post.meta_description.raw) {
                     tooltipDescription = post.meta_description.raw;
-                    boldedDescription = post.meta_description.raw.replaceAll(
-                        searchValue,
-                        `<b>${searchValue}</b>`
-                    );
+                    if (post.meta_description.snippet) {
+                        highlightedDescription = post.meta_description.snippet
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
+                            .trim();
+                    } else {
+                        highlightedDescription =
+                            post.meta_description.raw.replaceAll(
+                                searchValueRegex,
+                                `<mark>$1</mark>`
+                            );
+                    }
                 }
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
@@ -328,10 +351,10 @@ function search() {
                           href="${post.url_path.raw}"
                           title="${tooltipDescription}"
                         >
-                              <b>${post.title.raw}</b>
+                              <b>${highlightedTitle}</b>
                               <br/>
                               <span class="text-lg line-clamp-2">
-                                ${boldedDescription}
+                                ${highlightedDescription}
                               </span>
                         </a>
                     </div>`;

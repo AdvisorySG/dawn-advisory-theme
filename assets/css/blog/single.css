@@ -115,10 +115,6 @@
     font-size: 1.8rem;
 }
 
-.single-footer-bottom {
-    margin-top: 2rem;
-}
-
 @media (max-width: 767px) {
     .single-header {
         margin-bottom: 1.5rem;
