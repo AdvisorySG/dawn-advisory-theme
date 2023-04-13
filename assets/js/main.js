@@ -318,7 +318,7 @@ function search() {
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
-        if (searchValue != ""){
+        if (searchValue != '') {
             elasticSearch(searchValue, function () {
                 var data = JSON.parse(this.responseText);
                 var output = '';
@@ -328,14 +328,17 @@ function search() {
                 var lastPost = currentPage * postPerPage - 1;
                 var lastDisplay;
                 maxPages = Math.floor(data.results.length / postPerPage);
-                if (data.results.length % postPerPage > 0){
-                    maxPages +=1
+                if (data.results.length % postPerPage > 0) {
+                    maxPages += 1;
                 }
 
                 data.results.forEach(function (post, index) {
                     if (counter >= firstPost && counter <= lastPost) {
                         var tooltipDescription = '';
-                        var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                        var searchValueRegex = new RegExp(
+                            `(${searchValue})`,
+                            'ig'
+                        );
                         var highlightedTitle = '';
                         if (post.title && post.title.raw) {
                             if (post.title.snippet) {
@@ -351,7 +354,10 @@ function search() {
                             }
                         }
                         var highlightedDescription = '';
-                        if (post.meta_description && post.meta_description.raw) {
+                        if (
+                            post.meta_description &&
+                            post.meta_description.raw
+                        ) {
                             tooltipDescription = post.meta_description.raw;
                             if (post.meta_description.snippet) {
                                 highlightedDescription =
@@ -403,27 +409,31 @@ function search() {
                     lastDisplay = lastPost + 1;
                 }
 
-                pagination +=`<div>
+                pagination += `<div>
                                 <span class="text-lg text-gray-700">
                                 Showing
-                                <span class="font-medium">${firstPost + 1}</span>
+                                <span class="font-medium">${
+                                    firstPost + 1
+                                }</span>
                                 to
                                 <span class="font-medium">${lastDisplay}</span>
                                 of
-                                <span class="font-medium">${data.results.length}</span>
+                                <span class="font-medium">${
+                                    data.results.length
+                                }</span>
                                 results
                                 </span>
                             </div>`;
                 pageResult.html(pagination);
-                pageResult.show()
-                pageButtons.show()
+                pageResult.show();
+                pageButtons.show();
             });
         } else {
-            searchResult.hide()
-            pageResult.hide()
-            pageButtons.hide()
-        }    
-        
+            searchResult.hide();
+            pageResult.hide();
+            pageButtons.hide();
+        }
+
         if (searchValue.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
