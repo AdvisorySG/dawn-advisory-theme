@@ -96,11 +96,11 @@
         "zip": "gulp zip"
     },
     "devDependencies": {
-        "autoprefixer": "10.4.13",
-        "cssnano": "5.1.15",
+        "autoprefixer": "10.4.14",
+        "cssnano": "6.0.0",
         "djlint": "^1.19.7",
         "eslint": "^8.2.0",
-        "gscan": "4.36.0",
+        "gscan": "4.36.2",
         "gulp": "4.0.2",
         "gulp-livereload": "4.0.2",
         "gulp-postcss": "9.0.1",
