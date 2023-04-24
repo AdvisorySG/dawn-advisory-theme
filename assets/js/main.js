@@ -299,6 +299,31 @@ function elasticSearch(query, callback) {
 
 var searchSelectionId = 0;
 var searchListingLength = 0;
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function categoriseResult(post) {
+    if (!post.url_path_dir1.raw) {
+        return ['Home'];
+    }
+    if (isNumeric(post.url_path_dir1.raw)) {
+        var tags = ['Post'];
+        if (post.title.raw.startsWith('Conversations with')) {
+            tags.push('Conversations');
+        }
+        if (post.title.raw.startsWith('Reflections with')) {
+            tags.push('Reflections');
+        }
+        if (post.title.raw.startsWith('Insights on')) {
+            tags.push('Insights');
+        }
+        return tags;
+    }
+    var page_type = post.url_path_dir1.raw
+        .replace('-', ' ')
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+    return ['Page', page_type];
+}
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -345,6 +370,19 @@ function search() {
                             );
                     }
                 }
+                var tagsOutput = categoriseResult(post)
+                    .map(
+                        (tag) => `
+                    <div
+                      class="text-xs inline-flex items-center 
+                      font-bold leading-sm uppercase px-3 py-1 
+                      bg-yellow-300 text-gray-700 rounded-full
+                      my-1"
+                    >
+                      ${tag}
+                    </div>`
+                    )
+                    .reduce((a, b) => a + b, '');
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
                           class="search-result-row-link" 
@@ -352,6 +390,7 @@ function search() {
                           title="${tooltipDescription}"
                         >
                               <b>${highlightedTitle}</b>
+                              ${tagsOutput}
                               <br/>
                               <span class="text-lg line-clamp-2">
                                 ${highlightedDescription}
