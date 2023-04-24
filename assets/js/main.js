@@ -415,7 +415,7 @@ function expandTags() {
     const expandButton = $('.tag-expand-button');
     const tags = $('.tag-list');
     expandButton.on('click', function () {
-        tags.toggleClass('max-h-36 overflow-clip');
+        tags.toggleClass('max-h-40 overflow-clip');
         expandButton.html(
             expandButton.html() === 'Read more' ? 'Read less' : 'Read more'
         );
