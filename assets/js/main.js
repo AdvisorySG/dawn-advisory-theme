@@ -376,7 +376,7 @@ function search() {
                     <div
                       class="text-xs inline-flex items-center 
                       font-bold leading-sm uppercase px-3 py-1 
-                      bg-yellow-300 text-gray-700 rounded-full
+                      bg-yellow-300 text-gray-800 rounded-full
                       my-1"
                     >
                       ${tag}
