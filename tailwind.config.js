@@ -6,6 +6,7 @@ module.exports = {
         "assets/built/**/*.js",
         "!node_modules/**/*.hbs",
     ],
+    safelist: ["bg-amber-300", "text-sm", "text-gray-800"],
     theme: {
         extend: {},
     },
