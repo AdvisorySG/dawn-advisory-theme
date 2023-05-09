@@ -11,8 +11,7 @@
             <div class="container w-9/12">
                 {{#get "tags" limit="all" as |tags|}}
                     {{#if tags}}
-                        <div class="tag-list max-h-40 overflow-clip">
-                            <span class="tag-list-label">Industries:</span>
+                        <div class="tag-list">
                             {{#foreach tags}}
                                 <a href="{{url}}">
                                   <div
@@ -28,7 +27,6 @@
                     {{/if}}
                 {{/get}}
             </div>
-            <button class="mt-4 tag-expand-button">Read more</button>
         </section>
         <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
