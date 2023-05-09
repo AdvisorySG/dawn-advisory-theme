@@ -29,7 +29,7 @@ $(function () {
     modal();
     search();
     burger();
-    expandTags();
+    colourTags();
 });
 
 $(window).on('scroll', function () {
@@ -408,6 +408,19 @@ function search() {
 function burger() {
     $('.burger').on('click', function () {
         body.toggleClass('menu-opened');
+    });
+}
+
+var pillColours = {};
+function colourTags() {
+    var getPillColour = (text) =>
+        pillColours[text] ? pillColours[text] : 'bg-amber-300';
+    var getPillTextColour = (text) => 'text-gray-800';
+    $('.tag-element').each(function () {
+        $(this).toggleClass('bg-amber-300');
+        $(this).toggleClass(getPillColour(this.innerText));
+        $(this).toggleClass('text-gray-800');
+        $(this).toggleClass(getPillTextColour(this.innerText));
     });
 }
 
