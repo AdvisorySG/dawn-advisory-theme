@@ -197,6 +197,17 @@ function video() {
     fitvids('.single-content');
 }
 
+function gallery() {
+    const images = document.querySelectorAll('.kg-gallery-image img');
+    images.forEach((image) => {
+        const container = image.closest('.kg-gallery-image');
+        const width = image.attributes.width.value;
+        const height = image.attributes.height.value;
+        const ratio = width / height;
+        container.style.flex = ratio + ' 1 0%';
+    });
+}
+
 function table() {
     if (body.hasClass('post-template') || body.hasClass('page-template')) {
         var tables = $('.single-content').find('.table');
@@ -256,17 +267,6 @@ function modal() {
 
     modal.on('transitionend', function (e) {
         e.stopPropagation();
-    });
-}
-
-function gallery() {
-    const images = document.querySelectorAll('.kg-gallery-image img');
-    images.forEach((image) => {
-        const container = image.closest('.kg-gallery-image');
-        const width = image.attributes.width.value;
-        const height = image.attributes.height.value;
-        const ratio = width / height;
-        container.style.flex = ratio + ' 1 0%';
     });
 }
 
