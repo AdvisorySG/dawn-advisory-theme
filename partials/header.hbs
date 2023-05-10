@@ -18,7 +18,6 @@
             <div class="burger-bar"></div>
             <div class="burger-bar"></div>
         </div>
-
         <div class="mobile-menu hidden-lg hidden-xl">
             <div class="container">
                 <nav class="mobile-nav">
@@ -28,13 +27,11 @@
         </div>
     {{/if}}
     <div class="header-right hidden-xs hidden-sm hidden-md">
-        {{#if @custom.content_api_key_for_search}}
-            <button class="button-icon menu-item menu-item-button js-modal" data-modal="search" aria-label="Search">
-                <svg class="icon">
-                    <use xlink:href="#magnify"></use>
-                </svg>
-            </button>
-        {{/if}}
+        <button class="button-icon menu-item menu-item-button js-modal" data-modal="search" aria-label="Search">
+            <svg class="icon">
+                <use xlink:href="#magnify"></use>
+            </svg>
+        </button>
         {{navigation}}
     </div>
 </header>

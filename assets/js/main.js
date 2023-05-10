@@ -1,8 +1,6 @@
 import './jquery-global.js';
 
 import InfiniteScroll from 'infinite-scroll';
-import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
@@ -27,6 +25,7 @@ $(function () {
     gallery();
     table();
     modal();
+package com.amazonaws.mobileconnectors.kinesisvideo.client;
     search();
     burger();
     colourTags();
@@ -70,7 +69,8 @@ function sticky() {
     progress.css(
         'transform',
         'translate3d(' +
-            (-100 + Math.min((st * 100) / contentOffset, 100)) +
+            (-100 + Math.min((s
+package com.amazonaws.mobileconnectors.kinesisvideo.client;t * 100) / contentOffset, 100)) +
             '%,0,0)'
     );
 
@@ -201,22 +201,14 @@ function video() {
 }
 
 function gallery() {
-    var images = document.querySelectorAll('.kg-gallery-image img');
-    images.forEach(function (image) {
-        var container = image.closest('.kg-gallery-image');
-        var width = image.attributes.width.value;
-        var height = image.attributes.height.value;
-        var ratio = width / height;
+    const images = document.querySelectorAll('.kg-gallery-image img');
+    images.forEach((image) => {
+        const container = image.closest('.kg-gallery-image');
+        const width = image.attributes.width.value;
+        const height = image.attributes.height.value;
+        const ratio = width / height;
         container.style.flex = ratio + ' 1 0%';
     });
-
-    pswp(
-        '.kg-gallery-container',
-        '.kg-gallery-image',
-        '.kg-gallery-image',
-        false,
-        true
-    );
 }
 
 function table() {
@@ -315,13 +307,36 @@ function search() {
             var output = '';
             data.results.forEach(function (post, index) {
                 var tooltipDescription = '';
-                var boldedDescription = '';
+                var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
+                var highlightedTitle = '';
+                if (post.title && post.title.raw) {
+                    if (post.title.snippet) {
+                        highlightedTitle = post.title.snippet
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
+                            .trim();
+                    } else {
+                        highlightedTitle = post.title.raw.replaceAll(
+                            searchValueRegex,
+                            `<mark>$1</mark>`
+                        );
+                    }
+                }
+                var highlightedDescription = '';
                 if (post.meta_description && post.meta_description.raw) {
                     tooltipDescription = post.meta_description.raw;
-                    boldedDescription = post.meta_description.raw.replaceAll(
-                        searchValue,
-                        `<b>${searchValue}</b>`
-                    );
+                    if (post.meta_description.snippet) {
+                        highlightedDescription = post.meta_description.snippet
+                            .replaceAll(`<em>`, `<em><mark>`)
+                            .replaceAll(`</em>`, `</mark></em>`)
+                            .trim();
+                    } else {
+                        highlightedDescription =
+                            post.meta_description.raw.replaceAll(
+                                searchValueRegex,
+                                `<mark>$1</mark>`
+                            );
+                    }
                 }
                 output += `<div class="search-result-row group">
                         <a id="search-element-${index}" 
@@ -329,10 +344,10 @@ function search() {
                           href="${post.url_path.raw}"
                           title="${tooltipDescription}"
                         >
-                              <b>${post.title.raw}</b>
+                              <b>${highlightedTitle}</b>
                               <br/>
                               <span class="text-lg line-clamp-2">
-                                ${boldedDescription}
+                                ${highlightedDescription}
                               </span>
                         </a>
                     </div>`;
@@ -386,6 +401,16 @@ function search() {
                 e.preventDefault();
                 $(`#search-element-${searchSelectionId}`).focus();
                 break;
+            case 'ArrowLeft':
+                //go back to top search bar
+                searchSelectionId = -1;
+                searchInput.focus();
+                break;
+            case 'ArrowRight':
+                //go back to top search bar
+                searchSelectionId = -1;
+                searchInput.focus();
+                break;
             case 'Enter':
                 break;
             default:
@@ -421,94 +446,5 @@ function colourTags() {
         $(this).toggleClass(getPillColour(this.innerText));
         $(this).toggleClass('text-gray-800');
         $(this).toggleClass(getPillTextColour(this.innerText));
-    });
-}
-
-function pswp(container, element, trigger, caption, isGallery) {
-    var parseThumbnailElements = function (el) {
-        var items = [],
-            gridEl,
-            linkEl,
-            item;
-
-        $(el)
-            .find(element)
-            .each(function (i, v) {
-                gridEl = $(v);
-                linkEl = gridEl.find(trigger);
-
-                item = {
-                    src: isGallery
-                        ? gridEl.find('img').attr('src')
-                        : linkEl.attr('href'),
-                    w: 0,
-                    h: 0,
-                };
-
-                if (caption && gridEl.find(caption).length) {
-                    item.title = gridEl.find(caption).html();
-                }
-
-                items.push(item);
-            });
-
-        return items;
-    };
-
-    var openPhotoSwipe = function (index, galleryElement) {
-        var pswpElement = document.querySelectorAll('.pswp')[0],
-            gallery,
-            options,
-            items;
-
-        items = parseThumbnailElements(galleryElement);
-
-        options = {
-            closeOnScroll: false,
-            history: false,
-            index: index,
-            shareEl: false,
-            showAnimationDuration: 0,
-            showHideOpacity: true,
-        };
-
-        gallery = new PhotoSwipe(
-            pswpElement,
-            PhotoSwipeUIDefault,
-            items,
-            options
-        );
-        gallery.listen('gettingData', function (index, item) {
-            if (item.w < 1 || item.h < 1) {
-                // unknown size
-                var img = new Image();
-                img.onload = function () {
-                    // will get size after load
-                    item.w = this.width; // set image width
-                    item.h = this.height; // set image height
-                    gallery.updateSize(true); // reinit Items
-                };
-                img.src = item.src; // let's download image
-            }
-        });
-        gallery.init();
-    };
-
-    var onThumbnailsClick = function (e) {
-        e.preventDefault();
-
-        var index = $(e.target)
-            .closest(container)
-            .find(element)
-            .index($(e.target).closest(element));
-        var clickedGallery = $(e.target).closest(container);
-
-        openPhotoSwipe(index, clickedGallery[0]);
-
-        return false;
-    };
-
-    $(container).on('click', trigger, function (e) {
-        onThumbnailsClick(e);
     });
 }

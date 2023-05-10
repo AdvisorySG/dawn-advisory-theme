@@ -19,6 +19,8 @@
 
 .single-meta-tag .post-tag {
     color: var(--brand-color);
+    position: relative;
+    z-index: 2;
 }
 
 .single-title {
@@ -101,10 +103,6 @@
     font-size: 1.8rem;
 }
 
-.single-footer-bottom {
-    margin-top: 2rem;
-}
-
 @media (max-width: 767px) {
     .single-header {
         margin-bottom: 1.5rem;
@@ -121,4 +119,13 @@
     .single-media {
         margin-top: 3rem;
     }
+}
+
+.stretch-link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
