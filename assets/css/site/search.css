@@ -16,9 +16,8 @@
 }
 
 .search-result {
-    overflow-y: auto;
-    max-height: 50vh;
     -webkit-overflow-scrolling: touch;
+    max-height: 70vh;
 }
 
 .search-result-row + .search-result-row {
@@ -34,10 +33,23 @@
     padding: 1.3rem 1.5rem 1.2rem;
     font-size: 1.8rem;
     line-height: 1.4;
+    height: 9.3vh;
 }
 
 .search-result-row-link:hover,
 .search-result-row-link:focus {
     background-color: var(--lighter-gray-color);
     opacity: 1;
+}
+
+.search-prev:disabled {
+    background: #f5f5f5;
+    color: #c3c3c3;
+    outline: auto;
+}
+
+.search-next:disabled {
+    background: #f5f5f5;
+    color: #c3c3c3;
+    outline: auto;
 }

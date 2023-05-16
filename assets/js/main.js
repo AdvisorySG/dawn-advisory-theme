@@ -313,11 +313,28 @@ function search() {
     var pageButtons = $('.buttons-hide');
     let focusOnFirst;
     var currentPage = 1;
-    var postPerPage = 5;
+    var postPerPage = 7;
     var maxPages;
+    var prevInput = '';
+
+    function disableButtons() {
+        if (currentPage == 1) {
+            searchPrev.prop('disabled', true);
+        } else {
+            searchPrev.prop('disabled', false);
+        }
+        if (currentPage >= maxPages) {
+            searchNext.prop('disabled', true);
+        } else {
+            searchNext.prop('disabled', false);
+        }
+    }
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
+        if (searchValue != prevInput) {
+            currentPage = 1;
+        }
         if (searchValue != '') {
             elasticSearch(searchValue, function () {
                 var data = JSON.parse(this.responseText);
@@ -326,11 +343,8 @@ function search() {
                 var counter = 0;
                 var firstPost = (currentPage - 1) * postPerPage;
                 var lastPost = currentPage * postPerPage - 1;
-                var lastDisplay;
-                maxPages = Math.floor(data.results.length / postPerPage);
-                if (data.results.length % postPerPage > 0) {
-                    maxPages += 1;
-                }
+                var lastDisplay, resultsPerPage;
+                searchListingLength = data.results.length;
 
                 data.results.forEach(function (post, index) {
                     if (counter >= firstPost && counter <= lastPost) {
@@ -391,7 +405,6 @@ function search() {
                 });
                 searchResult.html(output);
                 searchResult.show();
-                searchListingLength = data.results.length;
                 searchSelectionId = -1;
 
                 clearTimeout(focusOnFirst);
@@ -409,24 +422,44 @@ function search() {
                     lastDisplay = lastPost + 1;
                 }
 
+                if (searchListingLength > 0) {
+                    resultsPerPage = firstPost + 1;
+                } else if (searchListingLength == 0) {
+                    resultsPerPage = 0;
+                } else {
+                    resultsPerPage = firstPost;
+                }
+
                 pagination += `<div>
                                 <span class="text-lg text-gray-700">
                                 Showing
-                                <span class="font-medium">${
-                                    firstPost + 1
-                                }</span>
+                                <span class="font-medium">${resultsPerPage}</span>
                                 to
                                 <span class="font-medium">${lastDisplay}</span>
                                 of
-                                <span class="font-medium">${
-                                    data.results.length
-                                }</span>
+                                <span class="font-medium">${searchListingLength}</span>
                                 results
                                 </span>
                             </div>`;
                 pageResult.html(pagination);
                 pageResult.show();
                 pageButtons.show();
+
+                maxPages = Math.floor(searchListingLength / postPerPage);
+                if (
+                    searchListingLength % postPerPage > 0 &&
+                    searchListingLength > 0
+                ) {
+                    maxPages += 1;
+                } else if (searchListingLength == 0) {
+                    maxPages = 1;
+                    searchPrev.prop('disabled', true);
+                    searchNext.prop('disabled', true);
+                } else if (searchListingLength > 0) {
+                    searchPrev.prop('disabled', false);
+                    searchNext.prop('disabled', false);
+                }
+                disableButtons();
             });
         } else {
             searchResult.hide();
@@ -439,6 +472,7 @@ function search() {
         } else {
             searchButton.removeClass('search-button-clear');
         }
+        prevInput = searchValue;
     });
 
     body.on('keydown', function () {
