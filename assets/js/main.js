@@ -306,29 +306,16 @@ function search() {
     var modalOverlay = $('.modal-overlay');
     var body = $('body,html');
 
-    //for search pagination
+    // for search pagination
     var searchNext = $('.search-next');
     var searchPrev = $('.search-prev');
     var pageResult = $('.page-result');
     var pageButtons = $('.buttons-hide');
     let focusOnFirst;
     var currentPage = 1;
-    var postPerPage = 7;
+    var postPerPage = 5;
     var maxPages;
     var prevInput = '';
-
-    function disableButtons() {
-        if (currentPage == 1) {
-            searchPrev.prop('disabled', true);
-        } else {
-            searchPrev.prop('disabled', false);
-        }
-        if (currentPage >= maxPages) {
-            searchNext.prop('disabled', true);
-        } else {
-            searchNext.prop('disabled', false);
-        }
-    }
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
@@ -341,52 +328,52 @@ function search() {
                 var output = '';
                 var pagination = '';
                 var counter = 0;
-                var firstPost = (currentPage - 1) * postPerPage;
-                var lastPost = currentPage * postPerPage - 1;
-                var lastDisplay, resultsPerPage;
-                searchListingLength = data.results.length;
 
-                data.results.forEach(function (post, index) {
+                searchListingLength = data.results.length;
+                var firstPost =
+                    searchListingLength != 0
+                        ? (currentPage - 1) * postPerPage
+                        : -1;
+                var lastPost =
+                    Math.min(currentPage * postPerPage, searchListingLength) -
+                    1;
+
+                data.results.forEach((post, index) => {
                     if (counter >= firstPost && counter <= lastPost) {
-                        var tooltipDescription = '';
                         var searchValueRegex = new RegExp(
                             `(${searchValue})`,
                             'ig'
                         );
-                        var highlightedTitle = '';
-                        if (post.title && post.title.raw) {
-                            if (post.title.snippet) {
-                                highlightedTitle = post.title.snippet
-                                    .replaceAll(`<em>`, `<em><mark>`)
-                                    .replaceAll(`</em>`, `</mark></em>`)
-                                    .trim();
-                            } else {
-                                highlightedTitle = post.title.raw.replaceAll(
-                                    searchValueRegex,
-                                    `<mark>$1</mark>`
-                                );
-                            }
-                        }
-                        var highlightedDescription = '';
-                        if (
-                            post.meta_description &&
-                            post.meta_description.raw
-                        ) {
-                            tooltipDescription = post.meta_description.raw;
-                            if (post.meta_description.snippet) {
-                                highlightedDescription =
-                                    post.meta_description.snippet
-                                        .replaceAll(`<em>`, `<em><mark>`)
-                                        .replaceAll(`</em>`, `</mark></em>`)
-                                        .trim();
-                            } else {
-                                highlightedDescription =
-                                    post.meta_description.raw.replaceAll(
-                                        searchValueRegex,
-                                        `<mark>$1</mark>`
-                                    );
-                            }
-                        }
+                        var highlightedTitle =
+                            post.title && post.title.raw
+                                ? post.title.snippet
+                                    ? post.title.snippet
+                                          .replaceAll(`<em>`, `<em><mark>`)
+                                          .replaceAll(`</em>`, `</mark></em>`)
+                                          .trim()
+                                    : post.title.raw.replaceAll(
+                                          searchValueRegex,
+                                          `<mark>$1</mark>`
+                                      )
+                                : '';
+
+                        var highlightedDescription =
+                            post.meta_description && post.meta_description.raw
+                                ? post.meta_description.snippet
+                                    ? post.meta_description.snippet
+                                          .replaceAll(`<em>`, `<em><mark>`)
+                                          .replaceAll(`</em>`, `</mark></em>`)
+                                          .trim()
+                                    : post.meta_description.raw.replaceAll(
+                                          searchValueRegex,
+                                          `<mark>$1</mark>`
+                                      )
+                                : '';
+                        var tooltipDescription =
+                            post.meta_description && post.meta_description.raw
+                                ? post.meta_description.raw
+                                : '';
+
                         output += `<div class="search-result-row group">
                                 <a id="search-element-${index}" 
                                 class="search-result-row-link" 
@@ -409,57 +396,33 @@ function search() {
 
                 clearTimeout(focusOnFirst);
 
-                focusOnFirst = setTimeout(function () {
-                    if (searchListingLength == 0) return;
-                    if (searchSelectionId >= 0) return;
+                focusOnFirst = setTimeout(() => {
+                    if (searchListingLength == 0 || searchSelectionId >= 0)
+                        return;
                     searchSelectionId = 0;
                     $(`#search-element-${searchSelectionId}`).focus();
                 }, 500);
 
-                if (searchListingLength < lastPost + 1) {
-                    lastDisplay = searchListingLength;
-                } else {
-                    lastDisplay = lastPost + 1;
-                }
-
-                if (searchListingLength > 0) {
-                    resultsPerPage = firstPost + 1;
-                } else if (searchListingLength == 0) {
-                    resultsPerPage = 0;
-                } else {
-                    resultsPerPage = firstPost;
-                }
-
                 pagination += `<div>
                                 <span class="text-lg text-gray-700">
                                 Showing
-                                <span class="font-medium">${resultsPerPage}</span>
+                                <span class="font-medium">${
+                                    firstPost + 1
+                                }</span>
                                 to
-                                <span class="font-medium">${lastDisplay}</span>
+                                <span class="font-medium">${lastPost + 1}</span>
                                 of
                                 <span class="font-medium">${searchListingLength}</span>
-                                results
+                                results.
                                 </span>
                             </div>`;
                 pageResult.html(pagination);
                 pageResult.show();
                 pageButtons.show();
 
-                maxPages = Math.floor(searchListingLength / postPerPage);
-                if (
-                    searchListingLength % postPerPage > 0 &&
-                    searchListingLength > 0
-                ) {
-                    maxPages += 1;
-                } else if (searchListingLength == 0) {
-                    maxPages = 1;
-                    searchPrev.prop('disabled', true);
-                    searchNext.prop('disabled', true);
-                } else if (searchListingLength > 0) {
-                    searchPrev.prop('disabled', false);
-                    searchNext.prop('disabled', false);
-                }
-                disableButtons();
+                maxPages = Math.ceil(searchListingLength / postPerPage);
+                searchPrev.prop('disabled', currentPage <= 1);
+                searchNext.prop('disabled', currentPage >= maxPages);
             });
         } else {
             searchResult.hide();
