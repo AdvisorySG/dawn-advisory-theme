@@ -6,8 +6,14 @@ module.exports = {
         "assets/built/**/*.js",
         "!node_modules/**/*.hbs",
     ],
-    safelist: ["bg-amber-300", "text-sm", "text-gray-800"],
+    safelist: ["bg-amber-300", "text-sm", "text-gray-800", "h-6"],
     theme: {
+        colors: {
+            brand: {
+                light: "#ffad33",
+                DEFAULT: "#f49200",
+            },
+        },
         extend: {},
     },
     variants: {
