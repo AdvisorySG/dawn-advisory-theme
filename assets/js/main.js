@@ -25,7 +25,6 @@ $(function () {
     gallery();
     table();
     modal();
-package com.amazonaws.mobileconnectors.kinesisvideo.client;
     search();
     burger();
     colourTags();
@@ -69,8 +68,7 @@ function sticky() {
     progress.css(
         'transform',
         'translate3d(' +
-            (-100 + Math.min((s
-package com.amazonaws.mobileconnectors.kinesisvideo.client;t * 100) / contentOffset, 100)) +
+            (-100 + Math.min((st * 100) / contentOffset, 100)) +
             '%,0,0)'
     );
 
