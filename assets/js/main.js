@@ -27,6 +27,7 @@ $(function () {
     modal();
     search();
     burger();
+    colourTags();
 });
 
 $(window).on('scroll', function () {
@@ -430,5 +431,18 @@ function search() {
 function burger() {
     $('.burger').on('click', function () {
         body.toggleClass('menu-opened');
+    });
+}
+
+var pillColours = {};
+function colourTags() {
+    var getPillColour = (text) =>
+        pillColours[text] ? pillColours[text] : 'bg-brand-light';
+    var getPillTextColour = (text) => 'text-gray-800';
+    $('.tag-element').each(function () {
+        $(this).toggleClass('bg-brand-light');
+        $(this).toggleClass(getPillColour(this.innerText));
+        $(this).toggleClass('text-gray-800');
+        $(this).toggleClass(getPillTextColour(this.innerText));
     });
 }

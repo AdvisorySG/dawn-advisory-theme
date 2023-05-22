@@ -8,13 +8,20 @@
             <h1 class="single-title">Stories</h1>
         </header>
         <section class="tag">
-            <div class="container medium">
+            <div class="container w-9/12">
                 {{#get "tags" limit="all" as |tags|}}
                     {{#if tags}}
                         <div class="tag-list">
-                            <span class="tag-list-label">Industries:</span>
                             {{#foreach tags}}
-                                <a class="tag-list-item" href="{{url}}">{{name}}</a>
+                                <a href="{{url}}">
+                                  <div
+                                    class="text-xl inline-flex items-center font-bold 
+                                    leading-sm px-4 py-2 my-1 rounded-full 
+                                    bg-brand-light text-gray-800 tag-element"
+                                  >
+                                    {{name}}
+                                  </div>
+                                </a>
                             {{/foreach}}
                         </div>
                     {{/if}}
