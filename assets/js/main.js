@@ -437,10 +437,10 @@ function burger() {
 var pillColours = {};
 function colourTags() {
     var getPillColour = (text) =>
-        pillColours[text] ? pillColours[text] : 'bg-amber-300';
+        pillColours[text] ? pillColours[text] : 'bg-brand-light';
     var getPillTextColour = (text) => 'text-gray-800';
     $('.tag-element').each(function () {
-        $(this).toggleClass('bg-amber-300');
+        $(this).toggleClass('bg-brand-light');
         $(this).toggleClass(getPillColour(this.innerText));
         $(this).toggleClass('text-gray-800');
         $(this).toggleClass(getPillTextColour(this.innerText));
