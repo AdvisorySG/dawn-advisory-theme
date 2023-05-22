@@ -23,7 +23,9 @@
 }
 
 .modal-search {
-    width: 500px;
+    width: 60%;
+    height: 80%;
+    position: relative;
 }
 
 .modal-search .form-wrapper {
