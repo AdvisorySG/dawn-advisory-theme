@@ -21,15 +21,14 @@
                     <div class="glide__slides">
                         {{#foreach featured}}
                             <article class="{{post_class}} relative glide__slide">
-                                <div class = "slide-content">
+                                <div class="slide-content">
                                     {{#if feature_image}}
                                         <div class="slide-image u-placeholder horizontal">
                                             <img class="lazyload u-object-fit" data-srcset="{{> srcset}}" data-sizes="auto" src="{{img_url feature_image size="
                                                 m"}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}">
                                         </div>
                                     {{/if}}
-
-                                    <div class ="slide-details">
+                                    <div class="slide-details">
                                         <div>
                                             {{#foreach tags from="1"}}
                                             <span class="text-xl inline-flex items-center font-bold 
