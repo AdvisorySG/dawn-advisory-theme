@@ -1,8 +1,6 @@
 import './jquery-global.js';
 
 import InfiniteScroll from 'infinite-scroll';
-import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import fitvids from 'fitvids';
 import 'lazysizes';
 
@@ -29,6 +27,7 @@ $(function () {
     modal();
     search();
     burger();
+    colourTags();
 });
 
 $(window).on('scroll', function () {
@@ -200,22 +199,14 @@ function video() {
 }
 
 function gallery() {
-    var images = document.querySelectorAll('.kg-gallery-image img');
-    images.forEach(function (image) {
-        var container = image.closest('.kg-gallery-image');
-        var width = image.attributes.width.value;
-        var height = image.attributes.height.value;
-        var ratio = width / height;
+    const images = document.querySelectorAll('.kg-gallery-image img');
+    images.forEach((image) => {
+        const container = image.closest('.kg-gallery-image');
+        const width = image.attributes.width.value;
+        const height = image.attributes.height.value;
+        const ratio = width / height;
         container.style.flex = ratio + ' 1 0%';
     });
-
-    pswp(
-        '.kg-gallery-container',
-        '.kg-gallery-image',
-        '.kg-gallery-image',
-        false,
-        true
-    );
 }
 
 function table() {
@@ -305,78 +296,137 @@ function search() {
     var searchResult = $('.search-result');
     var modalOverlay = $('.modal-overlay');
     var body = $('body,html');
+
+    // for search pagination
+    var searchNext = $('.search-next');
+    var searchPrev = $('.search-prev');
+    var pageResult = $('.page-result');
+    var pageButtons = $('.buttons-hide');
     let focusOnFirst;
+    var currentPage = 1;
+    var postPerPage = 5;
+    var maxPages;
+    var prevInput = '';
 
     searchInput.on('input', function (e) {
         const searchValue = e.target.value;
-        elasticSearch(e.target.value, function () {
-            var data = JSON.parse(this.responseText);
-            var output = '';
-            data.results.forEach(function (post, index) {
-                var tooltipDescription = '';
-                var searchValueRegex = new RegExp(`(${searchValue})`, 'ig');
-                var highlightedTitle = '';
-                if (post.title && post.title.raw) {
-                    if (post.title.snippet) {
-                        highlightedTitle = post.title.snippet
-                            .replaceAll(`<em>`, `<em><mark>`)
-                            .replaceAll(`</em>`, `</mark></em>`)
-                            .trim();
-                    } else {
-                        highlightedTitle = post.title.raw.replaceAll(
-                            searchValueRegex,
-                            `<mark>$1</mark>`
+        if (searchValue != prevInput) {
+            currentPage = 1;
+        }
+        if (searchValue != '') {
+            elasticSearch(searchValue, function () {
+                var data = JSON.parse(this.responseText);
+                var output = '';
+                var pagination = '';
+                var counter = 0;
+
+                searchListingLength = data.results.length;
+                var firstPost =
+                    searchListingLength != 0
+                        ? (currentPage - 1) * postPerPage
+                        : -1;
+                var lastPost =
+                    Math.min(currentPage * postPerPage, searchListingLength) -
+                    1;
+
+                data.results.forEach((post, index) => {
+                    if (counter >= firstPost && counter <= lastPost) {
+                        var searchValueRegex = new RegExp(
+                            `(${searchValue})`,
+                            'ig'
                         );
+                        var highlightedTitle =
+                            post.title && post.title.raw
+                                ? post.title.snippet
+                                    ? post.title.snippet
+                                          .replaceAll(`<em>`, `<em><mark>`)
+                                          .replaceAll(`</em>`, `</mark></em>`)
+                                          .trim()
+                                    : post.title.raw.replaceAll(
+                                          searchValueRegex,
+                                          `<mark>$1</mark>`
+                                      )
+                                : '';
+
+                        var highlightedDescription =
+                            post.meta_description && post.meta_description.raw
+                                ? post.meta_description.snippet
+                                    ? post.meta_description.snippet
+                                          .replaceAll(`<em>`, `<em><mark>`)
+                                          .replaceAll(`</em>`, `</mark></em>`)
+                                          .trim()
+                                    : post.meta_description.raw.replaceAll(
+                                          searchValueRegex,
+                                          `<mark>$1</mark>`
+                                      )
+                                : '';
+                        var tooltipDescription =
+                            post.meta_description && post.meta_description.raw
+                                ? post.meta_description.raw
+                                : '';
+
+                        output += `<div class="search-result-row group">
+                                <a id="search-element-${index}" 
+                                class="search-result-row-link" 
+                                href="${post.url_path.raw}"
+                                title="${tooltipDescription}"
+                                >
+                                    <b>${highlightedTitle}</b>
+                                    <br/>
+                                    <span class="text-lg line-clamp-2 search-result-text">
+                                        ${highlightedDescription}
+                                    </span>
+                                </a>
+                            </div>`;
                     }
-                }
-                var highlightedDescription = '';
-                if (post.meta_description && post.meta_description.raw) {
-                    tooltipDescription = post.meta_description.raw;
-                    if (post.meta_description.snippet) {
-                        highlightedDescription = post.meta_description.snippet
-                            .replaceAll(`<em>`, `<em><mark>`)
-                            .replaceAll(`</em>`, `</mark></em>`)
-                            .trim();
-                    } else {
-                        highlightedDescription =
-                            post.meta_description.raw.replaceAll(
-                                searchValueRegex,
-                                `<mark>$1</mark>`
-                            );
-                    }
-                }
-                output += `<div class="search-result-row group">
-                        <a id="search-element-${index}" 
-                          class="search-result-row-link" 
-                          href="${post.url_path.raw}"
-                          title="${tooltipDescription}"
-                        >
-                              <b>${highlightedTitle}</b>
-                              <br/>
-                              <span class="text-lg line-clamp-2">
-                                ${highlightedDescription}
-                              </span>
-                        </a>
-                    </div>`;
+                    counter += 1;
+                });
+                searchResult.html(output);
+                searchResult.show();
+                searchSelectionId = -1;
+
+                clearTimeout(focusOnFirst);
+
+                focusOnFirst = setTimeout(() => {
+                    if (searchListingLength == 0 || searchSelectionId >= 0)
+                        return;
+                    searchSelectionId = 0;
+                    $(`#search-element-${searchSelectionId}`).focus();
+                }, 500);
+
+                pagination += `<div>
+                                <span class="text-lg text-gray-700">
+                                Showing
+                                <span class="font-medium">${
+                                    firstPost + 1
+                                }</span>
+                                to
+                                <span class="font-medium">${lastPost + 1}</span>
+                                of
+                                <span class="font-medium">${searchListingLength}</span>
+                                results.
+                                </span>
+                            </div>`;
+                pageResult.html(pagination);
+                pageResult.show();
+                pageButtons.show();
+
+                maxPages = Math.ceil(searchListingLength / postPerPage);
+                searchPrev.prop('disabled', currentPage <= 1);
+                searchNext.prop('disabled', currentPage >= maxPages);
             });
-            searchResult.html(output);
-            searchListingLength = data.results.length;
-            searchSelectionId = -1;
+        } else {
+            searchResult.hide();
+            pageResult.hide();
+            pageButtons.hide();
+        }
 
-            clearTimeout(focusOnFirst);
-
-            focusOnFirst = setTimeout(function () {
-                if (searchListingLength == 0) return;
-                if (searchSelectionId >= 0) return;
-                searchSelectionId = 0;
-                $(`#search-element-${searchSelectionId}`).focus();
-            }, 500);
-        });
-        if (e.target.value.length > 0) {
+        if (searchValue.length > 0) {
             searchButton.addClass('search-button-clear');
         } else {
             searchButton.removeClass('search-button-clear');
         }
+        prevInput = searchValue;
     });
 
     body.on('keydown', function () {
@@ -433,6 +483,22 @@ function search() {
     searchButton.on('click', function () {
         if ($(this).hasClass('search-button-clear')) {
             searchInput.val('').focus().keyup();
+            currentPage = 1;
+            searchInput.trigger('input');
+        }
+    });
+
+    searchPrev.on('click', function () {
+        if (currentPage > 1) {
+            currentPage -= 1;
+            searchInput.trigger('input');
+        }
+    });
+
+    searchNext.on('click', function () {
+        if (currentPage < maxPages) {
+            currentPage += 1;
+            searchInput.trigger('input');
         }
     });
 }
@@ -443,91 +509,15 @@ function burger() {
     });
 }
 
-function pswp(container, element, trigger, caption, isGallery) {
-    var parseThumbnailElements = function (el) {
-        var items = [],
-            gridEl,
-            linkEl,
-            item;
-
-        $(el)
-            .find(element)
-            .each(function (i, v) {
-                gridEl = $(v);
-                linkEl = gridEl.find(trigger);
-
-                item = {
-                    src: isGallery
-                        ? gridEl.find('img').attr('src')
-                        : linkEl.attr('href'),
-                    w: 0,
-                    h: 0,
-                };
-
-                if (caption && gridEl.find(caption).length) {
-                    item.title = gridEl.find(caption).html();
-                }
-
-                items.push(item);
-            });
-
-        return items;
-    };
-
-    var openPhotoSwipe = function (index, galleryElement) {
-        var pswpElement = document.querySelectorAll('.pswp')[0],
-            gallery,
-            options,
-            items;
-
-        items = parseThumbnailElements(galleryElement);
-
-        options = {
-            closeOnScroll: false,
-            history: false,
-            index: index,
-            shareEl: false,
-            showAnimationDuration: 0,
-            showHideOpacity: true,
-        };
-
-        gallery = new PhotoSwipe(
-            pswpElement,
-            PhotoSwipeUIDefault,
-            items,
-            options
-        );
-        gallery.listen('gettingData', function (index, item) {
-            if (item.w < 1 || item.h < 1) {
-                // unknown size
-                var img = new Image();
-                img.onload = function () {
-                    // will get size after load
-                    item.w = this.width; // set image width
-                    item.h = this.height; // set image height
-                    gallery.updateSize(true); // reinit Items
-                };
-                img.src = item.src; // let's download image
-            }
-        });
-        gallery.init();
-    };
-
-    var onThumbnailsClick = function (e) {
-        e.preventDefault();
-
-        var index = $(e.target)
-            .closest(container)
-            .find(element)
-            .index($(e.target).closest(element));
-        var clickedGallery = $(e.target).closest(container);
-
-        openPhotoSwipe(index, clickedGallery[0]);
-
-        return false;
-    };
-
-    $(container).on('click', trigger, function (e) {
-        onThumbnailsClick(e);
+var pillColours = {};
+function colourTags() {
+    var getPillColour = (text) =>
+        pillColours[text] ? pillColours[text] : 'bg-brand-light';
+    var getPillTextColour = () => 'text-gray-800';
+    $('.tag-element').each(function () {
+        $(this).toggleClass('bg-brand-light');
+        $(this).toggleClass(getPillColour(this.innerText));
+        $(this).toggleClass('text-gray-800');
+        $(this).toggleClass(getPillTextColour());
     });
 }

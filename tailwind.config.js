@@ -7,6 +7,12 @@ module.exports = {
         "!node_modules/**/*.hbs",
     ],
     theme: {
+        colors: {
+            brand: {
+                light: "#ffad33",
+                DEFAULT: "#f49200",
+            },
+        },
         extend: {},
     },
     variants: {
