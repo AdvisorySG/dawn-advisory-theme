@@ -14,23 +14,6 @@
     max-width: 500px;
 }
 
-.tag-list {
-    margin-top: 2rem;
-    font-weight: 700;
-}
-
-.tag-list-label {
-    color: var(--secondary-text-color);
-}
-
-.tag-list-item:not(:last-child):after {
-    content: ", ";
-}
-
-.tag-list-item {
-    color: var(--brand-color);
-}
-
 .tag-feature-media {
     margin-top: 4.5rem;
 }

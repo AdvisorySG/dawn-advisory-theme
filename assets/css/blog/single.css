@@ -4,11 +4,20 @@
 }
 
 .single-meta {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: var(--secondary-text-color);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+.single-meta-date {
+    font-size: 1.5rem;
+}
+
+.single-meta-length {
+    font-size: 1.5rem;
 }
 
 .single-meta-item + .single-meta-item::before {
@@ -25,7 +34,7 @@
 
 .single-title {
     margin-bottom: 0;
-    font-size: 4rem;
+    font-size: 3.75rem;
     line-height: 1.2;
     letter-spacing: -0.1rem;
 }
@@ -44,7 +53,6 @@
 }
 
 .single-media {
-    margin-top: 3rem;
     margin-bottom: 3rem;
 }
 
