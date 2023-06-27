@@ -294,26 +294,27 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 function categoriseResult(post) {
-    if (!post.url_path_dir1 || !post.url_path_dir1.raw) {
-        return ['Home'];
+    if (!post.url_path || !post.url_path.raw) {
+        return ['home'];
     }
-    if (isNumeric(post.url_path_dir1.raw)) {
-        var tags = ['Post'];
+    var dir1 = post.url_path.raw.split('/')[1];
+    if (isNumeric(dir1)) {
+        var tags = ['post'];
         if (post.title.raw.startsWith('Conversations with')) {
-            tags.push('Conversations');
+            tags.push('conversations');
         }
         if (post.title.raw.startsWith('Reflections with')) {
-            tags.push('Reflections');
+            tags.push('reflections');
         }
         if (post.title.raw.startsWith('Insights on')) {
-            tags.push('Insights');
+            tags.push('insights');
         }
         return tags;
     }
-    var page_type = post.url_path_dir1.raw
-        .replace('-', ' ')
-        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
-    return ['Page', page_type];
+    var page_type = dir1.toLowerCase();
+        //.replace('-', ' ')
+        //.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+    return ['page', page_type];
 }
 function search() {
     var searchInput = $('.search-input');
@@ -393,7 +394,7 @@ function search() {
                             .map(
                                 (tag) => `
                           <div
-                            class="text-sm inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-brand-light text-gray-800 rounded-full my-1"
+                            class="text-sm inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-brand-light text-gray-800 rounded-full my-1 capitalize mr-1"
                           >
                             ${tag}
                           </div>`
