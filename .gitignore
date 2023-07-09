@@ -27,3 +27,6 @@ dist/
 config.json
 changelog.md
 changelog.md.bk
+
+replit.nix
+.replit
