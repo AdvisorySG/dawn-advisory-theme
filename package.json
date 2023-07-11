@@ -121,6 +121,7 @@
     "dependencies": {
         "@glidejs/glide": "^3.5.2",
         "@tailwindcss/line-clamp": "^0.4.0",
+        "alpinejs": "^3.12.3",
         "fitvids": "^2.1.1",
         "infinite-scroll": "^4.0.1",
         "jquery": "^3.6.0",

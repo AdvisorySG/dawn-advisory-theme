@@ -7,6 +7,10 @@ import fitvids from 'fitvids';
 import 'lazysizes';
 
 import Glide from '@glidejs/glide';
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+Alpine.start();
 
 var body = $('body');
 var timeout;
