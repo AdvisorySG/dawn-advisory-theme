@@ -22,8 +22,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
 
       - run: npm install
+      - run: pip install djlint
+
       - run: npx eslint .
       - run: npx prettier -c .
-      - run: npx djlint . --lint
+      - run: djlint . --lint
