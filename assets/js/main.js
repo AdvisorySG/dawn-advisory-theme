@@ -116,13 +116,13 @@ function featured() {
     var glideFeed = new Glide('.featured-feed', {
         type: 'carousel',
         autoplay: 3500,
-        perView: 3,
+        perView: 1,
         breakpoints: {
             768: {
                 perView: 1,
             },
             992: {
-                perView: 2,
+                perView: 1,
             },
         },
     });

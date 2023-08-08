@@ -12,6 +12,10 @@
     font-weight: 700;
 }
 
+.featured-track {
+    align-items: center;
+}
+
 .has-serif-title .featured-wrapper .post-title {
     font-family: var(--font-serif);
 }
@@ -24,4 +28,17 @@
     font-size: 1.5rem;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
+}
+
+.slide-content {
+    display: flex;
+    align-items: center;
+}
+
+.slide-image {
+    width: 50%;
+    flex-shrink: 0;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
 }

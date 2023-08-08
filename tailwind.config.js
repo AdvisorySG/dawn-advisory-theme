@@ -13,7 +13,11 @@ module.exports = {
                 DEFAULT: "#f49200",
             },
         },
-        extend: {},
+        extend: {
+            boxShadow: {
+                "featured-article": "0px 10px 50px -6px rgb(0 0 0 / 25%)",
+            },
+        },
     },
     variants: {
         extend: {
