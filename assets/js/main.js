@@ -311,9 +311,10 @@ function categoriseResult(post) {
             tags.push('insights');
         }
         return tags;
+    } else {
+        var page_type = dir1.toLowerCase();
+        return ['page', page_type];
     }
-    var page_type = dir1.toLowerCase();
-    return ['page', page_type];
 }
 function search() {
     var searchInput = $('.search-input');
