@@ -295,7 +295,6 @@ function categoriseResult(post) {
         return ['home'];
     }
     var dir1 = post.url_path.raw.split('/')[1];
-    // is numeric
     if (dir1.match(/^[0-9]*$/g)) {
         var tags = ['post'];
         if (post.title.raw.startsWith('Conversations with')) {
