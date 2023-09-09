@@ -298,7 +298,8 @@ function categoriseResult(post) {
         return ['home'];
     }
     var dir1 = post.url_path.raw.split('/')[1];
-    if (isNumeric(dir1)) {
+    // is numeric
+    if (dir1.match(/^[0-9]*$/g)) {
         var tags = ['post'];
         if (post.title.raw.startsWith('Conversations with')) {
             tags.push('conversations');
@@ -312,8 +313,6 @@ function categoriseResult(post) {
         return tags;
     }
     var page_type = dir1.toLowerCase();
-        //.replace('-', ' ')
-        //.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
     return ['page', page_type];
 }
 function search() {
