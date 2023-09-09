@@ -290,9 +290,6 @@ function elasticSearch(query, callback) {
 
 var searchSelectionId = 0;
 var searchListingLength = 0;
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
 function categoriseResult(post) {
     if (!post.url_path || !post.url_path.raw) {
         return ['home'];
