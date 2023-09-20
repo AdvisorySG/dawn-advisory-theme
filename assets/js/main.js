@@ -290,6 +290,26 @@ function elasticSearch(query, callback) {
 
 var searchSelectionId = 0;
 var searchListingLength = 0;
+function categoriseResult(post) {
+    if (!post.url_path || !post.url_path.raw) {
+        return ['home'];
+    }
+    var dir1 = post.url_path.raw.split('/')[1];
+    if (dir1.match(/^[0-9]*$/g)) {
+        var tags = ['post'];
+        if (post.title.raw.startsWith('Conversations with')) {
+            tags.push('conversations');
+        } else if (post.title.raw.startsWith('Reflections with')) {
+            tags.push('reflections');
+        } else if (post.title.raw.startsWith('Insights on')) {
+            tags.push('insights');
+        }
+        return tags;
+    } else {
+        var page_type = dir1.toLowerCase();
+        return ['page', page_type];
+    }
+}
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -364,6 +384,16 @@ function search() {
                             post.meta_description && post.meta_description.raw
                                 ? post.meta_description.raw
                                 : '';
+                        var tagsOutput = categoriseResult(post)
+                            .map(
+                                (tag) => `
+                          <div
+                            class="text-sm inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-brand-light text-gray-800 rounded-full my-1 capitalize mr-1"
+                          >
+                            ${tag}
+                          </div>`
+                            )
+                            .reduce((a, b) => a + b, '');
 
                         output += `<div class="search-result-row group">
                                 <a id="search-element-${index}" 
@@ -372,8 +402,12 @@ function search() {
                                 title="${tooltipDescription}"
                                 >
                                     <b>${highlightedTitle}</b>
+                                    <div class="inline-flex items-center">
+                                      <span class="h-6"></span>
+                                      ${tagsOutput}
+                                    </div>
                                     <br/>
-                                    <span class="text-lg line-clamp-2 search-result-text">
+                                    <span class="line-clamp-2 search-result-text">
                                         ${highlightedDescription}
                                     </span>
                                 </a>

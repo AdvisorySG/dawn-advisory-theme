@@ -34,6 +34,7 @@
     font-size: 1.8rem;
     line-height: 1.4;
     height: 9.3vh;
+    overflow: hidden;
 }
 
 .search-result-row-link:hover,
