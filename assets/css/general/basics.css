@@ -35,7 +35,12 @@ html {
     box-sizing: inherit;
 }
 
+footer {
+    background: var(--black-color);
+}
+
 body {
+    background: var(--black-color);
     color: var(--primary-text-color);
     font-family: var(--font-base);
     font-size: 1.5rem;
