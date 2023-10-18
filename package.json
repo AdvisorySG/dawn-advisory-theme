@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "engines": {
         "ghost": ">=5.0.0",
-        "node": "16.x"
+        "node": "18.x"
     },
     "license": "MIT",
     "author": {
