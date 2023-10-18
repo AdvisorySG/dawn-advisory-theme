@@ -1,0 +1,31 @@
+.parent {
+    text-align: center;
+}
+
+.gallery {
+    margin-left: auto;
+    margin-right: auto;
+    border: 0px;
+    width: 240px;
+    display: inline-block;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.desc {
+    padding: 15px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.desc::first-line {
+    font-weight: bold;
+}
+.page-header {
+    text-align: center;
+}

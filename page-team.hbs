@@ -1,0 +1,235 @@
+{{!< default}}
+
+<section class="text-gray-600 body-font" x-data='{
+  "team": {
+    "board":{
+      "board_of_advisors": [
+        {"name": "Aaron Maniam", "note":"chair", "href": "https://advisory.sg/board-of-advisors-aaron-maniam/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Aaron.jpg"},
+        {"name": "Alvin Tan", "note": "", "href": "https://advisory.sg/board-of-advisors-alvin-tan/", "img_src": "https://i2.wp.com/advisory.sg/wp-content/uploads/2019/02/Alvin-Tan.jpg?resize=768%2C768&ssl=1"},
+        {"name": "Brad Verne", "note": "", "href": "https://advisory.sg/board-of-advisors-brad-verne/", "img_src": "https://advisory.sg/wp-content/uploads/2022/01/BradVerne.jpg"},
+        {"name": "David Chua", "note": "", "href": "https://advisory.sg/board-of-advisors-david-chua/", "img_src": "https://advisory.sg/wp-content/uploads/2020/04/David-Chua-Square.jpg"},
+        {"name": "Desmond M. Koh", "note": "", "href": "https://advisory.sg/board-of-advisors-desmond-m-koh/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Desmond.jpg"},
+        {"name": "Eric Lim", "note": "", "href": "https://advisory.sg/board-of-advisors-eric-lim/", "img_src": "https://advisory.sg/wp-content/uploads/2022/01/UOB-Mr-Eric-Lim-Chief-Sustainability-Officer-scaled-1.jpg"},
+        {"name": "Hosea Lai", "note": "", "href": "https://advisory.sg/board-of-advisors-hosea-lai/", "img_src": "https://advisory.sg/wp-content/uploads/2020/04/Hosea-Square.jpg"},
+        {"name": "Jaclyn Seow", "note": "", "href": "https://advisory.sg/board-of-advisors-jaclyn-seow/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Jaclyn.jpg"},
+        {"name": "Jacqueline Poh", "note": "", "href": "https://advisory.sg/board-of-advisors-jacqueline-poh/", "img_src": "https://advisory.sg/wp-content/uploads/2020/10/Jacqueline-Poh.jpg"},
+        {"name": "Juliana Chan", "note": "", "href": "https://advisory.sg/board-of-advisors-juliana-m-chan/", "img_src": "https://advisory.sg/wp-content/uploads/2022/02/Juliana-1.jpg"},
+        {"name": "Khairul Rusydi", "note": "", "href": "https://advisory.sg/board-of-advisors-khairul-rusydi/", "img_src": "https://advisory.sg/wp-content/uploads/2019/09/Rusydi.jpg"},
+        {"name": "Mohamed Faizal", "note": "", "href": "https://advisory.sg/board-of-advisors-mohamed-faizal-mohamed-abdul-kadir/", "img_src": "https://advisory.sg/wp-content/uploads/2020/10/Mohamed-Faizal_new.jpg"},
+        {"name": "Serene Goh", "note": "", "href": "https://advisory.sg/board-of-advisors-serene-goh/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Serene.jpg"},
+        {"name": "Simo Chesterman", "note": "", "href": "https://advisory.sg/board-of-advisors-simon-chesterman/", "img_src": "https://i0.wp.com/advisory.sg/wp-content/uploads/2022/07/simon-chesterman.jpg?w=800&ssl=1"},
+        {"name": "Wong Sheau Fong", "note": "", "href": "https://advisory.sg/board-of-advisors-wong-sheau-fong/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Sheau-Fong.jpg"},
+        {"name": "Wu Jiezhen", "note": "", "href": "https://advisory.sg/board-of-advisors-wu-jiezhen/", "img_src": "https://advisory.sg/wp-content/uploads/2019/08/Jiezhen.jpg"},
+      ],
+      "communities: the advisory professionals network co-chairs":[
+        {"name": "Rahul Daswani", "note": "", "href": "https://advisory.sg/rahul-daswani/", "img_src": "https://advisory.sg/wp-content/uploads/2020/05/Rahul-Daswani-Square.jpg"},
+        {"name": "Shawn Loh", "note": "", "href": "https://advisory.sg/shawn-loh/", "img_src": "https://advisory.sg/wp-content/uploads/2020/05/Shawn-Loh-Square.jpg"},
+        {"name": "Timothy Low", "note": "", "href": "https://advisory.sg/timothy-low/", "img_src": "https://advisory.sg/wp-content/uploads/2020/05/Timothy-Low-Square.jpg"},
+        {"name": "Jesley Chua", "note": "", "href": "https://advisory.sg/jesley-chua/", "img_src": "https://i0.wp.com/advisory.sg/wp-content/uploads/2021/02/JC-Pic.jpg"},            
+      ],
+      "communities: educators roundtable co-chairs":[
+        {"name": "David Hoe", "note": "", "href": "https://advisory.sg/board-of-advisors-david-hoe/", "img_src": "https://advisory.sg/wp-content/uploads/2019/09/David-Hoe.jpg"},
+        {"name": "Marvin Kang", "note": "", "href": "https://advisory.sg/board-of-advisors-marvin-kang/", "img_src": "https://advisory.sg/wp-content/uploads/2019/09/Marvin-Kang.jpg"},
+        {"name": "Nakul Asija", "note": "", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2019/01/256px-Man_Silhouette2.jpg"},
+        {"name": "TBC", "note": "", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2019/01/256px-Man_Silhouette2.jpg"},
+      ],
+      "board of directors":[
+        {"name": "Mock Yi Jun", "note": "Co-Founder & President", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/Yi-Jun_Edited.png"},
+        {"name": "Loon Kin Yip, Brendan", "note": "Co-Founder & Director", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/Brendan_Edited.png"},
+        {"name": "Ng Yau Xuan", "note": "Co-Founder & Director", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/YauXuan_Edited_4.png"},
+        {"name": "Justin Quek", "note": "Deputy President (External)", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/Justin_Edited_3.png"},
+        {"name": "Teow Junhao", "note": "Deputy President (Public Engagements)", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/JunHao_Edited.png"},
+        {"name": "Sabariesh Ilankanthir", "note": "Deputy President (Student Engagements)", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2022/02/Advisory_Sab.jpg"},
+        {"name": "Yeo Su Yia, Denise", "note": "Head of People & Culture", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/Denise_Edited.png"},
+        {"name": "Lim Xinyi, Nicole", "note": "Director", "href": "", "img_src": "https://advisory.sg/wp-content/uploads/2021/11/Nicole_Edited.png"},
+      ],
+    },
+    "divisions": [
+      {
+        "title": "Content Division",
+        "heads":[{"name": "Vacant", "note": "Chief Content Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2019/01/256px-Man_Silhouette2.jpg?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Content Officer (Operations)", "name": "Kuo Pei Yu"},
+          {"position": "Deputy Chief Content Officer (Editorial)", "name": "Adira Chow"},
+          {"position": "Editor (Engagement)", "name": "Daphne Tang"},
+          {"position": "Editor (Engagement)", "name": "Eugene Goh"},
+          {"position": "Editor (Engagement)", "name": "Bryan Foo (Suon Chuang)"},
+          {"position": "Editor (Engagement)", "name": "Muhammad Dhafer"},
+        ],
+      },
+      {
+        "title": "Impact Division",
+        "heads":[{"name": "Vacant", "note": "Chief Impact Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2019/01/256px-Man_Silhouette2.jpg?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Impact Manager", "name": "Amanda Teo"},
+          {"position": "Impact Manager", "name": "Chime"},
+          {"position": "Impact Manager", "name": "James Fok"},
+          {"position": "Impact Manager", "name": "Julian Tham"},
+          {"position": "Impact Manager", "name": "Loh Ming Jie"},
+          {"position": "Impact Manager", "name": "Sophia He"},
+        ],
+      },
+      
+      {
+        "title": "Marketing Division",
+        "heads":[{"name": "Neo Xuan Ling", "note": "Chief Marketing Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2021/11/XuanLing_Edited_2-1.png?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Marketing Officer (Design)", "name": "Ng Yu Fang"},
+          {"position": "Social Media Manager", "name": "Estella Zhang Qiming"},
+          {"position": "Social Media Manager", "name": "Muhd Naeem"},
+          {"position": "Social Media Manager", "name": "Ng Jing Wen"},
+          {"position": "Social Media Manager", "name": "Shayne Low"},
+          {"position": "Social Media Manager", "name": "Liu Yuanjing"},
+          {"position": "Design Head", "name": "Hazirah Uzma"},
+          {"position": "Design Head", "name": "Jonathan Lau"},
+        ],
+      },
+      
+      {
+        "title": "Mentorship Division",
+        "heads":[{"name": "Chen Yusi", "note": "Chief Mentorship Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2021/11/Yusi-Edited.png?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Mentorship Officer", "name": "Tan Jun Jie"},
+          {"position": "Guidance Manager", "name": "Audrey Choong"},
+          {"position": "Guidance Manager", "name": "Joseph Khaw"},
+          {"position": "Mentor Engagement Manager", "name": "Liew Li Ren"},
+          {"position": "Mentor Engagement Manager", "name": "Tang Zi Xuan"},
+          {"position": "Mentor Engagement Manager", "name": "Teo Jun Li, Nicholas"},
+          {"position": "Mentor Engagement Manager", "name": "Esther Ong Lee Ann"},
+          {"position": "Mentor Engagement Manager", "name": "Wong Guan Min"},
+        ],
+      },
+      
+      {
+        "title": "Networks Division",
+        "heads":[{"name": "Zhang Zhi", "note": "Chief Networks Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2021/11/ZhangZhi_Edited.png?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Network Engagement Manager", "name": "Audrey Tung"},
+          {"position": "Network Engagement Manager", "name": "Lim Wei De, Daryl"},
+          {"position": "Network Engagement Manager", "name": "Yeo Shi Wen"},
+        ],
+      },
+      
+      {
+        "title": "Operations Division",
+        "heads":[
+          {"name": "Akshath Malik", "note": "Chief Operations Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2022/02/Advisory_Akshath.jpg?w=800&ssl=1"},
+          {"name": "Yeo Bao Shin", "note": "Chief Financial Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2021/11/BaoShin_Edited.png?w=800&ssl=1"},
+        ],
+        "positions": [
+          {"position": "Operations Manager", "name": "Lim Yang En"},
+          {"position": "Operations Manager", "name": "Kelvin Sng"},
+          {"position": "Finance Manager", "name": "Lee Wen"},
+          {"position": "Finance Manager", "name": "Bill Wong"},
+        ],
+      },
+      {
+        "title": "Programmes Division",
+        "heads":[{"name": "Vacant", "note": "Chief Programmes Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2022/07/Jamie-2652060377-1657980220147.jpg?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Programmes Officer", "name": "Jordan Lim"},
+          {"position": "Events Manager", "name": "Owen Tan"},
+          {"position": "Events Manager", "name": "Chua Kay Siong"},
+          {"position": "Events Manager", "name": "Le-Anne Ong Li Ying"},
+        ],
+      },
+      {
+        "title": "Schools Division",
+        "heads":[{"name": "Sabariesh Ilankanthir", "note": "Chief Schools Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2022/02/Advisory_Sab.jpg?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Schools Officer", "name": "Sundram Mohan Shakthi"},
+          {"position": "Schools Portfolio Manager", "name": "Chen Xinyi"},
+          {"position": "Schools Portfolio Manager", "name": "Darice Wong Jing Wen"},
+          {"position": "Schools Portfolio Manager", "name": "Eden Lok"},
+          {"position": "Schools Portfolio Manager", "name": "Sharafah Malihah"},
+          {"position": "Schools Portfolio Manager", "name": "Tng Ying Xin, Rae"},
+          {"position": "Schools Portfolio Manager", "name": "Thiong Yao Jie"},
+          {"position": "Schools Portfolio Manager", "name": "Kyler Kiyoshi Ito"},
+          {"position": "EduR Manager", "name": "Chew Jay Hong"},
+          {"position": "EduR Manager", "name": "Kieron Ong"},
+        ],
+      },
+      
+      {
+        "title": "Technology Division",
+        "heads":[{"name": "Ng Wei En", "note": "Chief Technology Officer", "img_src":"https://i0.wp.com/advisory.sg/wp-content/uploads/2021/11/WeiEn_Edited_2.png?w=800&ssl=1"},],
+        "positions": [
+          {"position": "Deputy Chief Technology Officer", "name": "Chan Zun Mun Terence"},
+          {"position": "Tech Lead", "name": "Shaine Goh"},
+          {"position": "Tech Lead", "name": "Darryl Lim"},
+        ],
+      },
+    ]
+  }
+}'>
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full">
+            <h1 class="entry-title">The Team</h1>
+        </div>
+        <br>
+        
+        <template x-for="[category, members] in Object.entries(team.board)">
+          <div>
+            <center><h1 class="single-title" x-text="category.replaceAll('_', ' ').toUpperCase()">CATEGORY</h1></center>
+            <br>
+            <div class="flex flex-wrap -m-4">
+              <template x-for="member in members">
+                <div class="p-4 lg:w-1/4 md:w-1/2">
+                  <div class="h-full flex flex-col items-center text-center">
+                      <a x-bind:href="member.href">
+                          <img class="shadow rounded-full max-w-full h-auto align-middle border-none" x-bind:src="member.img_src" x-bind:alt="head.name">
+                      </a>
+                      <div class="p-4 text-center font-normal">
+                        <p>
+                          <b x-text="member.name">Member</b>
+                          <br>
+                          <span x-text="member.note">Note</span>
+                        </p>
+                      </div>
+                  </div>
+                </div>
+              </template>                                                 
+            </div>
+            <br>
+          </div>
+        </template>
+        <br>
+        <template x-for="division in team.divisions">
+          <div>
+            <center><h1 class="single-title" x-text="division.title.replaceAll('_', ' ').toUpperCase()">DIVISION TITLE</h1></center>
+            <br>
+            <div class="md:flex md:flex-row">
+              <template x-for="head in division.heads">
+                <div class="p-4 lg:w-1/4 md:w-1/2">
+                  <div class="h-full flex flex-col items-center text-center">
+                      <a x-bind:href="head.href">
+                          <img class="shadow rounded-full max-w-full h-auto align-middle border-none" x-bind:src="head.img_src" x-bind:alt="head.name">
+                      </a>
+                      <div class="p-4 text-center font-normal">
+                        <p>
+                          <b x-text="head.name">Member</b>
+                          <br>
+                          <span x-text="head.note">Note</span>
+                        </p>
+                      </div>
+                  </div>
+                </div>
+              </template>
+              <div x-bind:class="`p-4 ${division.heads.length <= 1 ?'md:w-1/4':'md:w-1/8'}`"></div>
+              <div>
+                <table>
+                  <template x-for="position in division.positions">
+                    <tr>
+                      <td x-text="position.position"></td>
+                      <td x-text="position.name"></td>
+                    </tr>
+                  </template>
+                </table>
+              </div>
+            </div>
+            <br>
+          </div>
+        </template>
+    </div>
+</section>
+
