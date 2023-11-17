@@ -1,50 +1,48 @@
-<section class="container">
-    <div>
-        <article class="feed-card m-auto max-w-2xl max-w-full transform transition-all duration-200">
-            <div class="flex flex-col h-full rounded-xl overflow-hidden md:flex-row md:h-80">
-                <img class="object-cover m-0 h-48 md:aspect-[9/5]" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/insights-prod-man.png" alt="Events" />
-                <div class="grow bg-white px-3 pt-3 pb-5 relative md:text-right">
-                    <p class="text-4xl font-bold my-2">Upcoming Events</p>
-                    <p class="text-xl my-1 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc tortor, tristique in odio eget, viverra pretium ipsum. Etiam quis lobortis sapien. Cras congue finibus felis, nec dignissim nibh elementum quis. Phasellus ut nulla sed arcu euismod euismod vel et dolor. In et massa tincidunt, malesuada arcu eu, accumsan dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sit amet sem finibus ligula commodo sollicitudin eu in turpis. Quisque eget eros pretium nisl consectetur porta. Proin felis nibh, bibendum ac lacinia et, varius a nisl.</p>
-                    <div class="h-8"></div>
-                    <a href="/events">
-                        <button type="button" class="border border-gray-300 py-2 px-2 rounded">
-                            <p class="text-xl my-1">Read More</p>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </article>
-        <article class="feed-card m-auto max-w-2xl max-w-full transform transition-all duration-200">
-            <div class="flex flex-col h-full rounded-xl overflow-hidden md:flex-row-reverse md:h-80">
-                <img class="object-cover m-0 h-48 md:aspect-[9/5]" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/Yeh-Lin-1.jpeg" alt="Mentorship" />
-                <div class="grow bg-white px-3 pt-3 pb-5 relative">
-                    <p class="text-4xl font-bold my-2">Mentorship</p>
-                    <p class="text-xl my-1 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc tortor, tristique in odio eget, viverra pretium ipsum. Etiam quis lobortis sapien. Cras congue finibus felis, nec dignissim nibh elementum quis. Phasellus ut nulla sed arcu euismod euismod vel et dolor. In et massa tincidunt, malesuada arcu eu, accumsan dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sit amet sem finibus ligula commodo sollicitudin eu in turpis. Quisque eget eros pretium nisl consectetur porta. Proin felis nibh, bibendum ac lacinia et, varius a nisl.</p>
-                    <div class="h-8"></div>
-                    <a href="https://mentorship.advisory.sg" target="_blank">
-                        <button type="button" class="border border-gray-300 py-2 px-2 rounded">
-                            <p class="text-xl my-1">Read More</p>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </article>
-        <article class="feed-card m-auto max-w-2xl max-w-full transform transition-all duration-200">
-            <div class="flex flex-col h-full rounded-xl overflow-hidden md:flex-row md:h-80">
-                <img class="object-cover m-0 h-48 md:aspect-[9/5]" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/34.png" alt="Interviews" />
-                <div class="grow bg-white px-3 pt-3 pb-5 relative md:text-right">
-                    <p class="text-4xl font-bold my-2">Interviews</p>
-                    <p class="text-xl my-1 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc tortor, tristique in odio eget, viverra pretium ipsum. Etiam quis lobortis sapien. Cras congue finibus felis, nec dignissim nibh elementum quis. Phasellus ut nulla sed arcu euismod euismod vel et dolor. In et massa tincidunt, malesuada arcu eu, accumsan dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sit amet sem finibus ligula commodo sollicitudin eu in turpis. Quisque eget eros pretium nisl consectetur porta. Proin felis nibh, bibendum ac lacinia et, varius a nisl.</p>
-                    <div class="h-8"></div>
-                    <a href="/stories">
-                        <button type="button" class="border border-gray-300 py-2 px-2 rounded">
-                            <p class="text-xl my-1">Read More</p>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </article>
-        <br/>
-    </div>
+<section class="container pb-24">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <article class="feed-card m-auto w-full transform transition-all duration-200">
+      <div class="flex flex-col h-100 overflow-hidden">
+        <img style="object-fit: cover; height: 200px; border: 1px solid #808080; border-radius: 16px;" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/insights-prod-man.png" alt="Events" />
+        <div class="grow bg-white px-3 pt-10 pb-5 text-center">
+          <p class="text-4xl font-bold my-5">Upcoming Events</p>
+          <p class="text-xl my-4 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          <a href="/events">
+            <button type="button" class="border border-gray-300 py-2 px-2 rounded">
+              <p class="text-xl my-2">Read More</p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="feed-card m-auto w-full transform transition-all duration-200">
+      <div class="flex flex-col h-100 overflow-hidden">
+        <img style="object-fit: cover; height: 200px; border: 1px solid #808080; border-radius: 16px;" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/Yeh-Lin-1.jpeg" alt="Mentorship" />
+        <div class="grow bg-white px-3 pt-10 pb-5 text-center">
+          <p class="text-4xl font-bold my-5">Mentorship</p>
+          <p class="text-xl my-4 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          <a href="https://mentorship.advisory.sg" target="_blank">
+            <button type="button" class="border border-gray-300 py-2 px-2 rounded">
+              <p class="text-xl my-2">Read More</p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="feed-card m-auto w-full transform transition-all duration-200">
+      <div class="flex flex-col h-100 overflow-hidden">
+        <img style="object-fit: cover; height: 200px; border: 1px solid #808080; border-radius: 16px;" src="https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2021/10/34.png" alt="Interviews" />
+        <div class="grow bg-white px-3 pt-10 pb-5 text-center">
+          <p class="text-4xl font-bold my-5">Interviews</p>
+          <p class="text-xl my-4 line-clamp-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          <a href="/stories">
+            <button type="button" class="border border-gray-300 py-2 px-2 rounded">
+              <p class="text-xl my-2">Read More</p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
