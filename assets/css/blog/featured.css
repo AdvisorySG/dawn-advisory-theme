@@ -42,3 +42,10 @@
     margin-top: 20px;
     margin-left: 20px;
 }
+
+@media (max-width: 767px) {
+    .slide-image {
+        width: 100%;
+        margin-top: 0px;
+    }
+}
