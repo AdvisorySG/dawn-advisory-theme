@@ -42,3 +42,23 @@
     margin-top: 20px;
     margin-left: 20px;
 }
+
+@media (max-width: 767px) {
+    .flex.items-center {
+        display: block;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .flex.items-center > span {
+        max-width: calc(50% - 0.75rem);
+        display: inline-block;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .flex.items-center > span:nth-child(3) {
+        max-width: 100%;
+        margin-right: 0;
+    }
+}
