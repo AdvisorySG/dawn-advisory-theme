@@ -113,74 +113,25 @@ function subMenu() {
 }
 
 function featured() {
-    var glideFeed;
+    if (body.find('.featured-feed').length === 0) {
+        return;
+    }
 
-    function initializeGlide() {
-        glideFeed = new Glide('.featured-feed', {
-            type: 'carousel',
-            autoplay: 3500,
-            perView: 1,
-            breakpoints: {
-                576: { perView: 1 },
-                768: { perView: 1 },
-                992: { perView: 1 },
-                1200: { perView: 1 },
-                1400: { perView: 1 },
+    var glideFeed = new Glide('.featured-feed', {
+        type: 'carousel',
+        autoplay: 3500,
+        perView: 1,
+        breakpoints: {
+            768: {
+                perView: 1,
             },
-        });
-
-        $('.featured-prev').on('click', function () {
-            glideFeed.go('<');
-        });
-
-        $('.featured-next').on('click', function () {
-            glideFeed.go('>');
-        });
-
-        glideFeed.on(['mount.after', 'run'], function () {
-            glideFeed.update({ perView: 1 });
-        });
-
-        glideFeed.mount();
-    }
-
-    function destroyGlide() {
-        if (glideFeed) {
-            glideFeed.destroy();
-        }
-    }
-
-    // Debounce function to limit the rate at which the resize function is called
-    function debounce(func, delay) {
-        var timer;
-        return function () {
-            var context = this;
-            var args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-                func.apply(context, args);
-            }, delay);
-        };
-    }
-
-    // Initialize Glide after DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function () {
-        initializeGlide();
+            992: {
+                perView: 1,
+            },
+        },
     });
-
-    // Debounced refresh of Glide on window resize
-    var debouncedResize = debounce(function () {
-        if (glideFeed) {
-            destroyGlide();
-            initializeGlide();
-        }
-    }, 200);
-
-    // Attach the debounced function to the window resize event
-    $(window).on('resize', debouncedResize);
+    glideFeed.mount();
 }
-
-featured();
 
 function partners() {
     if (body.find('.partners-feed').length === 0) {
