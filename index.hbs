@@ -2,10 +2,37 @@
 
 {{#contentFor "title"}}Stories{{/contentFor}}
 
+<style>
+    .tag-list {
+        display: none;
+    }
+
+    .info-circle {
+        cursor: pointer;
+        font-size: 30px;
+        margin-left: 30px;
+    }
+
+    .close-icon {
+        cursor: pointer;
+        font-size: 25px;
+        margin-left: 30px;
+    }
+
+    .single-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <div class="content-area">
     <main class="site-main">
         <header class="single-header kg-canvas">
             <h1 class="single-title">Stories</h1>
+            <div class="tag-toggle" onclick="toggleTags()">
+                <span class="info-circle" id="icon">&#9432;</span>
+            </div>
         </header>
         <section class="tag">
             <div class="container w-9/12">
@@ -36,3 +63,20 @@
         {{pagination}}
     </main>
 </div>
+
+<script>
+    function toggleTags() {
+        var tagList = document.querySelector('.tag-list');
+        var icon = document.getElementById('icon');
+
+        if (tagList.style.display === 'none' || tagList.style.display === '') {
+            tagList.style.display = 'block';
+            icon.innerHTML = '&#10006;';
+            icon.className = 'close-icon';
+        } else {
+            tagList.style.display = 'none';
+            icon.innerHTML = '&#9432;';
+            icon.className = 'info-circle';
+        }
+    }
+</script>
