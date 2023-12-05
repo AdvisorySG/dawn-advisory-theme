@@ -461,7 +461,11 @@ function search() {
                                     </div>
                                     <br/>
                                     <span class="line-clamp-2 search-result-text">
-                                        ${highlightedDescription}
+                                        ${
+                                            highlightedDescription
+                                                ? `<p class="result-description">${highlightedDescription}</p>`
+                                                : ''
+                                        }
                                     </span>
                                 </a>
                             </div>`;
