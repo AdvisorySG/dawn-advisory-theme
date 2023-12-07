@@ -37,6 +37,7 @@ html {
 
 footer {
     background: var(--black-color);
+    color: var(--white-color);
 }
 
 body {
