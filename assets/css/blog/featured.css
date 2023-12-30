@@ -2,10 +2,6 @@
     margin-top: 6rem;
 }
 
-.featured-wrapper .u-placeholder {
-    margin-bottom: 3rem;
-}
-
 .featured-wrapper .post-title {
     margin-bottom: 0;
     font-size: 1.8rem;
@@ -41,4 +37,18 @@
     margin-right: 20px;
     margin-top: 20px;
     margin-left: 20px;
+}
+
+@media (max-width: 767px) {
+    .slide-image {
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+@media (min-width: 768px) {
+    .featured-wrapper .u-placeholder {
+        margin-bottom: 3rem;
+    }
 }
