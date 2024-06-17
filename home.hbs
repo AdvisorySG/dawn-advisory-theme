@@ -6,6 +6,9 @@
     <main class="site-main">
         {{!-- Placeholder comment --}}
         {{> home-starter}}
+        {{#if @custom.show_featured_posts}}
+            {{> featured}}
+        {{/if}}
         {{> our-programmes}}
         {{> home-impact}}
         {{> our-partners}}
