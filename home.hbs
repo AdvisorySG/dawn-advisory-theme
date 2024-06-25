@@ -5,7 +5,13 @@
 <div class="content-area">
     <main class="site-main">
         {{!-- Placeholder comment --}}
+        {{> home-starter}}
         {{> our-programmes}}
+        {{#if @custom.show_featured_posts}}
+            {{> featured}}
+        {{/if}}
+        {{> home-impact}}
+        {{> home-get-involved}}
         {{> our-partners}}
         {{> featured-by}}
         {{> quotes}}
