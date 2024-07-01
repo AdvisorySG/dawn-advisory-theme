@@ -1,0 +1,11 @@
+.dropdown-content {
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin: 5px 0;
+}
+
+.dropdown-header {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+}
