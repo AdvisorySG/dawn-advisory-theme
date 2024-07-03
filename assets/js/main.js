@@ -620,9 +620,8 @@ function contentDropdown() {
         var $nextElement = $header.next();
         var $pContainer = $('<div class="dropdown-content"></div>');
         var $pElements = [];
-        var $arrowIcon = $('<span class="arrow-icon">&#x2304;</span>');
+        var $arrowIcon = $('<span class="arrow-icon">&#xf0da;</span>');
 
-        // Collect all consecutive p elements
         while ($nextElement.is('p')) {
             $pElements.push($nextElement);
             $nextElement = $nextElement.next();
@@ -631,7 +630,6 @@ function contentDropdown() {
             $pContainer.append($pElement);
         });
 
-        // If we found any p elements
         if ($pContainer.length > 0) {
             // Add the dropdown-header class to the h2 element
             $header.addClass('dropdown-header');
@@ -642,10 +640,10 @@ function contentDropdown() {
             // Add a click event listener to the h2 element to toggle the container
             $header.on('click', function () {
                 $pContainer.slideToggle();
-                if ($arrowIcon.text() === '\u2304') {
-                    $arrowIcon.text('\u2303');
+                if ($arrowIcon.text() === '\uf0da') {
+                    $arrowIcon.text('\uf0d7');
                 } else {
-                    $arrowIcon.text('\u2304');
+                    $arrowIcon.text('\uf0d7');
                 }
             });
         }

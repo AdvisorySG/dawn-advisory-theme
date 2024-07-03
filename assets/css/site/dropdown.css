@@ -9,3 +9,14 @@
     padding: 10px;
     margin: 5px 0;
 }
+
+.dropdown-header::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    height: 5px;
+    background: black;
+    width: 40px;
+    left: 100%;
+    top: calc(50% - 2px);
+}
