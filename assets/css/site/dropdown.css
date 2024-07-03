@@ -1,22 +1,16 @@
 .dropdown-content {
     padding: 10px;
-    background-color: #f9f9f9;
     margin: 5px 0;
+    border-bottom: 1px solid grey;
 }
 
 .dropdown-header {
     cursor: pointer;
     padding: 10px;
     margin: 5px 0;
+    border-bottom: 1px solid grey;
 }
 
-.dropdown-header::after {
-    content: " ";
-    display: block;
-    position: absolute;
-    height: 5px;
-    background: black;
-    width: 40px;
-    left: 100%;
-    top: calc(50% - 2px);
+.arrow-icon {
+    padding-right: 10px;
 }
