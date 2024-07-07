@@ -26,7 +26,7 @@
     margin-left: -0.3rem;
 }
 
-.share-link .icon-twitter {
+.share-link .icon-instagram {
     margin-right: 0.3rem;
     margin-left: -0.3rem;
 }
@@ -40,8 +40,8 @@
     background-color: var(--facebook-color);
 }
 
-.share-link-twitter {
-    background-color: var(--twitter-color);
+.share-link-instagram {
+    background: var(--instagram-color);
 }
 
 .share-link-linkedin {
