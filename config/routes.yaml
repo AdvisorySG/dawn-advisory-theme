@@ -4,7 +4,7 @@ routes:
 collections:
   /insights/:
     permalink: /{year}/{month}/{day}/{slug}/
-    template: tag
+    template: insights
     filter: tag:hash-insights
 
   /stories/:
