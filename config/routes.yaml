@@ -2,6 +2,11 @@ routes:
   /: home
 
 collections:
+  /insights/:
+    permalink: /{year}/{month}/{day}/{slug}/
+    template: tag
+    filter: tag:hash-insights
+
   /stories/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: index
