@@ -32,6 +32,7 @@ $(function () {
     search();
     burger();
     colourTags();
+    contentDropdown();
 });
 
 $(window).on('scroll', function () {
@@ -610,5 +611,40 @@ function colourTags() {
         $(this).toggleClass(getPillColour(this.innerText));
         $(this).toggleClass('text-gray-800');
         $(this).toggleClass(getPillTextColour());
+    });
+}
+
+function contentDropdown() {
+    $('div.single-content h2').each(function () {
+        var $header = $(this);
+        var $nextElement = $header.next();
+        var $pContainer = $('<div class="dropdown-content"></div>');
+        var $pElements = [];
+        var $arrowIcon = $('<span class="arrow-icon">\u25B8</span>');
+        while ($nextElement.is('p')) {
+            $pElements.push($nextElement);
+            $nextElement = $nextElement.next();
+        }
+        $pElements.forEach(function ($pElement) {
+            $pContainer.append($pElement);
+        });
+
+        if ($pContainer.length > 0) {
+            // Add the dropdown-header class to the h2 element
+            $header.addClass('dropdown-header');
+            $header.prepend($arrowIcon);
+            // Hide the entire container and insert it after h2
+            $pContainer.hide().insertAfter($header);
+
+            // Add a click event listener to the h2 element to toggle the container
+            $header.on('click', function () {
+                $pContainer.slideToggle();
+                if ($arrowIcon.text() === '\u25B8') {
+                    $arrowIcon.text('\u25B4');
+                } else {
+                    $arrowIcon.text('\u25B8');
+                }
+            });
+        }
     });
 }
