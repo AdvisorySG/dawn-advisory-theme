@@ -10,6 +10,11 @@ collections:
   /stories/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: index
+    filter: tag:[hash-conversations,hash-reflections]
+
+  /posts/:
+    permalink: /{year}/{month}/{day}/{slug}/
+    template: index
 
 taxonomies:
   tag: /tag/{slug}/
