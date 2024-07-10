@@ -1,14 +1,12 @@
 .dropdown-content {
     padding: 10px;
     margin: 5px 0;
-    border-bottom: 1px solid grey;
 }
 
 .dropdown-header {
     cursor: pointer;
     padding: 10px;
     margin: 5px 0;
-    border-bottom: 1px solid grey;
 }
 
 .arrow-icon {
