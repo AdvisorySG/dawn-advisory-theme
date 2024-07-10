@@ -1,9 +1,9 @@
 {{#get "posts" filter="featured:true" include="tags,excerpt" limit="all" as |featured|}}
     {{#if featured}}
-        <section class="featured-wrapper container">
+        <section class="featured-wrapper container pt-24">
             <div class="featured-feed glide">
                 {{#if @custom.featured_title}}
-                    <h2 class="featured-title">{{@custom.featured_title}}</h2>
+                    <h2 class="featured-title" style="font-size:3rem;">{{@custom.featured_title}}</h2>
                 {{/if}}
                 <div data-glide-el="controls" style="position: absolute; top: -10px; right: 0px">
                     <button data-glide-dir="<" type="button" role="presentation" class="border border-gray-300 py-2 px-2 rounded" >
