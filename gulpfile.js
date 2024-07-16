@@ -36,7 +36,7 @@ function hbs(done) {
             ]),
             livereload(),
         ],
-        handleError(done)
+        handleError(done),
     );
 }
 
@@ -48,7 +48,7 @@ function css(done) {
             dest("assets/built/", { sourcemaps: "." }),
             livereload(),
         ],
-        handleError(done)
+        handleError(done),
     );
 }
 
@@ -60,7 +60,7 @@ function js(done) {
             dest("assets/built/", { sourcemaps: "." }),
             livereload(),
         ],
-        handleError(done)
+        handleError(done),
     );
 }
 
@@ -79,7 +79,7 @@ function zipper(done) {
             zip(filename),
             dest("dist/"),
         ],
-        handleError(done)
+        handleError(done),
     );
 }
 
