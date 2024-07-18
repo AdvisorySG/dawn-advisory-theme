@@ -1,12 +1,32 @@
 {{!< default}}
 
-{{#contentFor "title"}}{{meta_title}}{{/contentFor}}
+{{#contentFor "title"}}Insights{{/contentFor}}
 
 <div class="content-area">
     <main class="site-main">
+        <header class="single-header kg-canvas">
+            <h1 class="single-title">Insights</h1>
+        </header>
         <section class="tag">
-            <div class="container medium">
-                <h1 class="tag-name">Insights</h1>
+            <div class="container w-9/12">
+                {{#get "tags" limit="all" as |tags|}}
+                    {{#if tags}}
+                        <div class="tag-list">
+                            {{#foreach tags}}
+                                <a href="{{url}}">
+                                  <div
+                                    class="text-xl inline-flex items-center font-bold 
+                                    leading-sm px-4 py-2 my-1 rounded-full 
+                                    bg-brand-light text-gray-800 tag-element"
+                                  >
+                                    {{name}}
+                                  </div>
+                                </a>
+                            {{/foreach}}
+                        </div>
+                    {{/if}}
+                {{/get}}
+            </div>
         </section>
         <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
