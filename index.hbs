@@ -2,10 +2,46 @@
 
 {{#contentFor "title"}}Stories{{/contentFor}}
 
+<style>
+    .tag-list {
+        display: none;
+    }
+
+    .info-circle,
+    .close-icon {
+        cursor: pointer;
+        font-size: 30px;
+        margin-left: 30px;
+    }
+
+    .single-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .tag-list {
+            display: block;
+        }
+
+        .info-circle {
+            display: none;
+        }
+
+        .close-icon {
+            display: block;
+        }
+    }
+</style>
+
 <div class="content-area">
     <main class="site-main">
         <header class="single-header kg-canvas">
             <h1 class="single-title">Stories</h1>
+            <div class="tag-toggle" onclick="toggleTags()">
+                <span class="info-circle" id="icon">&#9432;</span>
+            </div>
         </header>
         <section class="tag">
             <div class="container w-9/12">
@@ -14,13 +50,13 @@
                         <div class="tag-list">
                             {{#foreach tags}}
                                 <a href="{{url}}">
-                                  <div
-                                    class="text-xl inline-flex items-center font-bold 
-                                    leading-sm px-4 py-2 my-1 rounded-full 
-                                    bg-brand-light text-gray-800 tag-element"
-                                  >
-                                    {{name}}
-                                  </div>
+                                    <div
+                                        class="text-xl inline-flex items-center font-bold 
+                                        leading-sm px-4 py-2 my-1 rounded-full 
+                                        bg-brand-light text-gray-800 tag-element"
+                                    >
+                                        {{name}}
+                                    </div>
                                 </a>
                             {{/foreach}}
                         </div>
@@ -36,3 +72,20 @@
         {{pagination}}
     </main>
 </div>
+
+<script>
+    function toggleTags() {
+        var tagList = document.querySelector('.tag-list');
+        var icon = document.getElementById('icon');
+
+        if (tagList.style.display === 'none' || tagList.style.display === '') {
+            tagList.style.display = 'block';
+            icon.innerHTML = '&#10006;';
+            icon.className = 'close-icon';
+        } else {
+            tagList.style.display = 'none';
+            icon.innerHTML = '&#9432;';
+            icon.className = 'info-circle';
+        }
+    }
+</script>
