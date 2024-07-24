@@ -1,3 +1,7 @@
+.glide__bullet {
+    background-color: rgba(0, 0, 0, 0.26);
+}
+
 .glide__bullet--active {
     background-color: rgb(0 0 0);
 }
