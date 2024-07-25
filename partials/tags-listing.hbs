@@ -1,21 +1,25 @@
 <section class="tag">        
-    <div class="container w-9/12">
-        {{#get "tags" limit="all" as |tags|}}
-            {{#if tags}}
-                <div class="tag-list">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" 
+        class="text-lg ring-4 focus:ring-blue-300 
+        font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center text-left" type="button">
+        Select Industry
+        <svg class="w-2.5 h-2.5 ms-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+    </button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 w-60 mt-1 divide-y divide-gray-100 rounded-md shadow-lg max-h-96 overflow-auto hidden">
+        <div class="py-1" style="background:white;">
+            {{#get "tags" limit="all" as |tags|}}
+                {{#if tags}}
                     {{#foreach tags}}
-                        <a href="{{url}}">
-                            <div
-                            class="text-xl inline-flex items-center font-bold 
-                            leading-sm px-4 py-2 my-1 rounded-full 
-                            bg-brand-light text-gray-800 tag-element"
-                            >
-                            {{name}}
-                            </div>
-                        </a>
+                        <a href="{{url}}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 text-left">{{name}}</a>
                     {{/foreach}}
-                </div>
-            {{/if}}
-        {{/get}}
+                {{/if}}
+            {{/get}}
+        </div>
     </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
