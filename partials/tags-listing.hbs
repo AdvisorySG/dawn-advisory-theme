@@ -1,7 +1,9 @@
 <section class="tag">        
     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" 
-        class="text-lg ring-4 focus:ring-blue-300 
-        font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center text-left" type="button">
+        class="text-lg text-left font-medium rounded-lg ring-1
+        px-5 py-2.5 inline-flex items-center" type="button"
+        style="-tw-ring-opacity: 1; --tw-ring-color: #ffad33;""
+        >
         Select Industry
         <svg class="w-2.5 h-2.5 ms-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -14,7 +16,7 @@
             {{#get "tags" limit="all" as |tags|}}
                 {{#if tags}}
                     {{#foreach tags}}
-                        <a href="{{url}}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 text-left">{{name}}</a>
+                        <a href="{{url}}" class="block px-4 py-2 text-lg text-left text-gray-700 hover:bg-gray-100">{{name}}</a>
                     {{/foreach}}
                 {{/if}}
             {{/get}}
