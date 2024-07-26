@@ -29,7 +29,7 @@ $(function () {
     gallery();
     table();
     modal();
-    search();
+    //search();
     burger();
     colourTags();
     contentDropdown();
