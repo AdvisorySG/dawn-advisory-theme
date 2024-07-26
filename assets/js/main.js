@@ -619,6 +619,10 @@ function colourTags() {
 }
 
 function contentDropdown() {
+    var element = document.getElementById('content-dropdown-enable');
+    if (typeof element == 'undefined' || element == null) {
+        return;
+    }
     $('div.single-content h2').each(function () {
         var $header = $(this);
         var $nextElement = $header.next();
