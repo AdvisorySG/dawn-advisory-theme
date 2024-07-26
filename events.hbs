@@ -1,13 +1,13 @@
 {{!< default}}
 
-{{#contentFor "title"}}{{meta_title}}{{/contentFor}}
+{{#contentFor "title"}}Events{{/contentFor}}
 
 <div class="content-area">
     <main class="site-main">
-        <section class="tag">
-            <div class="container medium">
-                <h1 class="tag-name">Insights</h1>
-        </section>
+        <header class="single-header kg-canvas">
+            <h1 class="single-title">Events</h1>
+        </header>
+        {{> tags-listing }}
         <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
                 {{> "post-card"}}

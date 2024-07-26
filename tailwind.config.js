@@ -5,6 +5,7 @@ module.exports = {
         "**/*.hbs",
         "assets/built/**/*.js",
         "!node_modules/**/*.hbs",
+        "./node_modules/flowbite/**/*.js",
     ],
     safelist: [
         "bg-amber-300",
@@ -32,4 +33,5 @@ module.exports = {
             padding: ["hover"],
         },
     },
+    plugins: [require("flowbite/plugin")],
 };

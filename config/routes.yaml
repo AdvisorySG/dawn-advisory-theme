@@ -2,12 +2,12 @@ routes:
   /: home
 
 collections:
-  /insights/:
+  /events/:
     permalink: /{year}/{month}/{day}/{slug}/
-    template: insights
+    template: events
     filter: tag:hash-insights
 
-  /stories/:
+  /interviews/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: index
     filter: tag:[hash-conversations,hash-reflections]

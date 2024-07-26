@@ -1,33 +1,13 @@
 {{!< default}}
 
-{{#contentFor "title"}}Stories{{/contentFor}}
+{{#contentFor "title"}}Interviews{{/contentFor}}
 
 <div class="content-area">
     <main class="site-main">
         <header class="single-header kg-canvas">
-            <h1 class="single-title">Stories</h1>
+            <h1 class="single-title">Interviews</h1>
         </header>
-        <section class="tag">
-            <div class="container w-9/12">
-                {{#get "tags" limit="all" as |tags|}}
-                    {{#if tags}}
-                        <div class="tag-list">
-                            {{#foreach tags}}
-                                <a href="{{url}}">
-                                  <div
-                                    class="text-xl inline-flex items-center font-bold 
-                                    leading-sm px-4 py-2 my-1 rounded-full 
-                                    bg-brand-light text-gray-800 tag-element"
-                                  >
-                                    {{name}}
-                                  </div>
-                                </a>
-                            {{/foreach}}
-                        </div>
-                    {{/if}}
-                {{/get}}
-            </div>
-        </section>
+        {{> tags-listing }}
         <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
             {{#foreach posts}}
                 {{> "post-card"}}
