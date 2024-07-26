@@ -28,8 +28,8 @@ $(function () {
     video();
     gallery();
     table();
-    modal();
-    search();
+    // modal();
+    // search();
     burger();
     colourTags();
     contentDropdown();
@@ -288,6 +288,7 @@ function table() {
     }
 }
 
+/*
 function modal() {
     var modalOverlay = $('.modal-overlay');
     var modal = $('.modal');
@@ -364,6 +365,7 @@ function categoriseResult(post) {
         return ['page', page_type];
     }
 }
+
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -594,6 +596,7 @@ function search() {
         }
     });
 }
+*/
 
 function burger() {
     $('.burger').on('click', function () {
