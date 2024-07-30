@@ -6,6 +6,7 @@ import 'lazysizes';
 
 import Glide from '@glidejs/glide';
 import Alpine from 'alpinejs';
+import 'flowbite';
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -28,10 +29,11 @@ $(function () {
     video();
     gallery();
     table();
-    modal();
-    search();
+    // modal();
+    // search();
     burger();
     colourTags();
+    contentDropdown();
 });
 
 $(window).on('scroll', function () {
@@ -73,7 +75,7 @@ function sticky() {
         'transform',
         'translate3d(' +
             (-100 + Math.min((st * 100) / contentOffset, 100)) +
-            '%,0,0)'
+            '%,0,0)',
     );
 
     lastSt = st;
@@ -86,7 +88,7 @@ function subMenu() {
     if (separator.length) {
         separator.nextAll('.menu-item').wrapAll('<div class="sub-menu" />');
         separator.replaceWith(
-            '<button class="button-icon menu-item-button menu-item-more" aria-label="More"><svg class="icon"><use xlink:href="#dots-horizontal"></use></svg></button>'
+            '<button class="button-icon menu-item-button menu-item-more" aria-label="More"><svg class="icon"><use xlink:href="#dots-horizontal"></use></svg></button>',
         );
 
         var toggle = mainNav.find('.menu-item-more');
@@ -103,7 +105,7 @@ function subMenu() {
 
         subMenu.on('animationend', function (e) {
             subMenu.removeClass(
-                'animate__animated animate__bounceIn animate__zoomOut'
+                'animate__animated animate__bounceIn animate__zoomOut',
             );
             if (e.originalEvent.animationName == 'zoomOut') {
                 subMenu.hide();
@@ -287,6 +289,7 @@ function table() {
     }
 }
 
+/*
 function modal() {
     var modalOverlay = $('.modal-overlay');
     var modal = $('.modal');
@@ -333,7 +336,7 @@ function elasticSearch(query, callback) {
     var payload = { query: query };
     searchReq.open(
         'POST',
-        `${baseUrl}/api/as/v1/engines/${engine}/search.json`
+        `${baseUrl}/api/as/v1/engines/${engine}/search.json`,
     );
     searchReq.addEventListener('load', callback);
     searchReq.setRequestHeader('Content-Type', 'application/json');
@@ -363,6 +366,7 @@ function categoriseResult(post) {
         return ['page', page_type];
     }
 }
+
 function search() {
     var searchInput = $('.search-input');
     var searchButton = $('.search-button');
@@ -406,7 +410,7 @@ function search() {
                     if (counter >= firstPost && counter <= lastPost) {
                         var searchValueRegex = new RegExp(
                             `(${searchValue})`,
-                            'ig'
+                            'ig',
                         );
                         var highlightedTitle =
                             post.title && post.title.raw
@@ -417,7 +421,7 @@ function search() {
                                           .trim()
                                     : post.title.raw.replaceAll(
                                           searchValueRegex,
-                                          `<mark>$1</mark>`
+                                          `<mark>$1</mark>`,
                                       )
                                 : '';
 
@@ -430,7 +434,7 @@ function search() {
                                           .trim()
                                     : post.meta_description.raw.replaceAll(
                                           searchValueRegex,
-                                          `<mark>$1</mark>`
+                                          `<mark>$1</mark>`,
                                       )
                                 : '';
                         var tooltipDescription =
@@ -444,7 +448,7 @@ function search() {
                             class="text-sm inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-brand-light text-gray-800 rounded-full my-1 capitalize mr-1"
                           >
                             ${tag}
-                          </div>`
+                          </div>`,
                             )
                             .reduce((a, b) => a + b, '');
 
@@ -593,6 +597,7 @@ function search() {
         }
     });
 }
+*/
 
 function burger() {
     $('.burger').on('click', function () {
@@ -610,5 +615,44 @@ function colourTags() {
         $(this).toggleClass(getPillColour(this.innerText));
         $(this).toggleClass('text-gray-800');
         $(this).toggleClass(getPillTextColour());
+    });
+}
+
+function contentDropdown() {
+    var element = document.getElementById('content-dropdown-enable');
+    if (typeof element == 'undefined' || element == null) {
+        return;
+    }
+    $('div.single-content h2').each(function () {
+        var $header = $(this);
+        var $nextElement = $header.next();
+        var $pContainer = $('<div class="dropdown-content"></div>');
+        var $pElements = [];
+        var $arrowIcon = $('<span class="arrow-icon">\u25B8</span>');
+        while ($nextElement.is('p')) {
+            $pElements.push($nextElement);
+            $nextElement = $nextElement.next();
+        }
+        $pElements.forEach(function ($pElement) {
+            $pContainer.append($pElement);
+        });
+
+        if ($pContainer.length > 0) {
+            // Add the dropdown-header class to the h2 element
+            $header.addClass('dropdown-header');
+            $header.prepend($arrowIcon);
+            // Hide the entire container and insert it after h2
+            $pContainer.hide().insertAfter($header);
+
+            // Add a click event listener to the h2 element to toggle the container
+            $header.on('click', function () {
+                $pContainer.slideToggle();
+                if ($arrowIcon.text() === '\u25B8') {
+                    $arrowIcon.text('\u25B4');
+                } else {
+                    $arrowIcon.text('\u25B8');
+                }
+            });
+        }
     });
 }

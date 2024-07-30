@@ -2,7 +2,17 @@ routes:
   /: home
 
 collections:
-  /stories/:
+  /events/:
+    permalink: /{year}/{month}/{day}/{slug}/
+    template: events
+    filter: tag:hash-insights
+
+  /interviews/:
+    permalink: /{year}/{month}/{day}/{slug}/
+    template: index
+    filter: tag:[hash-conversations,hash-reflections]
+
+  /posts/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: index
 

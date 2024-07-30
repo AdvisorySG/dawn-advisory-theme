@@ -1,0 +1,13 @@
+.dropdown-content {
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.dropdown-header {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.arrow-icon {
+    padding-right: 10px;
+}

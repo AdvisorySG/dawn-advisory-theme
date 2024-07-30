@@ -8,7 +8,7 @@
 }
 
 .u-text-format > * + * {
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 .u-text-format > *:first-child {
@@ -22,7 +22,7 @@
 }
 
 .u-text-format > [id] {
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .u-text-format > [id] + p {

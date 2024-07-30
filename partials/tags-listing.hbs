@@ -1,0 +1,25 @@
+<section class="tag">        
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" 
+        class="text-xl text-left font-medium rounded-lg ring-1
+        px-5 py-2.5 inline-flex items-center" type="button"
+        style="-tw-ring-opacity: 1; --tw-ring-color: #ffad33;""
+        >
+        Select Industry
+        <svg class="w-2.5 h-2.5 ms-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+    </button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 w-60 mt-1 divide-y divide-gray-100 rounded-md shadow-lg max-h-96 overflow-auto hidden">
+        <div class="py-1" style="background:white;">
+            {{#get "tags" limit="all" as |tags|}}
+                {{#if tags}}
+                    {{#foreach tags}}
+                        <a href="{{url}}" class="block px-4 py-2 text-xl text-left text-gray-700 hover:bg-gray-100">{{name}}</a>
+                    {{/foreach}}
+                {{/if}}
+            {{/get}}
+        </div>
+    </div>
+</section>

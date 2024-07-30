@@ -63,7 +63,17 @@
             },
             "featured_title": {
                 "type": "text",
-                "default": "Featured articles",
+                "default": "Highlights",
+                "group": "homepage"
+            },
+            "home_starter_image": {
+                "type": "text",
+                "default": "https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2024/07/home-starter.png",
+                "group": "homepage"
+            },
+            "home_impact_image": {
+                "type": "text",
+                "default": "https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2024/07/home-impact.png",
                 "group": "homepage"
             },
             "show_share_links": {
@@ -96,20 +106,20 @@
         "zip": "gulp zip"
     },
     "devDependencies": {
-        "autoprefixer": "10.4.18",
-        "cssnano": "6.0.1",
+        "autoprefixer": "^10.4.18",
+        "cssnano": "^6.0.1",
         "eslint": "^8.2.0",
-        "gscan": "4.42.0",
-        "gulp": "4.0.2",
-        "gulp-livereload": "4.0.2",
-        "gulp-postcss": "9.0.1",
-        "gulp-zip": "5.1.0",
-        "husky": "^8.0.1",
-        "postcss": "8.4.35",
-        "postcss-easy-import": "4.0.0",
-        "prettier": "^2.4.1",
-        "pretty-quick": "^3.1.2",
-        "pump": "3.0.0",
+        "gscan": "^4.42.0",
+        "gulp": "^4.0.2",
+        "gulp-livereload": "^4.0.2",
+        "gulp-postcss": "^10.0.0",
+        "gulp-zip": "^5.1.0",
+        "husky": "^9.0.11",
+        "postcss": "^8.4.35",
+        "postcss-easy-import": "^4.0.0",
+        "prettier": "^3.3.3",
+        "pretty-quick": "^4.0.0",
+        "pump": "^3.0.0",
         "webpack-stream": "^7.0.0"
     },
     "browserslist": [
@@ -119,6 +129,7 @@
         "@glidejs/glide": "^3.5.2",
         "alpinejs": "^3.12.3",
         "fitvids": "^2.1.1",
+        "flowbite": "^2.4.1",
         "infinite-scroll": "^4.0.1",
         "jquery": "^3.6.0",
         "lazysizes": "^5.3.2",
