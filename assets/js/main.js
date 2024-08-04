@@ -34,6 +34,7 @@ $(function () {
     burger();
     colourTags();
     contentDropdown();
+    tagContentFilter();
 });
 
 $(window).on('scroll', function () {
@@ -655,4 +656,31 @@ function contentDropdown() {
             });
         }
     });
+}
+
+function tagContentFilter() {
+    const context = new URLSearchParams(window.location.search).get('context');
+    const tagContent = document.querySelector('.tag-content');
+
+    if (!tagContent) {
+        console.log('No content to filter');
+        return;
+    }
+
+    const posts = tagContent.querySelectorAll('.post');
+    posts.forEach((post) => {
+        const postTags = post.getAttribute('class').split(' ');
+        if (context === 'events' && !postTags.includes('tag-hash-insights')) {
+            post.style.display = 'none';
+        } else if (
+            context === 'interviews' &&
+            !postTags.includes('tag-hash-conversations') &&
+            !postTags.includes('tag-hash-reflections')
+        ) {
+            post.style.display = 'none';
+        }
+    });
+
+    //Only reveals content after filtering is done
+    tagContent.style.visibility = 'visible';
 }
