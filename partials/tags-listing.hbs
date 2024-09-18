@@ -16,7 +16,7 @@
             {{#get "tags" limit="all" as |tags|}}
                 {{#if tags}}
                     {{#foreach tags}}
-                        <a href="{{url}}" class="block px-4 py-2 text-xl text-left text-gray-700 hover:bg-gray-100">{{name}}</a>
+                        <a href="{{url}}?context={{../../context}}" class="block px-4 py-2 text-xl text-left text-gray-700 hover:bg-gray-100">{{name}}</a>
                     {{/foreach}}
                 {{/if}}
             {{/get}}

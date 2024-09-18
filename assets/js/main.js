@@ -34,6 +34,7 @@ $(function () {
     burger();
     colourTags();
     contentDropdown();
+    tagContentFilter();
 });
 
 $(window).on('scroll', function () {
@@ -653,6 +654,29 @@ function contentDropdown() {
                     $arrowIcon.text('\u25B8');
                 }
             });
+        }
+    });
+}
+
+function tagContentFilter() {
+    const context = new URLSearchParams(window.location.search).get('context');
+    const tagContent = document.querySelector('.tag-content');
+
+    if (!tagContent) {
+        return;
+    }
+
+    const posts = tagContent.querySelectorAll('.post');
+    posts.forEach((post) => {
+        const postTags = post.getAttribute('class').split(' ');
+        if (context === 'events' && !postTags.includes('tag-hash-insights')) {
+            post.style.display = 'none';
+        } else if (
+            context === 'interviews' &&
+            !postTags.includes('tag-hash-conversations') &&
+            !postTags.includes('tag-hash-reflections')
+        ) {
+            post.style.display = 'none';
         }
     });
 }
