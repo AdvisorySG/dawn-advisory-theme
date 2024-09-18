@@ -663,7 +663,6 @@ function tagContentFilter() {
     const tagContent = document.querySelector('.tag-content');
 
     if (!tagContent) {
-        console.log('No content to filter');
         return;
     }
 
@@ -680,7 +679,4 @@ function tagContentFilter() {
             post.style.display = 'none';
         }
     });
-
-    //Only reveals content after filtering is done
-    tagContent.style.visibility = 'visible';
 }
