@@ -68,7 +68,7 @@
             },
             "home_impact_image": {
                 "type": "text",
-                "default": "https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2024/07/home-impact.png",
+                "default": "https://sampleadvisoryimpact.my.canva.site/media/d77729fa71e7f9b912fde6a591e82afa.jpg",
                 "group": "homepage"
             },
             "show_share_links": {
