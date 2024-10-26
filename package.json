@@ -61,11 +61,6 @@
                 "default": false,
                 "group": "homepage"
             },
-            "featured_title": {
-                "type": "text",
-                "default": "Highlights",
-                "group": "homepage"
-            },
             "home_starter_image": {
                 "type": "text",
                 "default": "https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2024/07/home-starter.png",
