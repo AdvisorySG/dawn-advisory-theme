@@ -11,8 +11,14 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
 
+    "containerEnv": {
+        "REPO": "/workspaces/dawn-advisory-theme"
+    },
+
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "cd ~/ghost && ghost start"
+    "postCreateCommand": "$REPO/.devcontainer/ghost_setup.sh",
+
+    "postStartCommand": "cd ~/ghost && ghost start"
 
     // Configure tool-specific properties.
     // "customizations": {},
