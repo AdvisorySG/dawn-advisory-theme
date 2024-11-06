@@ -17,8 +17,8 @@
 
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "$REPO/.devcontainer/ghost_setup.sh",
-
-    "postStartCommand": "cd ~/ghost && ghost start"
+    "postStartCommand": "npm run prepare",
+    "postAttachCommand": "cd ~/ghost && ghost start"
 
     // Configure tool-specific properties.
     // "customizations": {},
