@@ -7,3 +7,10 @@ updates:
     reviewers:
       - "AdvisorySG/ghost-reviewers"
     open-pull-requests-limit: 3
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    reviewers:
+      - "AdvisorySG/ghost-reviewers"
+    open-pull-requests-limit: 1
