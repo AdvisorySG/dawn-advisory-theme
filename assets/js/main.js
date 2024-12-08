@@ -25,7 +25,6 @@ $(function () {
     partners();
     featuredBy();
     pagination();
-    quotes();
     video();
     gallery();
     table();
@@ -217,20 +216,6 @@ function featuredBy() {
                 perView: 2,
             },
         },
-    });
-    glideFeed.mount();
-}
-
-function quotes() {
-    if (body.find('.quotes-feed').length === 0) {
-        return;
-    }
-
-    var glideFeed = new Glide('.quotes-feed', {
-        type: 'carousel',
-        dots: '.glide__bullets',
-        autoplay: 3500,
-        perView: 1,
     });
     glideFeed.mount();
 }
