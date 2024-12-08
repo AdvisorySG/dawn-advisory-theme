@@ -209,13 +209,7 @@ function featuredBy() {
 
     var glideFeed = new Glide('.featuredby-feed', {
         type: 'carousel',
-        autoplay: 3500,
-        perView: 4,
-        breakpoints: {
-            768: {
-                perView: 2,
-            },
-        },
+        perView: 3,
     });
     glideFeed.mount();
 }
