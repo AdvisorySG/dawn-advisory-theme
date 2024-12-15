@@ -605,28 +605,26 @@ function contentDropdown() {
     }
     $('div.single-content h2').each(function () {
         var $header = $(this);
+        var $container = $('<div class="dropdown-content"></div>');
         var $nextElement = $header.next();
-        var $pContainer = $('<div class="dropdown-content"></div>');
-        var $pElements = [];
+        var $curElement = $nextElement;
         var $arrowIcon = $('<span class="arrow-icon">\u25B8</span>');
-        while ($nextElement.is('p')) {
-            $pElements.push($nextElement);
+        while ($nextElement.length && !$nextElement.is('h2')) {
+            $curElement = $nextElement;
             $nextElement = $nextElement.next();
+            $container.append($curElement);
         }
-        $pElements.forEach(function ($pElement) {
-            $pContainer.append($pElement);
-        });
 
-        if ($pContainer.length > 0) {
+        if ($container.length > 0) {
             // Add the dropdown-header class to the h2 element
             $header.addClass('dropdown-header');
             $header.prepend($arrowIcon);
             // Hide the entire container and insert it after h2
-            $pContainer.hide().insertAfter($header);
+            $container.hide().insertAfter($header);
 
             // Add a click event listener to the h2 element to toggle the container
             $header.on('click', function () {
-                $pContainer.slideToggle();
+                $container.slideToggle();
                 if ($arrowIcon.text() === '\u25B8') {
                     $arrowIcon.text('\u25B4');
                 } else {

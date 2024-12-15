@@ -68,7 +68,7 @@ For the homepage and separate [Stories](https://beta.advisory.sg/stories) page t
 
 # PostCSS Features Used
 
--   Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
+- Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
 
 # Copyright & License
 
