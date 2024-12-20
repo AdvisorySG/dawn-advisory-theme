@@ -609,7 +609,7 @@ function contentDropdown() {
         var $nextElement = $header.next();
         var $curElement = $nextElement;
         var $arrowIcon = $('<span class="arrow-icon">\u25B8</span>');
-        while ($nextElement.length && !$nextElement.is('h2')) {
+        while ($nextElement.length && !$nextElement.is('h1') && !$nextElement.is('h2')) {
             $curElement = $nextElement;
             $nextElement = $nextElement.next();
             $container.append($curElement);
