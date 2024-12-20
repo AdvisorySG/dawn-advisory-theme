@@ -63,12 +63,12 @@
             },
             "home_starter_image": {
                 "type": "text",
-                "default": "https://s3-ap-southeast-1.amazonaws.com/advisorysg-ghost/2024/07/home-starter.png",
+                "default": "https://advisorysg-ghost.s3.ap-southeast-1.amazonaws.com/static/home/starter/home-starter.png",
                 "group": "homepage"
             },
             "home_impact_image": {
                 "type": "text",
-                "default": "https://sampleadvisoryimpact.my.canva.site/media/d77729fa71e7f9b912fde6a591e82afa.jpg",
+                "default": "https://advisorysg-ghost.s3.ap-southeast-1.amazonaws.com/static/home/impact/d77729fa71e7f9b912fde6a591e82afa.jpg",
                 "group": "homepage"
             },
             "show_share_links": {
