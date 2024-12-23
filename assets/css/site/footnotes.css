@@ -1,0 +1,38 @@
+hr.footnotes-sep {
+    display: none;
+}
+
+section.footnotes ol {
+    list-style: none;
+    counter-reset: footnote-counter;
+}
+
+section.footnotes ol li {
+    counter-increment: footnote-counter;
+    position: relative;
+}
+
+section.footnotes ol li::before {
+    content: "[" counter(footnote-counter) "]";
+    font-size: 0.75em;
+    font-weight: 700;
+    position: absolute;
+    top: -0.25em;
+    left: -1.6em;
+    color: var(--brand-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+section.footnotes a {
+    color: var(--brand-color);
+    text-decoration: none;
+}
+
+section.footnotes a:hover {
+    text-decoration: underline;
+}
+
+.footnote-backref {
+    display: none;
+}
