@@ -14,14 +14,15 @@ section.footnotes ol li {
 
 section.footnotes ol li::before {
     content: "[" counter(footnote-counter) "]";
-    font-size: 0.75em;
     font-weight: 700;
     position: absolute;
-    top: -0.25em;
-    left: -1.6em;
+    left: -1.2em;
     color: var(--brand-color);
     font-weight: bold;
-    text-decoration: underline;
+}
+
+section.footnotes p {
+    padding-left: 0.5em;
 }
 
 section.footnotes a {
@@ -31,8 +32,4 @@ section.footnotes a {
 
 section.footnotes a:hover {
     text-decoration: underline;
-}
-
-.footnote-backref {
-    display: none;
 }
