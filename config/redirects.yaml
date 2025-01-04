@@ -1,0 +1,98 @@
+301:
+  ### WP post slugs ###
+  /2017/08/13/conversations-ainan-liu/: /2017/08/13/conversations-with-ainan-liu/
+  /2018/05/01/conversations-with-ong-lee-on/: /2018/05/01/conversations-with-lee-on/
+  /2018/09/02/reflections-with-dr-yaacob/: /2018/09/02/reflections-with-dr-yaacob-ibrahim/
+  /2019/01/31/reflections-with-senior-parliamentary-secretary-baey-yam-keng/: /2019/01/31/reflections-with-baey-yam-keng/
+  /2019/07/14/insights-on-singapores-space-industry/: /2019/07/14/insights-on-singapores-rising-space-industry/
+  /2019/07/26/insights-from-discoverhci-banking-and-finance/: /2019/07/26/insights-on-banking-and-finance/
+  /2020/02/14/insights-from-discover-cybersecurity/: /2020/02/14/insights-on-cybersecurity/
+  /2020/02/14/insights-from-discovernjc-social-impact/: /2020/02/14/insights-on-discover-njc-social-impact/
+  /2020/06/06/insights-on-banking-and-finance/: /2020/06/06/insights-on-banking-and-finance-2020/
+  /2020/07/18/insights-on-government-relations-and-public-affairs/: /2020/07/18/insights-on-government-relations-public-affairs/
+  /2021/02/24/reflections-with-brandon-lee-adv/: /2021/02/24/reflections-with-brandon-lee/
+  /2021/06/29/insights-on-consulting-2/: /2021/06/29/insights-on-consulting-2021/
+  /2021/07/28/insights-on-cybersecurity/: /2021/07/28/insights-on-cybersecurity-2021/
+  /2021/11/08/insights-on-sustainability-2/: /2021/11/08/insights-on-sustainability-2021/
+  /2022/01/25/insights-on-banking-and-finance-2/: /2022/01/25/insights-on-banking-and-finance-2022/
+  # FIXME: /2022/02/02/reflections-with-hwang-yu-ning/ (to be migrated by Content)
+  /2022/02/13/insights-on-maritime-2/: /2022/02/13/insights-on-maritime-2022/
+  /2022/03/31/insights-on-travel-2/: /2022/03/31/insights-on-travel-2022/
+  /2022/10/09/discover-analytics-insights/: /2022/10/09/insights-on-analytics-insights/
+  /2022/12/27/discovery-insights-on-new-opportunities-in-maritimes-transformation/: /2022/12/27/insights-on-new-opportunities-in-maritimes-transformation/
+  # FIXME: /2022/12/28/conversations-with-andy-soh/ (to be migrated by Content)
+  /2023/02/10/discover-education/: /2023/02/10/insights-on-education/
+  /2023/02/12/insights-on-food-security-2/: /2023/02/12/insights-on-food-security-2022/
+  /2023/03/28/discover-public-policy/: /2023/03/28/insights-on-public-policy-2023/
+  /2023/06/11/insights-on-fintech-2/: /2023/06/11/insights-on-fintech-2023/
+  /2023/12/05/insights-on-branding-and-marketing-2/: /2023/12/05/insights-on-branding-and-marketing-2022/
+  /2024/01/21/insights-on-consulting-3/: /2024/01/21/insights-on-consulting-2023/
+  /2024/02/13/discover-infocommunication-technologies/: /2024/02/13/insights-on-infocommunication-technologies/
+  /2024/02/13/experience-foodpanda/: /2024/02/13/insights-on-foodpanda/
+  /2024/02/20/conversations-with-jiejing/: /2024/02/20/conversations-with-chen-jiejing/
+  /2024/02/25/discover-product-management-2023/: /2024/02/25/insights-on-product-management-2023/
+
+  ### About Us ###
+  /about/: /about-us/
+
+  ### Communities ###
+  /educators/: /communities/
+  /educators-roundtable/: /communities/
+  /professionals-network/: /communities/
+
+  ### Events ###
+  /past-events/: /events/
+  /past-events-hello-hello/: /events/
+  /past-events-old/: /events/
+  /past-events-old-2/: /events/
+  /upcoming-events/: /events/
+  /upcoming-events-hello-hello/: /events/
+
+  ### Interviews ###
+  /stories/: /interviews/
+
+  ### Join Us ###
+  /volunteers/: /join-us/
+  /working-professionals/: /join-us/
+
+  ### Mentorship ###
+  /mentorship/: https://mentorship.advisory.sg/
+
+  ### The Team ###
+  /the-team-2/: /team/
+  /board-of-advisors-kenneth-paul-tan/: /team/
+  /denzel-chen/: /team/
+  /jesley-chua/: /pronet-co-chair-jesley-chua/
+  /rahul-daswani/: /pronet-co-chair-rahul-daswani/
+  /shawn-loh/: /pronet-co-chair-shawn-loh/
+  /teow-jun-hao/: /team/
+  /timothy-low/: /pronet-co-chair-timothy-low/
+
+  ### Press Releases ###
+  /press-release/: /press-releases/
+  /covid-19-policy-statement/: /press-releases/
+  /covid-19-policy-statement-updated/: /press-releases/
+  /endorsement-letter-from-david-chua/: /press-releases/
+  /memorandum-of-understanding-between-advisory-singapore-clg-ltd-ngee-ann-polytechnic/: /press-releases/
+  /memorandum-of-understanding-between-advisory-singapore-clg-ltd-singapore-maritime-foundation-smf/: /press-releases/
+  /memorandum-of-understanding-between-advisory-singapore-institute-of-public-relations-of-singapore/: /press-releases/
+
+  ### Reports ###
+  /advisory-2016-2019-impact-report/: /reports/
+  /advisory-2020-impact-report/: /reports/
+  /advisory-2021-impact-report/: /reports/
+  /advisory-2022-2023-impact-report/: /reports/
+  /our-impact/: /reports/
+  /report-of-the-first-meeting-of-the-advisory-educators-roundtable/: /reports/
+  /report-of-the-fourth-meeting-of-the-advisory-educators-roundtable/: /reports/
+  /report-of-the-second-meeting-of-the-advisory-educators-roundtable/: /reports/
+  /report-of-the-third-meeting-of-the-advisory-educators-roundtable/: /reports/
+  /statement-in-response-to-the-covid-19-situation-may-2021/: /reports/
+
+  ### Obsolete URLs ###
+  /advisory-homefront-security/: /interviews/
+  /advisory-urban-development/: /interviews/
+  /contact-us/: /
+
+  ### Miscellaneous ###
+  /sorry/: /404/
