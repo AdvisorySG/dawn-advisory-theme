@@ -1,7 +1,23 @@
 {{!< default}}
 
 {{#contentFor "title"}}{{meta_title}}{{/contentFor}}
+<style>
 
+.content-area { 
+    
+    background-color: white;
+    text-align: left;
+    
+}
+
+.contentinfoarea {
+    
+    background-color: white;
+    text-align: left;
+    line-height: 8;
+}
+
+</style>
 <div class="content-area">
     <main class="site-main">
         <div class="container pb-24">
@@ -10,10 +26,15 @@
                 <span class="block sm:inline">Posts before 31st March 2024 may be incomplete or contain errors. You can refer to <a href="https://old.advisory.sg">old.advisory.sg</a> for the original article.</span>
             </div>
         </div>
+
+    <div class="contentinfoarea">
         {{#post}}
             {{> content width="wide"}}
         {{/post}}
         {{#is "post"}}
+
+    </div>
+    
             <div id="content-dropdown-enable"></div>
             {{#if @custom.show_related_posts}}
                 {{> related}}
