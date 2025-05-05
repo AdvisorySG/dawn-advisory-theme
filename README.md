@@ -60,6 +60,33 @@ Finally, run `npm run dev` in the `content/themes/dawn-advisory-theme/` director
 
 This method is not officially supported by Ghost and might break any time (though the theme handling logic is unlikely to be modified in the foreseeable future). Take note that if you add new post templates, you may need to restart Ghost manually for the changes to take place in the Admin panel.
 
+## Folder Structure
+
+This purpose of this section is to help developers to gain a more comprehensive understanding regarding the different components that are needed for ghost development.
+
+-   Partials
+    -   The Partial folder contains reusable template components that can be used by other templates. These reusable template components serve to simplify the development process as we can reuse similar template components without having to code them from scrtch all over again.
+-   Handlebar Files (`.hbs`)
+    -   Handlebars can be though of as a **language** that is used to construct template components. There are various other similar templating languages, some that you might be familiar with (for eg. `jsx` files (in React) or `html` files).
+    -   Ghost themes uses Handlebars for their templating language, and also includes some additional features such as layout and partials.
+    -   Handlebar files can also be easily customized through modifications of the custom theme settings in the `package.json` file placed at the root directory of the project.
+-   Static Folder
+    -   The static Folder contains files that do not change when the application is running. As such, they are not required to be rendered dynamically.
+    -   Some examples of what can be stored in the static folder include:
+        -   Scripts (`.js)
+        -   Style Sheets (`.css`)
+        -   Images (profile pictures, header images... )
+-   Build process
+    -   What is the difference between `npm run dev` and `npm run start`?
+        -   `npm run dev` is used to run or view the application worked on while in development mode. When developing new features, this would be the more appropriate build command to use - as it renders changes onto your local build without having you to restart the server.
+        -   `npm run start` is used to run the application in production mode. Changes made to the code base will not be reflected on the website when production mode is used.
+
+## Key Technologies that you might want to read up on
+
+-   TailWind CSS (https://tailwindcss.com/docs/installation)
+-   Handlebars (https://handlebarsjs.com/guide/)
+-   Javascript (https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
 ## `routes.yaml` Setup
 
 For the homepage and separate [Stories](https://beta.advisory.sg/stories) page to be rendered correctly, it is necessary to upload a custom `routes.yaml` file onto Ghost. Please refer to [the instructions here](https://ghost.org/docs/themes/routing/) for more details.
