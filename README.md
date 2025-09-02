@@ -22,7 +22,12 @@ npm run zip
 
 4. Upload the zipfile at `dist/dawn-advisory-theme.zip` onto your local Ghost instance at `Settings > Theme > Change theme > Upload theme`.
 
-Optionally, if you have access to the [Admin panel of Advisory](https://beta.advisory.sg/ghost/), you can go to `Settings > Labs > Migration Options > Export your content` in order to export the posts and settings used for the actual website as a JSON file. This file can be imported into your local instance of Ghost, at `Settings > Labs > Migration Options > Import content`. Take note that this will not remove existing posts/pages.
+For new developers, please ask Tech Management for the posts and settings to be exported, and to pass you the output JSON file.
+This file can be imported into your local instance of Ghost, at `Settings > Labs > Migration Options > Import content`. Take note that this will not remove existing posts/pages.
+
+Optionally, if you have access to the [Admin panel of Advisory](https://beta.advisory.sg/ghost/), you can go to `Settings > Labs > Migration Options > Export your content` in order to export the posts and settings used for the actual website as a JSON file. 
+
+Furthermore, also make sure to setup `routes.yaml` as explained further down below
 
 # Dropdown Menu
 
