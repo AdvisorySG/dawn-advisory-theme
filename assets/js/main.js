@@ -650,12 +650,19 @@ function tagContentFilter() {
     const posts = tagContent.querySelectorAll('.post');
     posts.forEach((post) => {
         const postTags = post.getAttribute('class').split(' ');
-        if (context === 'events' && !postTags.includes('tag-hash-insights')) {
+        if (
+            context === 'events' &&
+            !postTags.includes('tag-hash-insights') &&
+            !postTags.includes('tag-hash-insight-2')
+        ) {
             post.style.display = 'none';
         } else if (
             context === 'interviews' &&
             !postTags.includes('tag-hash-conversations') &&
-            !postTags.includes('tag-hash-reflections')
+            !postTags.includes('tag-hash-conversations-2') &&
+            !postTags.includes('tag-hash-conversations-3') &&
+            !postTags.includes('tag-hash-reflections') &&
+            !postTags.includes('tag-hash-reflections-2')
         ) {
             post.style.display = 'none';
         }
