@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
-# Node v20 setup - refer to below URL for details
+# Node v22 setup - refer to below URL for details
 # https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-20
 RUN apt-get install -y curl \
-    && curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
-    && apt-get install -y nodejs \
+    && apt-get install -y nodejs python3-setuptools \
     && node -v  # verify Node installation
 
 # Ghost setup
