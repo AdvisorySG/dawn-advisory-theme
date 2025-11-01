@@ -9,6 +9,6 @@
     "license": "MIT",
     "description": "",
     "dependencies": {
-        "@tryghost/admin-api": "^1.13.12"
+        "@tryghost/admin-api": "^1.14.0"
     }
 }
