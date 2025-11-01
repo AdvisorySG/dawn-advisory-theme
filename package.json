@@ -124,7 +124,7 @@
         "@glidejs/glide": "^3.5.2",
         "alpinejs": "^3.12.3",
         "fitvids": "^2.1.1",
-        "flowbite": "^2.4.1",
+        "flowbite": "^3.1.2",
         "infinite-scroll": "^4.0.1",
         "jquery": "^3.6.0",
         "lazysizes": "^5.3.2",
