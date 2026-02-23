@@ -67,10 +67,10 @@
               <br>
               <div class="flex flex-wrap -m-4">
                 <template x-for="member in members">
-                  <div class="p-4 lg:w-1/4 md:w-1/2">
-                    <div class="h-full flex flex-col items-center text-center">
+                  <div class= "p-4 basis-1/2 md:basis-1/3 lg:basis-1/4"> <!--"p-4 lg:w-1/4 md:w-1/2">-->
+                    <div class="h-96 flex flex-col items-center text-center">
                         <a x-bind:href="member.href">
-                            <img class="shadow rounded-full w-full aspect-square align-middle border-none" x-bind:src="member.img_src" x-bind:alt="head.name">
+                            <img class="shadow rounded-full w-96 aspect-square  align-middle border-none" x-bind:src="member.img_src" x-bind:alt="head.name">
                         </a>
                         <div class="p-4 text-center font-normal">
                           <p>
