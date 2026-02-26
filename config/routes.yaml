@@ -5,12 +5,12 @@ collections:
   /events/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: events
-    filter: tag:hash-insights
+    filter: tag:[hash-insights,hash-insights-2]
 
   /interviews/:
     permalink: /{year}/{month}/{day}/{slug}/
     template: index
-    filter: tag:[hash-conversations,hash-reflections]
+    filter: tag:[hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2]
 
   /posts/:
     permalink: /{year}/{month}/{day}/{slug}/
