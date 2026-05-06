@@ -8,7 +8,10 @@ import { searchSlugs } from './typesense-search.js';
 // Parameters:
 //   collection: passed through for the partial's DOM id namespace; not used here.
 //   mode: 'or' (default) or 'and'. Selects matching function for chips.
-//   tagSlugs: comma-separated string of tag slugs scoping this collection (used by Task 7 for Typesense filter_by). Not consumed in Task 3.
+//   tagSlugs: comma-separated string of tag slugs scoping this collection.
+//             Parsed into an array and passed to searchSlugs() as the
+//             Typesense filter_by value so cross-collection slug results
+//             don't bleed into this page.
 // Sort modes accepted in URL params and the dropdown UI.
 // Keep this list in sync with the <select> options in partials/post-filter-list.hbs
 // and the cases in _sorted() below.
@@ -44,7 +47,9 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             const state = this._readStateFromUrl();
             this.selectedTags = state.tags;
             this.sortMode = state.sort;
-            this.searchQuery = state.q;
+            // Normalize sub-threshold queries to '' so the input doesn't
+            // display a stale character with no active search behind it.
+            this.searchQuery = state.q.trim().length >= 2 ? state.q : '';
 
             this.$watch('selectedTags', () => {
                 this.visibleCount = PAGE_SIZE;
@@ -104,6 +109,16 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             return this.filtered().length > this.visibleCount;
         },
 
+        // True when any user-controlled dimension is non-default — drives
+        // the visibility of every Clear-filters affordance.
+        hasActiveFilters() {
+            return (
+                this.selectedTags.length > 0 ||
+                this.searchQuery.trim().length > 0 ||
+                this.sortMode !== 'newest'
+            );
+        },
+
         // --- actions -----------------------------------------------------
 
         isSelected(slug) {
@@ -131,6 +146,12 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
         setSearchQuery(value) {
             this.searchQuery = value;
             clearTimeout(this._searchDebounceTimer);
+            // Empty/short input goes through immediately so Esc-to-clear
+            // doesn't leave the URL ?q= and result count stale for 250ms.
+            if (value.trim().length < 2) {
+                this._runSearch();
+                return;
+            }
             this._searchDebounceTimer = setTimeout(() => {
                 this._runSearch();
             }, 250);
