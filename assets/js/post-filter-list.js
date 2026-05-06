@@ -140,8 +140,18 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             this.selectedTags = [];
             this.sortMode = 'newest';
             this.searchQuery = '';
+            // Cancel any in-flight search and pending debounce so a stale
+            // response can't overwrite searchSlugs after the clear.
+            if (this._searchAbortController) {
+                this._searchAbortController.abort();
+            }
+            clearTimeout(this._searchDebounceTimer);
             this.searchSlugs = null;
             this.searchError = false;
+            this.isSearching = false;
+            // selectedTags/sortMode watchers fire only on change. Force a URL
+            // write so ?q= and ?sort= drop even when those weren't dirty.
+            this._writeStateToUrl();
         },
 
         // --- internals ---------------------------------------------------
@@ -205,14 +215,19 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
                 return;
             }
 
-            this._searchAbortController = new AbortController();
+            // Capture the controller locally so finally{} can tell whether
+            // THIS call is still the latest. Without this, an aborted call's
+            // finally{} flips isSearching=false while the superseding call is
+            // still in flight, making the spinner flicker off mid-typing.
+            const controller = new AbortController();
+            this._searchAbortController = controller;
             this.isSearching = true;
 
             try {
                 const slugs = await searchSlugs(
                     trimmed,
                     this.tagSlugs,
-                    this._searchAbortController.signal,
+                    controller.signal,
                 );
                 this.searchSlugs = slugs;
                 this.searchError = false;
@@ -223,7 +238,9 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
                 this.searchSlugs = null;
                 this.searchError = true;
             } finally {
-                this.isSearching = false;
+                if (this._searchAbortController === controller) {
+                    this.isSearching = false;
+                }
             }
         },
 
