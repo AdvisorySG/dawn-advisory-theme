@@ -7,6 +7,7 @@
         <header class="single-header kg-canvas">
             <h1 class="single-title">Events</h1>
         </header>
+        {{!-- filter must match config/routes.yaml /events/ filter exactly --}}
         {{> post-filter-list collection="events" filter="tag:[hash-insights,hash-insights-2]" mode="or"}}
     </main>
 </div>
