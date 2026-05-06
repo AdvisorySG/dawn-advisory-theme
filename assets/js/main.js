@@ -8,7 +8,10 @@ import Glide from '@glidejs/glide';
 import Alpine from 'alpinejs';
 import 'flowbite';
 
+import postFilterList from './post-filter-list.js';
+
 window.Alpine = Alpine;
+Alpine.data('postFilterList', postFilterList);
 Alpine.start();
 
 var body = $('body');
