@@ -8,9 +8,6 @@
             <h1 class="single-title">Interviews</h1>
         </header>
         {{!-- filter must match config/routes.yaml /interviews/ filter exactly --}}
-        {{> post-filter-list
-            collection="interviews"
-            filter="tag:[hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2]"
-            mode="or"}}
+        {{> post-filter-list collection="interviews" filter="tag:[hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2]" tagSlugs="hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2" mode="or"}}
     </main>
 </div>
