@@ -63,9 +63,12 @@
     {{!-- Server-rendered post grid. NO x-cloak: JS-disabled users still see all posts. --}}
     <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
         <!-- djlint:off -->
-        {{#get "posts" limit="1000" filter=filter include="tags" order="published_at desc" as |posts|}}
+        {{#get "posts" limit="all" filter=filter include="tags" order="published_at desc" as |posts|}}
         <!-- djlint:on -->
             {{#foreach posts}}
+                {{!-- isVisible() requires the [data-tags] node (the <article> in post-card.hbs).
+                     The wrapper div exists only as the x-show host so we don't toggle attributes
+                     on the article itself. --}}
                 <div x-show="isVisible($el.querySelector('[data-tags]'))" class="filter-card-wrapper">
                     {{> "post-card"}}
                 </div>
@@ -83,7 +86,3 @@
         </button>
     </div>
 </div>
-
-<style>
-    [x-cloak] { display: none !important; }
-</style>
