@@ -25,7 +25,7 @@ npm run zip
 For new developers, please ask Tech Management for the posts and settings to be exported, and to pass you the output JSON file.
 This file can be imported into your local instance of Ghost, at `Settings > Labs > Migration Options > Import content`. Take note that this will not remove existing posts/pages.
 
-Optionally, if you have access to the [Admin panel of Advisory](https://beta.advisory.sg/ghost/), you can go to `Settings > Labs > Migration Options > Export your content` in order to export the posts and settings used for the actual website as a JSON file. 
+Optionally, if you have access to the [Admin panel of Advisory](https://beta.advisory.sg/ghost/), you can go to `Settings > Labs > Migration Options > Export your content` in order to export the posts and settings used for the actual website as a JSON file.
 
 Furthermore, also make sure to setup `routes.yaml` as explained further down below
 
@@ -71,9 +71,27 @@ For the homepage and separate [Stories](https://beta.advisory.sg/stories) page t
 
 **Note**: The `routes.yaml` file supplied in the repository is not automatically deployed onto the main website.
 
+# Typesense Search
+
+The bottom-of-article "you might also like" widget uses [Typesense](https://typesense.org/) for typo-tolerant, content-relevance ranking. Three settings live under `config.custom` in `package.json` and are admin-overridable in **Ghost Admin → Settings → Design → Customize**:
+
+| Setting                | Default                         | What it is                                                         |
+| ---------------------- | ------------------------------- | ------------------------------------------------------------------ |
+| `typesense_host`       | `https://typesense.advisory.sg` | Typesense host URL (no trailing slash). HTTPS recommended.         |
+| `typesense_api_key`    | (Advisory SG search-only key)   | Typesense **search-only** API key. Embedded client-side by design. |
+| `typesense_collection` | `ghost`                         | Name of the indexed Ghost-posts collection on the Typesense host.  |
+
+The flow is: `package.json` defaults → `default.hbs` injects them as `window.__TYPESENSE_CONFIG__` → `assets/js/typesense-search.js` reads from that global at search time, falling back to the same defaults if the global is missing.
+
+**About the API key in source.** Typesense splits keys into _admin_ (read/write, secret) and _search-only_ (read-only, scoped to a collection). The search-only key is the analogue of Ghost's Content API key — it's designed to ship in client-side JavaScript and only grants read access to data that's already public. Don't paste an admin key here.
+
+**Deploying to a different Ghost instance.** If your instance points at a different Typesense backend, override the three settings in **Design → Customize** rather than editing the theme. The defaults in `package.json` are only the fallback for installs that don't override.
+
+**About the indexer.** This theme expects an existing Typesense collection populated with Ghost posts (`title`, `slug`, `excerpt`, `plaintext`, `feature_image`, `url`, `tags.name`, `tags.slug`, `published_at`, etc.). The sync mechanism (e.g. [MagicPages' Ghost-Typesense integration](https://github.com/magicpages/ghost-typesense)) is **not** part of this theme.
+
 # PostCSS Features Used
 
-- Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
+-   Autoprefixer - Don't worry about writing browser prefixes of any kind, it's all done automatically with support for the latest 2 major versions of every browser.
 
 # Copyright & License
 
