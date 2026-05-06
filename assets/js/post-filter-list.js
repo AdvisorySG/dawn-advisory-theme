@@ -1,29 +1,52 @@
-// Alpine component for client-side multi-tag filter, load-more, and URL sync.
+// Alpine component for client-side multi-tag filter, sort, search, load-more, and URL sync.
 // Used by partials/post-filter-list.hbs on /events/ and /interviews/.
 //
 // Call site:
-//   <div x-data="postFilterList({ collection: 'events', mode: 'or' })" ...>
+//   <div x-data="postFilterList({ collection: 'events', mode: 'or', tagSlugs: 'hash-insights,...' })" ...>
 //
 // Parameters:
 //   collection: passed through for the partial's DOM id namespace; not used here.
-//   mode: 'or' (default) or 'and'. Selects matching function.
-export default function postFilterList({ collection, mode }) {
+//   mode: 'or' (default) or 'and'. Selects matching function for chips.
+//   tagSlugs: comma-separated string of tag slugs scoping this collection (used by Task 7 for Typesense filter_by). Not consumed in Task 3.
+export default function postFilterList({ collection, mode, tagSlugs }) {
     const PAGE_SIZE = 12;
 
     return {
+        // --- state -------------------------------------------------------
         selectedTags: [],
+        sortMode: 'newest', // 'newest' | 'oldest' | 'az' | 'za'
         visibleCount: PAGE_SIZE,
         allCards: [],
         availableTags: [],
+        tagSlugs: (tagSlugs || '')
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean),
+
+        // --- lifecycle ---------------------------------------------------
 
         init() {
             this.allCards = this._readCardsFromDom();
             this.availableTags = this._buildAvailableTags(this.allCards);
-            this.selectedTags = this._readTagsFromUrl();
+
+            const state = this._readStateFromUrl();
+            this.selectedTags = state.tags;
+            this.sortMode = state.sort;
+
             this.$watch('selectedTags', () => {
                 this.visibleCount = PAGE_SIZE;
-                this._writeTagsToUrl();
+                this._writeStateToUrl();
             });
+            this.$watch('sortMode', () => {
+                this.visibleCount = PAGE_SIZE;
+                this._reorderDom();
+                this._writeStateToUrl();
+            });
+
+            // Apply initial DOM order if URL specified a non-default sort.
+            if (this.sortMode !== 'newest') {
+                this._reorderDom();
+            }
         },
 
         // --- queries -----------------------------------------------------
@@ -37,7 +60,9 @@ export default function postFilterList({ collection, mode }) {
         },
 
         filtered() {
-            return this.allCards.filter((c) => this.matches(c));
+            const tagFiltered = this.allCards.filter((c) => this.matches(c));
+            // Search filter (added in Task 7).
+            return this._sorted(tagFiltered);
         },
 
         visible() {
@@ -76,7 +101,6 @@ export default function postFilterList({ collection, mode }) {
         loadMore() {
             this.visibleCount += PAGE_SIZE;
             // Move focus to the first newly-revealed card for keyboard users.
-            // The wrapper element carries tabindex="-1" (set in the partial).
             this.$nextTick(() => {
                 const newIndex = this.visibleCount - PAGE_SIZE;
                 const card = this.filtered()[newIndex];
@@ -86,9 +110,46 @@ export default function postFilterList({ collection, mode }) {
 
         clearFilters() {
             this.selectedTags = [];
+            this.sortMode = 'newest';
+            // Search reset added in Task 7.
         },
 
         // --- internals ---------------------------------------------------
+
+        _sorted(cards) {
+            const sorted = [...cards];
+            switch (this.sortMode) {
+                case 'oldest':
+                    sorted.sort((a, b) =>
+                        a.publishedAt.localeCompare(b.publishedAt),
+                    );
+                    break;
+                case 'az':
+                    sorted.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'za':
+                    sorted.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'newest':
+                default:
+                    sorted.sort((a, b) =>
+                        b.publishedAt.localeCompare(a.publishedAt),
+                    );
+                    break;
+            }
+            return sorted;
+        },
+
+        // Reorders ALL .filter-card-wrapper nodes in the grid to match the current sort.
+        // Hidden cards (x-show=false) reorder along with visible ones; CSS Grid then
+        // lays out only the visible ones in their new DOM order.
+        _reorderDom() {
+            if (this.allCards.length === 0) return;
+            const grid = this.allCards[0].el.parentNode;
+            if (!grid) return;
+            const sorted = this._sorted(this.allCards);
+            sorted.forEach((c) => grid.appendChild(c.el));
+        },
 
         _readCardsFromDom() {
             const root = this.$root || this.$el;
@@ -101,7 +162,13 @@ export default function postFilterList({ collection, mode }) {
                     .split(',')
                     .map((s) => s.trim())
                     .filter(Boolean);
-                return { el, tagSlugs: new Set(slugs) };
+                return {
+                    el,
+                    tagSlugs: new Set(slugs),
+                    slug: (inner && inner.dataset.slug) || '',
+                    title: (inner && inner.dataset.title) || '',
+                    publishedAt: (inner && inner.dataset.publishedAt) || '',
+                };
             });
         },
 
@@ -125,22 +192,36 @@ export default function postFilterList({ collection, mode }) {
             );
         },
 
-        _readTagsFromUrl() {
+        _readStateFromUrl() {
             const params = new URLSearchParams(window.location.search);
-            const raw = params.get('tags') || '';
-            return raw
+
+            const tags = (params.get('tags') || '')
                 .split(',')
                 .map((s) => s.trim())
                 .filter(Boolean);
+
+            const rawSort = params.get('sort') || 'newest';
+            const validSorts = ['newest', 'oldest', 'az', 'za'];
+            const sort = validSorts.includes(rawSort) ? rawSort : 'newest';
+
+            return { tags, sort };
         },
 
-        _writeTagsToUrl() {
+        _writeStateToUrl() {
             const params = new URLSearchParams(window.location.search);
+
             if (this.selectedTags.length) {
                 params.set('tags', this.selectedTags.join(','));
             } else {
                 params.delete('tags');
             }
+
+            if (this.sortMode && this.sortMode !== 'newest') {
+                params.set('sort', this.sortMode);
+            } else {
+                params.delete('sort');
+            }
+
             const qs = params.toString();
             const newUrl = qs
                 ? `${window.location.pathname}?${qs}`
