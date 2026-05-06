@@ -8,6 +8,23 @@
     id="post-filter-{{collection}}"
     x-data="postFilterList({ collection: '{{collection}}', mode: '{{mode}}' })"
     class="post-filter-list">
+    {{!-- Toolbar: sort dropdown (and search input — added in Task 8). --}}
+    <div
+        x-cloak
+        class="post-filter-toolbar container m-auto px-4 mb-4 flex flex-wrap gap-3 items-center justify-end">
+        <div class="flex items-center gap-2">
+            <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
+            <select
+                id="post-sort-{{collection}}"
+                x-model="sortMode"
+                class="px-3 py-2 rounded border border-gray-300 text-base">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="az">Title A → Z</option>
+                <option value="za">Title Z → A</option>
+            </select>
+        </div>
+    </div>
 
     {{!-- Filter chips: hidden until Alpine init via x-cloak --}}
     <div
