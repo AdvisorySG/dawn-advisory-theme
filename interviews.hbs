@@ -1,0 +1,15 @@
+{{!< default}}
+
+{{#contentFor "title"}}Interviews{{/contentFor}}
+
+<div class="content-area">
+    <main class="site-main">
+        <header class="single-header kg-canvas">
+            <h1 class="single-title">Interviews</h1>
+        </header>
+        {{> post-filter-list
+            collection="interviews"
+            filter="tag:[hash-conversations,hash-reflections]"
+            mode="or"}}
+    </main>
+</div>
