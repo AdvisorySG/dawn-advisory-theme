@@ -8,6 +8,11 @@
 //   collection: passed through for the partial's DOM id namespace; not used here.
 //   mode: 'or' (default) or 'and'. Selects matching function for chips.
 //   tagSlugs: comma-separated string of tag slugs scoping this collection (used by Task 7 for Typesense filter_by). Not consumed in Task 3.
+// Sort modes accepted in URL params and the dropdown UI.
+// Keep this list in sync with the <select> options in partials/post-filter-list.hbs
+// and the cases in _sorted() below.
+const VALID_SORTS = ['newest', 'oldest', 'az', 'za'];
+
 export default function postFilterList({ collection, mode, tagSlugs }) {
     const PAGE_SIZE = 12;
 
@@ -141,8 +146,14 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
         },
 
         // Reorders ALL .filter-card-wrapper nodes in the grid to match the current sort.
-        // Hidden cards (x-show=false) reorder along with visible ones; CSS Grid then
-        // lays out only the visible ones in their new DOM order.
+        // Hidden cards (x-show=false → display:none) reorder along with visible ones;
+        // CSS Grid skips display:none items in auto-flow, so the visible ones lay out
+        // in their new DOM order.
+        //
+        // Assumes every .filter-card-wrapper shares the same parent element (the
+        // #post-grid-{collection} div in post-filter-list.hbs). If a future partial
+        // change splits cards across multiple containers, this loop will silently
+        // re-parent them all to the first card's parent.
         _reorderDom() {
             if (this.allCards.length === 0) return;
             const grid = this.allCards[0].el.parentNode;
@@ -201,8 +212,7 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
                 .filter(Boolean);
 
             const rawSort = params.get('sort') || 'newest';
-            const validSorts = ['newest', 'oldest', 'az', 'za'];
-            const sort = validSorts.includes(rawSort) ? rawSort : 'newest';
+            const sort = VALID_SORTS.includes(rawSort) ? rawSort : 'newest';
 
             return { tags, sort };
         },
