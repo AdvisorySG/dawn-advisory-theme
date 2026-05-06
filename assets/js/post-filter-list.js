@@ -1,3 +1,4 @@
+import { searchSlugs } from './typesense-search.js';
 // Alpine component for client-side multi-tag filter, sort, search, load-more, and URL sync.
 // Used by partials/post-filter-list.hbs on /events/ and /interviews/.
 //
@@ -27,6 +28,12 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             .split(',')
             .map((s) => s.trim())
             .filter(Boolean),
+        searchQuery: '',
+        searchSlugs: null, // null = no search active or query < 2 chars; Set = Typesense results
+        searchError: false,
+        isSearching: false,
+        _searchAbortController: null,
+        _searchDebounceTimer: null,
 
         // --- lifecycle ---------------------------------------------------
 
@@ -37,6 +44,7 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             const state = this._readStateFromUrl();
             this.selectedTags = state.tags;
             this.sortMode = state.sort;
+            this.searchQuery = state.q;
 
             this.$watch('selectedTags', () => {
                 this.visibleCount = PAGE_SIZE;
@@ -52,6 +60,11 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             if (this.sortMode !== 'newest') {
                 this._reorderDom();
             }
+
+            // Fire a search if URL had ?q=… on load.
+            if (this.searchQuery.trim().length >= 2) {
+                this._runSearch();
+            }
         },
 
         // --- queries -----------------------------------------------------
@@ -65,9 +78,11 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
         },
 
         filtered() {
-            const tagFiltered = this.allCards.filter((c) => this.matches(c));
-            // Search filter (added in Task 7).
-            return this._sorted(tagFiltered);
+            let result = this.allCards.filter((c) => this.matches(c));
+            if (this.searchSlugs !== null) {
+                result = result.filter((c) => this.searchSlugs.has(c.slug));
+            }
+            return this._sorted(result);
         },
 
         visible() {
@@ -113,10 +128,20 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             });
         },
 
+        setSearchQuery(value) {
+            this.searchQuery = value;
+            clearTimeout(this._searchDebounceTimer);
+            this._searchDebounceTimer = setTimeout(() => {
+                this._runSearch();
+            }, 250);
+        },
+
         clearFilters() {
             this.selectedTags = [];
             this.sortMode = 'newest';
-            // Search reset added in Task 7.
+            this.searchQuery = '';
+            this.searchSlugs = null;
+            this.searchError = false;
         },
 
         // --- internals ---------------------------------------------------
@@ -160,6 +185,46 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             if (!grid) return;
             const sorted = this._sorted(this.allCards);
             sorted.forEach((c) => grid.appendChild(c.el));
+        },
+
+        async _runSearch() {
+            const trimmed = this.searchQuery.trim();
+
+            // Cancel any in-flight request — newer query supersedes it.
+            if (this._searchAbortController) {
+                this._searchAbortController.abort();
+            }
+
+            // Short-circuit: <2 chars means no search active.
+            if (trimmed.length < 2) {
+                this.searchSlugs = null;
+                this.searchError = false;
+                this.isSearching = false;
+                this.visibleCount = PAGE_SIZE;
+                this._writeStateToUrl();
+                return;
+            }
+
+            this._searchAbortController = new AbortController();
+            this.isSearching = true;
+
+            try {
+                const slugs = await searchSlugs(
+                    trimmed,
+                    this.tagSlugs,
+                    this._searchAbortController.signal,
+                );
+                this.searchSlugs = slugs;
+                this.searchError = false;
+                this.visibleCount = PAGE_SIZE;
+                this._writeStateToUrl();
+            } catch (err) {
+                if (err.name === 'AbortError') return; // newer query is in flight
+                this.searchSlugs = null;
+                this.searchError = true;
+            } finally {
+                this.isSearching = false;
+            }
         },
 
         _readCardsFromDom() {
@@ -214,7 +279,9 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             const rawSort = params.get('sort') || 'newest';
             const sort = VALID_SORTS.includes(rawSort) ? rawSort : 'newest';
 
-            return { tags, sort };
+            const q = params.get('q') || '';
+
+            return { tags, sort, q };
         },
 
         _writeStateToUrl() {
@@ -230,6 +297,13 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
                 params.set('sort', this.sortMode);
             } else {
                 params.delete('sort');
+            }
+
+            const q = (this.searchQuery || '').trim();
+            if (q.length >= 2) {
+                params.set('q', q);
+            } else {
+                params.delete('q');
             }
 
             const qs = params.toString();
