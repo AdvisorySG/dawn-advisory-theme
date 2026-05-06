@@ -7,7 +7,9 @@
         <header class="single-header kg-canvas">
             <h1 class="single-title">Events</h1>
         </header>
-        {{!-- filter must match config/routes.yaml /events/ filter exactly --}}
+        {{!-- filter and tagSlugs must mirror config/routes.yaml /events/ filter
+              exactly. tagSlugs is the same slug list as filter=tag:[...], in
+              the format Typesense's filter_by accepts (plain comma-separated). --}}
         {{> post-filter-list collection="events" filter="tag:[hash-insights,hash-insights-2]" tagSlugs="hash-insights,hash-insights-2" mode="or"}}
     </main>
 </div>
