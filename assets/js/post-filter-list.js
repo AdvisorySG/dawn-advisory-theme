@@ -3,6 +3,10 @@
 //
 // Call site:
 //   <div x-data="postFilterList({ collection: 'events', mode: 'or' })" ...>
+//
+// Parameters:
+//   collection: passed through for the partial's DOM id namespace; not used here.
+//   mode: 'or' (default) or 'and'. Selects matching function.
 export default function postFilterList({ collection, mode }) {
     const PAGE_SIZE = 12;
 
@@ -14,7 +18,7 @@ export default function postFilterList({ collection, mode }) {
 
         init() {
             this.allCards = this._readCardsFromDom();
-            this.availableTags = this._buildAvailableTags();
+            this.availableTags = this._buildAvailableTags(this.allCards);
             this.selectedTags = this._readTagsFromUrl();
             this.$watch('selectedTags', () => {
                 this.visibleCount = PAGE_SIZE;
@@ -40,6 +44,8 @@ export default function postFilterList({ collection, mode }) {
             return this.filtered().slice(0, this.visibleCount);
         },
 
+        // el must be the [data-tags] element itself (the same node stored in allCards),
+        // not a wrapper. The caller is responsible for passing the right node.
         isVisible(el) {
             return this.visible().some((c) => c.el === el);
         },
@@ -70,6 +76,8 @@ export default function postFilterList({ collection, mode }) {
         loadMore() {
             this.visibleCount += PAGE_SIZE;
             // Move focus to the first newly-revealed card for keyboard users.
+            // The card element (the one stored in allCards) must have tabindex="-1"
+            // applied in the template — otherwise focus() silently no-ops on <article>.
             this.$nextTick(() => {
                 const newIndex = this.visibleCount - PAGE_SIZE;
                 const card = this.filtered()[newIndex];
@@ -95,11 +103,9 @@ export default function postFilterList({ collection, mode }) {
             });
         },
 
-        _buildAvailableTags() {
-            const root = this.$root || this.$el;
-            const cards = root.querySelectorAll('[data-tags]');
+        _buildAvailableTags(cards) {
             const map = new Map();
-            cards.forEach((el) => {
+            cards.forEach(({ el }) => {
                 const slugs = (el.dataset.tags || '').split(',');
                 const names = (el.dataset.tagNames || '').split('|');
                 slugs.forEach((slug, i) => {
