@@ -1,0 +1,89 @@
+{{!-- Reusable filter UI + post grid + load-more.
+     Parameters:
+       collection — string label (used as DOM id namespace)
+       filter     — Ghost filter string passed to {{#get "posts"}}
+       mode       — "or" (default) or "and" --}}
+
+<div
+    id="post-filter-{{collection}}"
+    x-data="postFilterList({ collection: '{{collection}}', mode: '{{mode}}' })"
+    class="post-filter-list">
+
+    {{!-- Filter chips: hidden until Alpine init via x-cloak --}}
+    <div
+        x-cloak
+        class="filter-chips container m-auto flex flex-wrap gap-2 mb-6 px-4"
+        x-show="availableTags.length > 0">
+        <template x-for="tag in availableTags" :key="tag.slug">
+            <button
+                type="button"
+                role="checkbox"
+                :aria-checked="isSelected(tag.slug)"
+                @click="toggleTag(tag.slug)"
+                :class="isSelected(tag.slug)
+                    ? 'bg-brand-light text-gray-900 border-gray-900'
+                    : 'bg-white text-gray-700 border-gray-300'"
+                class="px-4 py-2 rounded-full border text-base hover:border-gray-900 transition-colors">
+                <span x-text="tag.name"></span>
+            </button>
+        </template>
+        <button
+            type="button"
+            @click="clearFilters()"
+            x-show="selectedTags.length > 0"
+            class="px-4 py-2 rounded-full text-base text-gray-700 underline hover:text-gray-900">
+            Clear filters
+        </button>
+    </div>
+
+    {{!-- Live result count for screen readers --}}
+    <div x-cloak role="status" aria-live="polite" class="container m-auto px-4 mb-4 text-lg text-gray-700">
+        <span x-text="`Showing ${visible().length} of ${filtered().length}`"></span>
+    </div>
+
+    {{!-- Unknown-tags banner --}}
+    <div
+        x-cloak
+        x-show="unknownTags().length > 0"
+        class="container m-auto px-4 mb-4 p-3 rounded border bg-amber-50 border-amber-200 text-amber-900 text-base">
+        The following tags don't exist on this page:
+        <template x-for="(slug, i) in unknownTags()" :key="slug">
+            <span><code x-text="slug"></code><span x-show="i < unknownTags().length - 1">, </span></span>
+        </template>
+    </div>
+
+    {{!-- Empty state --}}
+    <div
+        x-cloak
+        x-show="filtered().length === 0"
+        class="container m-auto px-4 py-12 text-center text-xl text-gray-700">
+        <p>No posts match your selected tags.</p>
+    </div>
+
+    {{!-- Server-rendered post grid. NO x-cloak: JS-disabled users still see all posts. --}}
+    <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
+        <!-- djlint:off -->
+        {{#get "posts" limit="1000" filter=filter include="tags" order="published_at desc" as |posts|}}
+        <!-- djlint:on -->
+            {{#foreach posts}}
+                <div x-show="isVisible($el.querySelector('[data-tags]'))" class="filter-card-wrapper">
+                    {{> "post-card"}}
+                </div>
+            {{/foreach}}
+        {{/get}}
+    </div>
+
+    {{!-- Load more button --}}
+    <div x-cloak class="container m-auto px-4 my-8 text-center" x-show="hasMore()">
+        <button
+            type="button"
+            @click="loadMore()"
+            class="px-6 py-3 rounded-full border border-gray-900 text-lg font-bold hover:bg-gray-900 hover:text-white transition-colors">
+            Load more
+        </button>
+    </div>
+</div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>
