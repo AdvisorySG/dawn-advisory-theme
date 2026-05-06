@@ -21,6 +21,21 @@ import { searchSimilar } from './typesense-search.js';
 const TARGET_COUNT = 3;
 const QUERY_MAX_CHARS = 500; // keeps Typesense URL well under 8KB
 
+// Convert an absolute URL (Typesense indexes posts with production
+// absolute URLs like https://advisory.sg/path/) into a same-origin
+// path so the browser resolves it against the current site. On
+// localhost:2368 a click stays on localhost; on prod it stays on prod.
+// Falls back to the original string on parse failure.
+function toLocalPath(url) {
+    if (!url) return url;
+    try {
+        const parsed = new URL(url, window.location.origin);
+        return parsed.pathname + parsed.search + parsed.hash;
+    } catch {
+        return url;
+    }
+}
+
 export default function relatedPosts() {
     return {
         async init() {
@@ -69,7 +84,11 @@ export default function relatedPosts() {
                 if (!h.slug) return false;
                 if (source.id && h.id === source.id) return false;
                 if (source.slug && h.slug === source.slug) return false;
-                if (h.url && h.url === window.location.href) return false;
+                // Compare paths instead of full URLs so the localhost ↔
+                // production origin mismatch in Typesense data doesn't
+                // defeat this check.
+                if (h.url && toLocalPath(h.url) === window.location.pathname)
+                    return false;
                 return true;
             });
 
@@ -130,7 +149,10 @@ function buildCardElement(hit) {
     const inner = document.createElement('div');
     inner.className =
         'flex flex-col cursor-pointer h-full rounded-xl overflow-hidden md:flex-row md:h-80 lg:flex-col lg:h-full';
-    inner.setAttribute('onclick', `location.href='${hit.url || '#'}'`);
+    inner.setAttribute(
+        'onclick',
+        `location.href='${toLocalPath(hit.url) || '#'}'`,
+    );
 
     if (hit.feature_image) {
         const img = document.createElement('img');
@@ -199,7 +221,7 @@ function buildCardElement(hit) {
     inner.appendChild(body);
 
     const stretchAnchor = document.createElement('a');
-    stretchAnchor.href = hit.url || '#';
+    stretchAnchor.href = toLocalPath(hit.url) || '#';
     const stretchSpan = document.createElement('span');
     stretchSpan.className = 'stretch-link';
     stretchAnchor.appendChild(stretchSpan);
