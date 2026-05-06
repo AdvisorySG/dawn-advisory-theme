@@ -30,6 +30,7 @@ export default function relatedPosts() {
 
             const source = {
                 id: root.dataset.postId || '',
+                slug: root.dataset.postSlug || '',
                 title: root.dataset.postTitle || '',
                 excerpt: root.dataset.postExcerpt || '',
             };
@@ -49,6 +50,7 @@ export default function relatedPosts() {
             try {
                 hits = await searchSimilar(query, {
                     excludeId: source.id,
+                    excludeSlug: source.slug,
                     limit: TARGET_COUNT,
                 });
             } catch (err) {
@@ -58,10 +60,18 @@ export default function relatedPosts() {
                 return; // SSR cards stay
             }
 
-            // Defensive: drop the source post if filter_by didn't suppress
-            // it (compares by id since source.id is a Ghost ObjectId, not
-            // a slug). Also drops malformed hits with no slug.
-            hits = hits.filter((h) => h.id !== source.id && h.slug);
+            // Defensive: drop the source post if Typesense filter_by didn't
+            // suppress it (e.g. data-post-id was empty so excludeId never
+            // reached the wrapper). Compares by id, slug, AND url so any one
+            // matching identifier triggers exclusion. Also drops malformed
+            // hits with no slug.
+            hits = hits.filter((h) => {
+                if (!h.slug) return false;
+                if (source.id && h.id === source.id) return false;
+                if (source.slug && h.slug === source.slug) return false;
+                if (h.url && h.url === window.location.href) return false;
+                return true;
+            });
 
             if (hits.length === 0) return; // SSR cards stay
 

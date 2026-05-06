@@ -42,6 +42,10 @@ const RELATED_QUERY_BY_WEIGHTS = '4,2,1';
  *                         length-capped by the caller (see related-posts.js).
  * @param {object} options
  * @param {string} [options.excludeId] - Document id to exclude (e.g. the current post).
+ * @param {string} [options.excludeSlug] - Document slug to ALSO exclude. Belt-
+ *                         and-braces in case excludeId is empty/wrong; both
+ *                         conditions are AND'd in filter_by so a doc matching
+ *                         either identifier is excluded.
  * @param {number} [options.limit=3] - Max hits to return.
  * @param {AbortSignal} [options.signal] - Aborts the request.
  * @returns {Promise<object[]>} Array of hit documents (slug, title, excerpt,
@@ -51,7 +55,7 @@ const RELATED_QUERY_BY_WEIGHTS = '4,2,1';
  *                 is propagated as-is so callers can distinguish.
  */
 export async function searchSimilar(query, options = {}) {
-    const { excludeId, limit = 3, signal } = options;
+    const { excludeId, excludeSlug, limit = 3, signal } = options;
     const { host, apiKey, collection } = getConfig();
 
     const params = new URLSearchParams({
@@ -61,8 +65,11 @@ export async function searchSimilar(query, options = {}) {
         include_fields: RELATED_INCLUDE_FIELDS,
         per_page: String(limit),
     });
-    if (excludeId) {
-        params.set('filter_by', `id:!=${excludeId}`);
+    const filters = [];
+    if (excludeId) filters.push(`id:!=${excludeId}`);
+    if (excludeSlug) filters.push(`slug:!=${excludeSlug}`);
+    if (filters.length > 0) {
+        params.set('filter_by', filters.join(' && '));
     }
 
     const url = `${host}/collections/${collection}/documents/search?${params.toString()}`;
