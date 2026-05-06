@@ -25,6 +25,17 @@
         var siteUrl = '{{@site.url}}';
     </script>
 
+    {{!-- Typesense search config — sourced from package.json config.custom,
+          overridable per-install in Ghost Admin → Design → Customize.
+          The API key here is search-only (read-only, public-scoped). --}}
+    <script>
+        window.__TYPESENSE_CONFIG__ = {
+            host: '{{@custom.typesense_host}}',
+            apiKey: '{{@custom.typesense_api_key}}',
+            collection: '{{@custom.typesense_collection}}',
+        };
+    </script>
+
     {{ghost_head}}
 </head>
 

@@ -90,6 +90,18 @@
                 "type": "boolean",
                 "default": true,
                 "group": "post"
+            },
+            "typesense_host": {
+                "type": "text",
+                "default": "https://typesense.advisory.sg"
+            },
+            "typesense_api_key": {
+                "type": "text",
+                "default": "LWQ1uyADTZBRVJa0XuFY5BcipgnhvQ8g"
+            },
+            "typesense_collection": {
+                "type": "text",
+                "default": "ghost"
             }
         }
     },
