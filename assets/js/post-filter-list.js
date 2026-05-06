@@ -44,8 +44,8 @@ export default function postFilterList({ collection, mode }) {
             return this.filtered().slice(0, this.visibleCount);
         },
 
-        // el must be the [data-tags] element itself (the same node stored in allCards),
-        // not a wrapper. The caller is responsible for passing the right node.
+        // el must be the .filter-card-wrapper element (the same node stored in allCards).
+        // The wrapper carries tabindex="-1" so loadMore() can focus it.
         isVisible(el) {
             return this.visible().some((c) => c.el === el);
         },
@@ -76,8 +76,7 @@ export default function postFilterList({ collection, mode }) {
         loadMore() {
             this.visibleCount += PAGE_SIZE;
             // Move focus to the first newly-revealed card for keyboard users.
-            // The card element (the one stored in allCards) must have tabindex="-1"
-            // applied in the template — otherwise focus() silently no-ops on <article>.
+            // The wrapper element carries tabindex="-1" (set in the partial).
             this.$nextTick(() => {
                 const newIndex = this.visibleCount - PAGE_SIZE;
                 const card = this.filtered()[newIndex];
@@ -93,9 +92,12 @@ export default function postFilterList({ collection, mode }) {
 
         _readCardsFromDom() {
             const root = this.$root || this.$el;
-            const cards = root.querySelectorAll('[data-tags]');
-            return Array.from(cards).map((el) => {
-                const slugs = (el.dataset.tags || '')
+            const wrappers = root.querySelectorAll('.filter-card-wrapper');
+            return Array.from(wrappers).map((el) => {
+                const inner = el.querySelector('[data-tags]');
+                const slugs = (
+                    inner && inner.dataset.tags ? inner.dataset.tags : ''
+                )
                     .split(',')
                     .map((s) => s.trim())
                     .filter(Boolean);
@@ -106,8 +108,10 @@ export default function postFilterList({ collection, mode }) {
         _buildAvailableTags(cards) {
             const map = new Map();
             cards.forEach(({ el }) => {
-                const slugs = (el.dataset.tags || '').split(',');
-                const names = (el.dataset.tagNames || '').split('|');
+                const inner = el.querySelector('[data-tags]');
+                if (!inner) return;
+                const slugs = (inner.dataset.tags || '').split(',');
+                const names = (inner.dataset.tagNames || '').split('|');
                 slugs.forEach((slug, i) => {
                     const s = slug.trim();
                     if (!s) return;

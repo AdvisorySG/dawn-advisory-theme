@@ -23,7 +23,8 @@
                 :class="isSelected(tag.slug)
                     ? 'bg-brand-light text-gray-900 border-gray-900'
                     : 'bg-white text-gray-700 border-gray-300'"
-                class="px-4 py-2 rounded-full border text-base hover:border-gray-900 transition-colors">
+                class="px-4 py-2 rounded-full border text-base hover:border-gray-900 transition-colors inline-flex items-center gap-1">
+                <span x-show="isSelected(tag.slug)" aria-hidden="true">✓</span>
                 <span x-text="tag.name"></span>
             </button>
         </template>
@@ -58,6 +59,13 @@
         x-show="filtered().length === 0"
         class="container m-auto px-4 py-12 text-center text-xl text-gray-700">
         <p>No posts match your selected tags.</p>
+        <button
+            type="button"
+            @click="clearFilters()"
+            x-show="selectedTags.length > 0"
+            class="mt-4 px-4 py-2 rounded-full border border-gray-900 text-base hover:bg-gray-900 hover:text-white transition-colors">
+            Clear filters
+        </button>
     </div>
 
     {{!-- Server-rendered post grid. NO x-cloak: JS-disabled users still see all posts. --}}
@@ -66,10 +74,12 @@
         {{#get "posts" limit="all" filter=filter include="tags" order="published_at desc" as |posts|}}
         <!-- djlint:on -->
             {{#foreach posts}}
-                {{!-- isVisible() requires the [data-tags] node (the <article> in post-card.hbs).
-                     The wrapper div exists only as the x-show host so we don't toggle attributes
-                     on the article itself. --}}
-                <div x-show="isVisible($el.querySelector('[data-tags]'))" class="filter-card-wrapper">
+                {{!-- The wrapper is the filter unit: tagged via its [data-tags] child,
+                     focusable for keyboard users via tabindex="-1", and reactive via x-show. --}}
+                <div
+                    x-show="isVisible($el)"
+                    tabindex="-1"
+                    class="filter-card-wrapper">
                     {{> "post-card"}}
                 </div>
             {{/foreach}}
