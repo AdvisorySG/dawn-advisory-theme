@@ -58,9 +58,10 @@ export default function relatedPosts() {
                 return; // SSR cards stay
             }
 
-            // Defensive: drop any hit matching the source post (in case
-            // filter_by didn't work for some reason).
-            hits = hits.filter((h) => h.slug !== source.id && h.slug);
+            // Defensive: drop the source post if filter_by didn't suppress
+            // it (compares by id since source.id is a Ghost ObjectId, not
+            // a slug). Also drops malformed hits with no slug.
+            hits = hits.filter((h) => h.id !== source.id && h.slug);
 
             if (hits.length === 0) return; // SSR cards stay
 
@@ -101,9 +102,15 @@ export default function relatedPosts() {
 
 // IMPORTANT: this builder mirrors partials/post-card.hbs. Keep the structure
 // (article > div.flex > optional img + div.grow > primary tag span + title +
-// excerpt + date / stretch-link anchor) byte-equivalent (modulo data
-// attributes specific to the filter feature, which related-posts doesn't
-// need).
+// excerpt + date / stretch-link anchor) byte-equivalent.
+//
+// Two intentional divergences from post-card.hbs:
+//   1. We hardcode "feed-card post" instead of post-card's "feed-card {{post_class}}".
+//      {{post_class}} also emits per-post tag-{slug} classes; no CSS in this
+//      project targets those (verified against assets/css/), so skipping is safe.
+//   2. We omit the <img> entirely when feature_image is empty; post-card.hbs
+//      renders a hidden placeholder <img> instead. Both are display:none in
+//      effect, so layout is equivalent for the related-posts grid.
 function buildCardElement(hit) {
     const article = document.createElement('article');
     article.className =
@@ -194,8 +201,9 @@ function buildCardElement(hit) {
 
 // First non-hash-prefixed tag from the parallel tags.name / tags.slug arrays.
 // Returns null if all tags are routing tags or arrays are missing/empty.
+// Both arrays are requested via RELATED_INCLUDE_FIELDS in typesense-search.js.
 function pickPrimaryTag(hit) {
-    const names = hit['tags.name'] || hit.tags || [];
+    const names = hit['tags.name'] || [];
     const slugs = hit['tags.slug'] || [];
     for (let i = 0; i < slugs.length; i++) {
         if (slugs[i] && !slugs[i].startsWith('hash-')) {

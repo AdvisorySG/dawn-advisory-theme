@@ -27,7 +27,7 @@ function getConfig() {
 // Fields the related-posts card builder needs. Keep in sync with the field
 // list in assets/js/related-posts.js → buildCardElement().
 const RELATED_INCLUDE_FIELDS =
-    'slug,title,excerpt,feature_image,url,tags,tags.name,tags.slug,published_at';
+    'id,slug,title,excerpt,feature_image,url,tags.name,tags.slug,published_at';
 
 // Title hits weighted highest, then excerpt, then plaintext.
 const RELATED_QUERY_BY = 'title,excerpt,plaintext';
