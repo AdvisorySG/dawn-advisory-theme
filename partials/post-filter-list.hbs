@@ -8,10 +8,28 @@
     id="post-filter-{{collection}}"
     x-data="postFilterList({ collection: '{{collection}}', mode: '{{mode}}', tagSlugs: '{{tagSlugs}}' })"
     class="post-filter-list">
-    {{!-- Toolbar: sort dropdown (and search input — added in Task 8). --}}
+    {{!-- Toolbar: search input (left, flex-1) + sort dropdown (right). --}}
     <div
         x-cloak
-        class="post-filter-toolbar container m-auto px-4 mb-6 flex flex-wrap gap-3 items-center justify-end">
+        class="post-filter-toolbar container m-auto px-4 mb-6 flex flex-wrap gap-3 items-center">
+        <div class="flex-1 min-w-[200px] flex items-center gap-2">
+            <label for="post-search-{{collection}}" class="sr-only">Search posts</label>
+            <input
+                id="post-search-{{collection}}"
+                type="search"
+                placeholder="Search posts..."
+                :value="searchQuery"
+                @input="setSearchQuery($event.target.value)"
+                @keydown.escape="setSearchQuery(''); $event.target.focus()"
+                aria-controls="post-grid-{{collection}}"
+                class="flex-1 px-3 py-2 rounded border border-gray-300 text-base">
+            <span
+                x-show="isSearching"
+                aria-live="polite"
+                class="text-base text-gray-600 whitespace-nowrap">
+                Searching…
+            </span>
+        </div>
         <div class="flex items-center gap-2">
             <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
             <select
@@ -24,6 +42,15 @@
                 <option value="za">Title Z → A</option>
             </select>
         </div>
+    </div>
+
+    {{!-- Search error banner --}}
+    <div
+        x-cloak
+        x-show="searchError"
+        role="alert"
+        class="container m-auto px-4 mb-4 p-3 rounded border bg-red-50 border-red-200 text-red-900 text-base">
+        Search temporarily unavailable. Filters and sorting still work.
     </div>
 
     {{!-- Filter chips: hidden until Alpine init via x-cloak --}}
@@ -48,7 +75,7 @@
         <button
             type="button"
             @click="clearFilters()"
-            x-show="selectedTags.length > 0"
+            x-show="selectedTags.length > 0 || searchQuery.trim().length > 0 || sortMode !== 'newest'"
             class="px-4 py-2 rounded-full text-base text-gray-700 underline hover:text-gray-900">
             Clear filters
         </button>
@@ -75,11 +102,14 @@
         x-cloak
         x-show="filtered().length === 0"
         class="container m-auto px-4 py-12 text-center text-xl text-gray-700">
-        <p>No posts match your selected tags.</p>
+        <p x-show="searchQuery.trim().length > 0 && selectedTags.length > 0">No posts match your search and filters.</p>
+        <p x-show="searchQuery.trim().length > 0 && selectedTags.length === 0">No posts match your search.</p>
+        <p x-show="searchQuery.trim().length === 0 && selectedTags.length > 0">No posts match your selected tags.</p>
+        <p x-show="searchQuery.trim().length === 0 && selectedTags.length === 0">No posts to show.</p>
         <button
             type="button"
             @click="clearFilters()"
-            x-show="selectedTags.length > 0"
+            x-show="selectedTags.length > 0 || searchQuery.trim().length > 0 || sortMode !== 'newest'"
             class="mt-4 px-4 py-2 rounded-full border border-gray-900 text-base hover:bg-gray-900 hover:text-white transition-colors">
             Clear filters
         </button>
