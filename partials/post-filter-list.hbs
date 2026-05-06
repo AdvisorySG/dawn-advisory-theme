@@ -12,15 +12,17 @@
     <div
         x-cloak
         class="post-filter-toolbar container m-auto px-4 mb-6 flex flex-wrap gap-3 items-center">
-        <div class="flex-1 min-w-[200px] flex items-center gap-2">
+        {{!-- min-width inline because Tailwind 3.0 JIT in this project
+              doesn't reliably emit arbitrary values like min-w-[200px]. --}}
+        <div class="flex-1 flex items-center gap-2" style="min-width: 200px;">
             <label for="post-search-{{collection}}" class="sr-only">Search posts</label>
             <input
                 id="post-search-{{collection}}"
                 type="search"
-                placeholder="Search posts..."
+                placeholder="Search posts…"
                 :value="searchQuery"
                 @input="setSearchQuery($event.target.value)"
-                @keydown.escape="setSearchQuery(''); $event.target.focus()"
+                @keydown.escape="setSearchQuery('')"
                 aria-controls="post-grid-{{collection}}"
                 class="flex-1 px-3 py-2 rounded border border-gray-300 text-base">
             <span
