@@ -68,22 +68,30 @@
         </button>
     </div>
 
-    {{!-- Server-rendered post grid. NO x-cloak: JS-disabled users still see all posts. --}}
-    <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
-        <!-- djlint:off -->
-        {{#get "posts" limit="all" filter=filter include="tags" order="published_at desc" as |posts|}}
-        <!-- djlint:on -->
-            {{#foreach posts}}
-                {{!-- The wrapper is the filter unit: tagged via its [data-tags] child,
-                     focusable for keyboard users via tabindex="-1", and reactive via x-show. --}}
-                <div
-                    x-show="isVisible($el)"
-                    tabindex="-1"
-                    class="filter-card-wrapper">
-                    {{> "post-card"}}
-                </div>
-            {{/foreach}}
-        {{/get}}
+    {{!-- Server-rendered post grid. 20 stacked page blocks (limit=100 each) work
+         around Ghost's silent 100-post cap on limit="all". Hard ceiling: 2000 posts.
+         NO x-cloak: JS-disabled users still see all posts. --}}
+    <div id="post-grid-{{collection}}" class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
+        {{> "post-filter-page" page="1" filter=filter}}
+        {{> "post-filter-page" page="2" filter=filter}}
+        {{> "post-filter-page" page="3" filter=filter}}
+        {{> "post-filter-page" page="4" filter=filter}}
+        {{> "post-filter-page" page="5" filter=filter}}
+        {{> "post-filter-page" page="6" filter=filter}}
+        {{> "post-filter-page" page="7" filter=filter}}
+        {{> "post-filter-page" page="8" filter=filter}}
+        {{> "post-filter-page" page="9" filter=filter}}
+        {{> "post-filter-page" page="10" filter=filter}}
+        {{> "post-filter-page" page="11" filter=filter}}
+        {{> "post-filter-page" page="12" filter=filter}}
+        {{> "post-filter-page" page="13" filter=filter}}
+        {{> "post-filter-page" page="14" filter=filter}}
+        {{> "post-filter-page" page="15" filter=filter}}
+        {{> "post-filter-page" page="16" filter=filter}}
+        {{> "post-filter-page" page="17" filter=filter}}
+        {{> "post-filter-page" page="18" filter=filter}}
+        {{> "post-filter-page" page="19" filter=filter}}
+        {{> "post-filter-page" page="20" filter=filter}}
     </div>
 
     {{!-- Load more button --}}
