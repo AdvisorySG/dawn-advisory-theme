@@ -23,6 +23,7 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
     return {
         // --- state -------------------------------------------------------
         selectedTags: [],
+        tagDropdownOpen: false,
         sortMode: 'newest', // 'newest' | 'oldest' | 'az' | 'za'
         visibleCount: PAGE_SIZE,
         allCards: [],
@@ -131,6 +132,24 @@ export default function postFilterList({ collection, mode, tagSlugs }) {
             } else {
                 this.selectedTags = [...this.selectedTags, slug];
             }
+        },
+
+        selectedTagLabel() {
+            return this.selectedTags.length
+                ? `Tags (${this.selectedTags.length})`
+                : 'Tags';
+        },
+
+        clearTags() {
+            this.selectedTags = [];
+        },
+
+        toggleTagDropdown() {
+            this.tagDropdownOpen = !this.tagDropdownOpen;
+        },
+
+        closeTagDropdown() {
+            this.tagDropdownOpen = false;
         },
 
         loadMore() {

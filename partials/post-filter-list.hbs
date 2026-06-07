@@ -8,7 +8,7 @@
     id="post-filter-{{collection}}"
     x-data="postFilterList({ collection: '{{collection}}', mode: '{{mode}}', tagSlugs: '{{tagSlugs}}' })"
     class="post-filter-list">
-    {{!-- Toolbar: search input (left, flex-1) + sort dropdown (right). --}}
+    {{!-- Toolbar: search input (left, flex-1) + sort/tags controls (right). --}}
     <div
         x-cloak
         class="post-filter-toolbar container m-auto px-4 mb-6 flex flex-wrap gap-3 items-center">
@@ -32,17 +32,67 @@
                 Searching…
             </span>
         </div>
-        <div class="flex items-center gap-2">
-            <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
-            <select
-                id="post-sort-{{collection}}"
-                x-model="sortMode"
-                class="px-3 py-2 rounded border border-gray-300 text-base">
-                <option value="newest">Newest first</option>
-                <option value="oldest">Oldest first</option>
-                <option value="az">Title A → Z</option>
-                <option value="za">Title Z → A</option>
-            </select>
+        <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-2">
+                <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
+                <select
+                    id="post-sort-{{collection}}"
+                    x-model="sortMode"
+                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="az">Title A → Z</option>
+                    <option value="za">Title Z → A</option>
+                </select>
+            </div>
+            <div
+                class="relative"
+                x-show="availableTags.length > 0"
+                @click.outside="closeTagDropdown()"
+                @keydown.escape.window="closeTagDropdown()">
+                <button
+                    type="button"
+                    id="post-tags-{{collection}}"
+                    @click="toggleTagDropdown()"
+                    :aria-expanded="tagDropdownOpen.toString()"
+                    aria-haspopup="listbox"
+                    aria-controls="post-tags-menu-{{collection}}"
+                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white inline-flex items-center gap-2">
+                    <span x-text="selectedTagLabel()"></span>
+                    <span aria-hidden="true">▾</span>
+                </button>
+                <div
+                    id="post-tags-menu-{{collection}}"
+                    x-show="tagDropdownOpen"
+                    x-cloak
+                    class="absolute right-0 z-20 mt-2 w-64 max-h-80 overflow-y-auto rounded border border-gray-300 bg-white shadow">
+                    <template x-for="tag in availableTags" :key="tag.slug">
+                        <button
+                            type="button"
+                            role="checkbox"
+                            :aria-checked="isSelected(tag.slug)"
+                            @click="toggleTag(tag.slug)"
+                            class="w-full px-3 py-2 text-left text-base flex items-center gap-2 hover:bg-gray-50">
+                            <span aria-hidden="true" x-text="isSelected(tag.slug) ? '✓' : ''" class="w-4"></span>
+                            <span x-text="tag.name"></span>
+                        </button>
+                    </template>
+                    <button
+                        type="button"
+                        x-show="selectedTags.length > 0"
+                        @click="clearTags()"
+                        class="w-full px-3 py-2 text-left text-base text-gray-700 underline hover:text-gray-900">
+                        Clear tags
+                    </button>
+                </div>
+            </div>
+            <button
+                type="button"
+                @click="clearFilters()"
+                x-show="hasActiveFilters()"
+                class="px-3 py-2 text-base text-gray-700 underline hover:text-gray-900">
+                Clear filters
+            </button>
         </div>
     </div>
 
@@ -53,34 +103,6 @@
         role="alert"
         class="container m-auto px-4 mb-4 p-3 rounded border bg-red-50 border-red-200 text-red-900 text-base">
         Search temporarily unavailable. Filters and sorting still work.
-    </div>
-
-    {{!-- Filter chips: hidden until Alpine init via x-cloak --}}
-    <div
-        x-cloak
-        class="filter-chips container m-auto flex flex-wrap gap-2 mb-6 px-4"
-        x-show="availableTags.length > 0">
-        <template x-for="tag in availableTags" :key="tag.slug">
-            <button
-                type="button"
-                role="checkbox"
-                :aria-checked="isSelected(tag.slug)"
-                @click="toggleTag(tag.slug)"
-                :class="isSelected(tag.slug)
-                    ? 'bg-brand-light text-gray-900 border-gray-900'
-                    : 'bg-white text-gray-700 border-gray-300'"
-                class="px-4 py-2 rounded-full border text-base hover:border-gray-900 transition-colors inline-flex items-center gap-1">
-                <span x-show="isSelected(tag.slug)" aria-hidden="true">✓</span>
-                <span x-text="tag.name"></span>
-            </button>
-        </template>
-        <button
-            type="button"
-            @click="clearFilters()"
-            x-show="hasActiveFilters()"
-            class="px-4 py-2 rounded-full text-base text-gray-700 underline hover:text-gray-900">
-            Clear filters
-        </button>
     </div>
 
     {{!-- Live result count for screen readers --}}
