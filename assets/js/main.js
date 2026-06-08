@@ -8,9 +8,11 @@ import Glide from '@glidejs/glide';
 import Alpine from 'alpinejs';
 import 'flowbite';
 
+import postFilterList from './post-filter-list.js';
 import relatedPosts from './related-posts.js';
 
 window.Alpine = Alpine;
+Alpine.data('postFilterList', postFilterList);
 Alpine.data('relatedPosts', relatedPosts);
 Alpine.start();
 
@@ -213,6 +215,11 @@ function featuredBy() {
     var glideFeed = new Glide('.featuredby-feed', {
         type: 'carousel',
         perView: 3,
+        breakpoints: {
+            768: {
+                perView: 2,
+            },
+        },
     });
     glideFeed.mount();
 }

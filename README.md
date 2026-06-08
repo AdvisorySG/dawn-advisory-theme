@@ -73,7 +73,7 @@ For the homepage and separate [Stories](https://beta.advisory.sg/stories) page t
 
 # Typesense Search
 
-The bottom-of-article "you might also like" widget uses [Typesense](https://typesense.org/) for typo-tolerant, content-relevance ranking. Three settings live under `config.custom` in `package.json` and are admin-overridable in **Ghost Admin → Settings → Design → Customize**:
+The `/events/` and `/interviews/` pages have a typo-tolerant search box backed by [Typesense](https://typesense.org/), and the bottom-of-article "you might also like" widget uses Typesense for content-relevance ranking. Three settings live under `config.custom` in `package.json` and are admin-overridable in **Ghost Admin -> Settings -> Design -> Customize**:
 
 | Setting                | Default                         | What it is                                                         |
 | ---------------------- | ------------------------------- | ------------------------------------------------------------------ |

@@ -1,0 +1,15 @@
+{{!< default}}
+
+{{#contentFor "title"}}Interviews{{/contentFor}}
+
+<div class="content-area">
+    <main class="site-main">
+        <header class="single-header kg-canvas">
+            <h1 class="single-title">Interviews</h1>
+        </header>
+        {{!-- filter and tagSlugs must mirror config/routes.yaml /interviews/
+              filter exactly. tagSlugs is the same slug list as filter=tag:[...],
+              in the format Typesense's filter_by accepts (plain comma-separated). --}}
+        {{> post-filter-list collection="interviews" filter="tag:[hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2]" tagSlugs="hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2" mode="or"}}
+    </main>
+</div>

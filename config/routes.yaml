@@ -9,7 +9,7 @@ collections:
 
   /interviews/:
     permalink: /{year}/{month}/{day}/{slug}/
-    template: index
+    template: interviews
     filter: tag:[hash-conversations,hash-conversations-2,hash-conversations-3,hash-reflections,hash-reflections-2]
 
   /posts/:
