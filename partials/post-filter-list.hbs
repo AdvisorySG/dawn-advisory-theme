@@ -1,0 +1,181 @@
+{{!-- Reusable filter UI + post grid + load-more.
+     Parameters:
+       collection — string label (used as DOM id namespace)
+       filter     — Ghost filter string passed to {{#get "posts"}}
+       mode       — "or" (default) or "and" --}}
+
+<div
+    id="post-filter-{{collection}}"
+    x-data="postFilterList({ collection: '{{collection}}', mode: '{{mode}}', tagSlugs: '{{tagSlugs}}' })"
+    class="post-filter-list">
+    {{!-- Toolbar: search input (left, flex-1) + sort/tags controls (right). --}}
+    <div
+        x-cloak
+        class="post-filter-toolbar container m-auto px-4 mb-6 flex flex-wrap gap-3 items-center">
+        {{!-- min-width inline because Tailwind 3.0 JIT in this project
+              doesn't reliably emit arbitrary values like min-w-[200px]. --}}
+        <div class="flex-1 flex items-center gap-2" style="min-width: 200px;">
+            <label for="post-search-{{collection}}" class="sr-only">Search posts</label>
+            <input
+                id="post-search-{{collection}}"
+                type="search"
+                placeholder="Search posts…"
+                :value="searchQuery"
+                @input="setSearchQuery($event.target.value)"
+                @keydown.escape="setSearchQuery('')"
+                aria-controls="post-grid-{{collection}}"
+                style="height: 42px;"
+                class="flex-1 px-3 py-2 rounded border border-gray-300 text-base">
+            <span
+                x-show="isSearching"
+                aria-live="polite"
+                class="text-base text-gray-600 whitespace-nowrap">
+                Searching…
+            </span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+            <div
+                class="relative flex items-center gap-2"
+                x-show="availableTags.length > 0"
+                @click.outside="closeTagDropdown()"
+                @keydown.escape.window="closeTagDropdown()">
+                <label for="post-tags-{{collection}}" class="text-base text-gray-700">Tag:</label>
+                <button
+                    type="button"
+                    id="post-tags-{{collection}}"
+                    @click="toggleTagDropdown()"
+                    :aria-expanded="tagDropdownOpen.toString()"
+                    aria-haspopup="listbox"
+                    aria-controls="post-tags-menu-{{collection}}"
+                    style="height: 42px;"
+                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white inline-flex items-center gap-2">
+                    <span x-text="selectedTagLabel()"></span>
+                    <span aria-hidden="true">▾</span>
+                </button>
+                <div
+                    id="post-tags-menu-{{collection}}"
+                    x-show="tagDropdownOpen"
+                    x-cloak
+                    class="absolute right-0 z-20 mt-2 w-64 max-h-80 overflow-y-auto rounded border border-gray-300 bg-white shadow">
+                    <template x-for="tag in availableTags" :key="tag.slug">
+                        <button
+                            type="button"
+                            role="checkbox"
+                            :aria-checked="isSelected(tag.slug)"
+                            @click="toggleTag(tag.slug)"
+                            class="w-full px-3 py-2 text-left text-base flex items-center gap-2 hover:bg-gray-50">
+                            <span aria-hidden="true" x-text="isSelected(tag.slug) ? '✓' : ''" class="w-4"></span>
+                            <span x-text="tag.name"></span>
+                        </button>
+                    </template>
+                    <button
+                        type="button"
+                        x-show="selectedTags.length > 0"
+                        @click="clearTags()"
+                        class="w-full px-3 py-2 text-left text-base text-gray-700 underline hover:text-gray-900">
+                        Clear tags
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
+                <select
+                    id="post-sort-{{collection}}"
+                    x-model="sortMode"
+                    style="height: 42px;"
+                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="az">Title A → Z</option>
+                    <option value="za">Title Z → A</option>
+                </select>
+            </div>
+            <button
+                type="button"
+                @click="clearFilters()"
+                x-show="hasActiveFilters()"
+                class="px-3 py-2 text-base text-gray-700 underline hover:text-gray-900">
+                Clear filters
+            </button>
+        </div>
+    </div>
+
+    {{!-- Search error banner --}}
+    <div
+        x-cloak
+        x-show="searchError"
+        role="alert"
+        class="container m-auto px-4 mb-4 p-3 rounded border bg-red-50 border-red-200 text-red-900 text-base">
+        Search temporarily unavailable. Filters and sorting still work.
+    </div>
+
+    {{!-- Live result count for screen readers --}}
+    <div x-cloak role="status" aria-live="polite" class="container m-auto px-4 mb-4 text-lg text-gray-700">
+        <span x-text="`Showing ${visible().length} of ${filtered().length}`"></span>
+    </div>
+
+    {{!-- Unknown-tags banner --}}
+    <div
+        x-cloak
+        x-show="unknownTags().length > 0"
+        class="container m-auto px-4 mb-4 p-3 rounded border bg-amber-50 border-amber-200 text-amber-900 text-base">
+        The following tags don't exist on this page:
+        <template x-for="(slug, i) in unknownTags()" :key="slug">
+            <span><code x-text="slug"></code><span x-show="i < unknownTags().length - 1">, </span></span>
+        </template>
+    </div>
+
+    {{!-- Empty state --}}
+    <div
+        x-cloak
+        x-show="filtered().length === 0"
+        class="container m-auto px-4 py-12 text-center text-xl text-gray-700">
+        <p x-show="searchQuery.trim().length > 0 && selectedTags.length > 0">No posts match your search and filters.</p>
+        <p x-show="searchQuery.trim().length > 0 && selectedTags.length === 0">No posts match your search.</p>
+        <p x-show="searchQuery.trim().length === 0 && selectedTags.length > 0">No posts match your selected tags.</p>
+        <p x-show="searchQuery.trim().length === 0 && selectedTags.length === 0">No posts to show.</p>
+        <button
+            type="button"
+            @click="clearFilters()"
+            x-show="hasActiveFilters()"
+            class="mt-4 px-4 py-2 rounded-full border border-gray-900 text-base hover:bg-gray-900 hover:text-white transition-colors">
+            Clear filters
+        </button>
+    </div>
+
+    {{!-- Server-rendered post grid. 20 stacked page blocks (limit=100 each) work
+         around Ghost's silent 100-post cap on limit="all". Hard ceiling: 2000 posts.
+         NO x-cloak: JS-disabled users still see all posts. --}}
+    <div id="post-grid-{{collection}}" class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
+        {{> "post-filter-page" page="1" filter=filter}}
+        {{> "post-filter-page" page="2" filter=filter}}
+        {{> "post-filter-page" page="3" filter=filter}}
+        {{> "post-filter-page" page="4" filter=filter}}
+        {{> "post-filter-page" page="5" filter=filter}}
+        {{> "post-filter-page" page="6" filter=filter}}
+        {{> "post-filter-page" page="7" filter=filter}}
+        {{> "post-filter-page" page="8" filter=filter}}
+        {{> "post-filter-page" page="9" filter=filter}}
+        {{> "post-filter-page" page="10" filter=filter}}
+        {{> "post-filter-page" page="11" filter=filter}}
+        {{> "post-filter-page" page="12" filter=filter}}
+        {{> "post-filter-page" page="13" filter=filter}}
+        {{> "post-filter-page" page="14" filter=filter}}
+        {{> "post-filter-page" page="15" filter=filter}}
+        {{> "post-filter-page" page="16" filter=filter}}
+        {{> "post-filter-page" page="17" filter=filter}}
+        {{> "post-filter-page" page="18" filter=filter}}
+        {{> "post-filter-page" page="19" filter=filter}}
+        {{> "post-filter-page" page="20" filter=filter}}
+    </div>
+
+    {{!-- Load more button --}}
+    <div x-cloak class="container m-auto px-4 my-8 text-center" x-show="hasMore()">
+        <button
+            type="button"
+            @click="loadMore()"
+            class="px-6 py-3 rounded-full border border-gray-900 text-lg font-bold hover:bg-gray-900 hover:text-white transition-colors">
+            Load more
+        </button>
+    </div>
+</div>

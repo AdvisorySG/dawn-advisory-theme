@@ -7,12 +7,9 @@
         <header class="single-header kg-canvas">
             <h1 class="single-title">Events</h1>
         </header>
-        {{> tags-listing context="events"}}
-        <div class="post-feed container grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
-            {{#foreach posts}}
-                {{> "post-card"}}
-            {{/foreach}}
-        </div>
-        {{pagination}}
+        {{!-- filter and tagSlugs must mirror config/routes.yaml /events/ filter
+              exactly. tagSlugs is the same slug list as filter=tag:[...], in
+              the format Typesense's filter_by accepts (plain comma-separated). --}}
+        {{> post-filter-list collection="events" filter="tag:[hash-insights,hash-insights-2]" tagSlugs="hash-insights,hash-insights-2" mode="or"}}
     </main>
 </div>

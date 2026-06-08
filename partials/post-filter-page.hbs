@@ -1,0 +1,21 @@
+{{!-- Renders one page (up to 100 posts) for post-filter-list.hbs.
+     Receives:
+       page    — string "1".."20" (Ghost's {{#get}} accepts string page arg)
+       filter  — Ghost filter expression (same one used on every page block)
+     Cards are wrapped in .filter-card-wrapper so the parent Alpine component
+     can show/hide them via x-show. The wrapper carries tabindex="-1" so
+     loadMore() in post-filter-list.js can programmatically focus the first
+     newly-revealed card for keyboard users. --}}
+<!-- djlint:off -->
+{{!-- limit=100 is Ghost's per-page max for {{#get}}. --}}
+{{#get "posts" limit="100" page=page filter=filter include="tags" order="published_at desc" as |posts|}}
+<!-- djlint:on -->
+    {{#foreach posts}}
+        <div
+            x-show="isVisible($el)"
+            tabindex="-1"
+            class="filter-card-wrapper">
+            {{> "post-card"}}
+        </div>
+    {{/foreach}}
+{{/get}}
