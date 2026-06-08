@@ -73,7 +73,7 @@ For the homepage and separate [Stories](https://beta.advisory.sg/stories) page t
 
 # Typesense Search
 
-The `/events/` and `/interviews/` pages have a typo-tolerant search box backed by [Typesense](https://typesense.org/). Three settings live under `config.custom` in `package.json` and are admin-overridable in **Ghost Admin → Settings → Design → Customize**:
+The `/events/` and `/interviews/` pages have a typo-tolerant search box backed by [Typesense](https://typesense.org/), and the bottom-of-article "you might also like" widget uses Typesense for content-relevance ranking. Three settings live under `config.custom` in `package.json` and are admin-overridable in **Ghost Admin -> Settings -> Design -> Customize**:
 
 | Setting                | Default                         | What it is                                                         |
 | ---------------------- | ------------------------------- | ------------------------------------------------------------------ |
@@ -87,7 +87,7 @@ The flow is: `package.json` defaults → `default.hbs` injects them as `window._
 
 **Deploying to a different Ghost instance.** If your instance points at a different Typesense backend, override the three settings in **Design → Customize** rather than editing the theme. The defaults in `package.json` are only the fallback for installs that don't override.
 
-**About the indexer.** This theme expects an existing Typesense collection populated with Ghost posts (`title`, `slug`, `excerpt`, `plaintext`, `tags.slug`, `published_at`, etc.). The sync mechanism (e.g. [MagicPages' Ghost-Typesense integration](https://github.com/magicpages/ghost-typesense)) is **not** part of this theme.
+**About the indexer.** This theme expects an existing Typesense collection populated with Ghost posts (`title`, `slug`, `excerpt`, `plaintext`, `feature_image`, `url`, `tags.name`, `tags.slug`, `published_at`, etc.). The sync mechanism (e.g. [MagicPages' Ghost-Typesense integration](https://github.com/magicpages/ghost-typesense)) is **not** part of this theme.
 
 # PostCSS Features Used
 

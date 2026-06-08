@@ -487,13 +487,11 @@ Reload `http://localhost:2368/events/`. Open DevTools → Console:
 // Confirm the new fields are populated.
 const c = Alpine.$data(document.querySelector('[x-data^="postFilterList"]'));
 console.log(
-    c.allCards
-        .slice(0, 3)
-        .map((x) => ({
-            slug: x.slug,
-            title: x.title.slice(0, 30),
-            publishedAt: x.publishedAt,
-        })),
+    c.allCards.slice(0, 3).map((x) => ({
+        slug: x.slug,
+        title: x.title.slice(0, 30),
+        publishedAt: x.publishedAt,
+    })),
 );
 // Should show 3 entries with non-empty slug/title/publishedAt.
 

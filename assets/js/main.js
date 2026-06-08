@@ -9,9 +9,11 @@ import Alpine from 'alpinejs';
 import 'flowbite';
 
 import postFilterList from './post-filter-list.js';
+import relatedPosts from './related-posts.js';
 
 window.Alpine = Alpine;
 Alpine.data('postFilterList', postFilterList);
+Alpine.data('relatedPosts', relatedPosts);
 Alpine.start();
 
 var body = $('body');

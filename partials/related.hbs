@@ -1,16 +1,29 @@
-<!-- djlint:off -->
-{{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags" as |related|}}
-<!-- djlint:on -->
-    {{#if related}}
-        <section class="related-wrapper">
-            <div class="container large">
-                <h3 class="related-title">You might also like...</h3>
-                <div class="related-feed grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
-                    {{#foreach posts}}
+{{!-- Bottom-of-article "You might also like…" widget.
+     The SSR {{#get}} block below renders 3 tag-matched cards as the
+     no-JS baseline AND as a topup pool for the JS-side Typesense
+     enhancement (see assets/js/related-posts.js). --}}
+<section
+    class="related-wrapper"
+    x-data="relatedPosts"
+    data-post-id="{{post.id}}"
+    data-post-slug="{{post.slug}}"
+    data-post-title="{{post.title}}"
+    data-post-excerpt="{{post.excerpt}}">
+    <div class="container large">
+        <h3 class="related-title">You might also like...</h3>
+        <div class="related-feed grid grid-cols-1 lg:grid-cols-3 gap-x-20 gap-y-10 m-auto">
+            {{!-- SSR baseline: same query as before. The {{#if related}}
+                 gate is intentionally INSIDE so the wrapper always renders;
+                 the JS may populate from Typesense even when SSR returns 0. --}}
+            <!-- djlint:off -->
+            {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags" as |related|}}
+            <!-- djlint:on -->
+                {{#if related}}
+                    {{#foreach related}}
                         {{> "post-card"}}
                     {{/foreach}}
-                </div>
-            </div>
-        </section>
-    {{/if}}
-{{/get}}
+                {{/if}}
+            {{/get}}
+        </div>
+    </div>
+</section>
