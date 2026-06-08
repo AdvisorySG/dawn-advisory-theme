@@ -24,6 +24,7 @@
                 @input="setSearchQuery($event.target.value)"
                 @keydown.escape="setSearchQuery('')"
                 aria-controls="post-grid-{{collection}}"
+                style="height: 42px;"
                 class="flex-1 px-3 py-2 rounded border border-gray-300 text-base">
             <span
                 x-show="isSearching"
@@ -33,23 +34,12 @@
             </span>
         </div>
         <div class="flex flex-wrap items-center gap-2">
-            <div class="flex items-center gap-2">
-                <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
-                <select
-                    id="post-sort-{{collection}}"
-                    x-model="sortMode"
-                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white">
-                    <option value="newest">Newest first</option>
-                    <option value="oldest">Oldest first</option>
-                    <option value="az">Title A → Z</option>
-                    <option value="za">Title Z → A</option>
-                </select>
-            </div>
             <div
-                class="relative"
+                class="relative flex items-center gap-2"
                 x-show="availableTags.length > 0"
                 @click.outside="closeTagDropdown()"
                 @keydown.escape.window="closeTagDropdown()">
+                <label for="post-tags-{{collection}}" class="text-base text-gray-700">Tag:</label>
                 <button
                     type="button"
                     id="post-tags-{{collection}}"
@@ -57,6 +47,7 @@
                     :aria-expanded="tagDropdownOpen.toString()"
                     aria-haspopup="listbox"
                     aria-controls="post-tags-menu-{{collection}}"
+                    style="height: 42px;"
                     class="px-3 py-2 rounded border border-gray-300 text-base bg-white inline-flex items-center gap-2">
                     <span x-text="selectedTagLabel()"></span>
                     <span aria-hidden="true">▾</span>
@@ -85,6 +76,19 @@
                         Clear tags
                     </button>
                 </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <label for="post-sort-{{collection}}" class="text-base text-gray-700">Sort:</label>
+                <select
+                    id="post-sort-{{collection}}"
+                    x-model="sortMode"
+                    style="height: 42px;"
+                    class="px-3 py-2 rounded border border-gray-300 text-base bg-white">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="az">Title A → Z</option>
+                    <option value="za">Title Z → A</option>
+                </select>
             </div>
             <button
                 type="button"
