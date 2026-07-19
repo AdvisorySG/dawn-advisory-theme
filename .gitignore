@@ -30,3 +30,4 @@ changelog.md.bk
 
 replit.nix
 .replit
+.claude/settings.local.json
